@@ -31,7 +31,7 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  overscroll-behavior-y: none; /* Cegah pull-to-refresh di mobile */
+  overscroll-behavior-y: none;
 }
 
 /* HEADER */
@@ -60,14 +60,28 @@ header { height: var(--header-h); background: var(--surface); border-bottom: 1px
 
 /* CANVAS AREA */
 .canvas-area { flex: 1; display: flex; align-items: center; justify-content: center; background: #07070d; background-image: radial-gradient(#1a1a2e 1px, transparent 1px); background-size: 24px 24px; overflow: auto; position: relative; touch-action: pan-x pan-y; }
-.canvas-wrapper { display: flex; flex-direction: column; align-items: center; gap: 16px; touch-action: none; /* Penting agar elemen bisa di drag tanpa scroll layar */ }
+.canvas-wrapper { display: flex; flex-direction: column; align-items: center; gap: 16px; touch-action: none; }
 .grid-row { display: flex; gap: 3px; }
-.post-cell { width: 300px; height: 300px; position: relative; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; border-radius: 2px; background: #1a1a2e; }
-.post-cell.active-cell { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 20px rgba(240,192,64,0.2); }
+.post-cell { width: 300px; height: 300px; position: relative; overflow: hidden; border: 2px solid transparent; transition: border-color 0.2s; border-radius: 2px; background: #1a1a2e; }
+.post-cell.active-cell { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 20px rgba(240,192,64,0.2); z-index: 10; }
 .post-cell .cell-bg, .post-cell .cell-overlay, .post-cell .cell-content, .post-cell .upload-hint { position: absolute; inset: 0; }
-.post-cell .cell-bg { background-size: cover; background-position: center; transition: all 0.3s; }
+.post-cell .cell-bg { background-size: cover; background-position: center; transition: filter 0.3s, background 0.3s; }
 .post-cell .cell-overlay, .post-cell .cell-content { pointer-events: none; }
 .post-cell .upload-hint { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--text-muted); font-size: 12px; pointer-events: none; }
+
+/* ELEMENT LAYER (PENTING UNTUK DRAG & DROP) */
+.element-layer {
+  position: absolute;
+  cursor: move;
+  touch-action: none; /* Mencegah layar scroll saat drag elemen */
+  user-select: none;
+  pointer-events: auto; /* Mengaktifkan klik kembali di dalam cell-content */
+}
+.element-layer.selected {
+  outline: 2px dashed rgba(240,192,64,0.9);
+  outline-offset: 2px;
+  z-index: 100 !important;
+}
 
 /* INPUT STYLES */
 label { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
@@ -84,8 +98,6 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 .template-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .template-card { aspect-ratio: 1; border-radius: 8px; cursor: pointer; border: 2px solid transparent; overflow: hidden; transition: all 0.2s; position: relative; }
 .template-card:hover { border-color: var(--accent2); transform: scale(1.02); }
-.text-layer { position: absolute; cursor: move; user-select: none; min-width: 40px; min-height: 20px; word-break: break-word; line-height: 1.2; touch-action: none; }
-.text-layer.selected { outline: 1px dashed rgba(240,192,64,0.8); }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
@@ -122,12 +134,10 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 /* ========================================================
    MOBILE JOYSTICK & RESPONSIVE CSS
 ======================================================== */
-.mobile-joystick-panel {
-  display: none; /* Hide by default on desktop */
-}
+.mobile-joystick-panel { display: none; }
 
 @media (max-width: 860px) {
-  body { height: auto; overflow-y: auto; display: block; padding-bottom: 240px; /* Space for joystick */ }
+  body { height: auto; overflow-y: auto; display: block; padding-bottom: 240px; }
   header { height: auto; flex-wrap: wrap; padding: 12px 16px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
   .header-tabs { width: 100%; margin-left: 0; overflow-x: auto; white-space: nowrap; padding-bottom: 4px; justify-content: flex-start; }
   .header-actions { width: 100%; margin-left: 0; justify-content: space-between; }
@@ -140,63 +150,22 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 
   /* MOBILE FLOATING CONTROLLER */
   .mobile-joystick-panel {
-    display: flex;
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: rgba(17, 17, 24, 0.95);
-    backdrop-filter: blur(10px);
-    border-top: 1px solid var(--border);
-    padding: 12px 16px;
-    z-index: 9000;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; position: fixed; bottom: 0; left: 0; right: 0;
+    background: rgba(17, 17, 24, 0.95); backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border); padding: 12px 16px; z-index: 9000;
+    justify-content: space-between; align-items: center;
     box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
   }
-
-  .d-pad {
-    display: grid;
-    grid-template-columns: 40px 40px 40px;
-    grid-template-rows: 40px 40px 40px;
-    gap: 4px;
-    align-items: center;
-    justify-items: center;
-  }
-  .d-btn {
-    width: 40px; height: 40px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--accent);
-    font-size: 18px;
-    display: flex; align-items: center; justify-content: center;
-    user-select: none; touch-action: none;
-  }
+  .d-pad { display: grid; grid-template-columns: 40px 40px 40px; grid-template-rows: 40px 40px 40px; gap: 4px; align-items: center; justify-items: center; }
+  .d-btn { width: 40px; height: 40px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--accent); font-size: 18px; display: flex; align-items: center; justify-content: center; user-select: none; touch-action: none; }
   .d-btn:active { background: var(--accent); color: #000; transform: scale(0.95); }
   .d-btn.up { grid-column: 2; grid-row: 1; }
   .d-btn.left { grid-column: 1; grid-row: 2; }
   .d-btn.right { grid-column: 3; grid-row: 2; }
   .d-btn.down { grid-column: 2; grid-row: 3; }
   .d-btn.center { grid-column: 2; grid-row: 2; font-size: 10px; background: none; border: none; color: var(--text-muted);}
-
-  .action-pad {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    flex: 1;
-    margin-left: 20px;
-  }
-  .action-btn {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 8px;
-    border-radius: 8px;
-    font-size: 11px;
-    font-family: 'DM Sans', sans-serif;
-    font-weight: 600;
-    display: flex; align-items: center; justify-content: center; gap: 4px;
-    user-select: none; touch-action: none;
-  }
+  .action-pad { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; margin-left: 20px; }
+  .action-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 8px; font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; user-select: none; touch-action: none; }
   .action-btn:active { background: var(--border); }
   .action-btn.del { color: #f04070; border-color: rgba(240,64,112,0.3); }
   .action-btn.enter { background: rgba(240,192,64,0.1); color: var(--accent); border-color: rgba(240,192,64,0.3); }
@@ -227,10 +196,7 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 <div class="left-panel">
   <div class="panel-scroll">
     <div class="panel-section">
-      <div class="panel-title" onclick="toggleSection('templates')">
-        🎨 Template Trading & Bisnis
-        <span id="templates-arrow">▾</span>
-      </div>
+      <div class="panel-title" onclick="toggleSection('templates')">🎨 Template Trading & Bisnis <span id="templates-arrow">▾</span></div>
       <div class="panel-body" id="templates-body">
         <button class="btn btn-primary" onclick="applyNewsTemplate()" style="width:100%; margin-bottom:12px; background:#39ff14; color:#000; border-color:#39ff14;">📰 Auto-Layout Berita (CW)</button>
         <div class="template-grid" id="templateGrid"></div>
@@ -383,11 +349,9 @@ const CELL_SIZE = 300;
 const DISPLAY_SCALE = CELL_SIZE / 1080;
 
 function saveState() {
-  // Potong masa depan jika kita sedang di tengah undo lalu melakukan aksi baru
   if (historyIndex < historyStack.length - 1) {
     historyStack = historyStack.slice(0, historyIndex + 1);
   }
-  // Simpan salinan (deep copy) dari state cells saat ini
   historyStack.push(JSON.parse(JSON.stringify(cells)));
   historyIndex++;
 }
@@ -399,9 +363,7 @@ function undoState() {
     renderElements(activeCellIdx);
     syncPanelToCell();
     showToast('↶ Undo berhasil');
-  } else {
-    showToast('Batas awal Undo');
-  }
+  } else { showToast('Batas awal Undo'); }
 }
 
 function redoState() {
@@ -411,9 +373,7 @@ function redoState() {
     renderElements(activeCellIdx);
     syncPanelToCell();
     showToast('↷ Redo berhasil');
-  } else {
-    showToast('Batas akhir Redo');
-  }
+  } else { showToast('Batas akhir Redo'); }
 }
 
 // ============================
@@ -447,7 +407,7 @@ function init() {
   buildThemePresets();
   buildOverlayPresets();
   setActiveCell(0);
-  saveState(); // Simpan state kosong pertama
+  saveState();
 }
 
 function buildCells(count) {
@@ -481,7 +441,12 @@ function makeCell(idx) {
     <div class="upload-hint" id="cellhint-${idx}"><div style="font-size:28px;opacity:0.3">🖼</div><div style="opacity:0.4">Klik untuk pilih</div></div>
     <div class="grid-label">${idx + 1}</div>
   `;
-  div.onclick = (e) => { if (!e.target.classList.contains('text-layer')) setActiveCell(idx); };
+  div.onclick = (e) => { 
+    // Jangan ubah active cell jika kita klik elemen di dalamnya
+    if (!e.target.classList.contains('element-layer')) {
+       setActiveCell(idx);
+    }
+  };
   return div;
 }
 
@@ -490,7 +455,10 @@ function setActiveCell(idx) {
   document.querySelectorAll('.post-cell').forEach(c => c.classList.remove('active-cell'));
   const el = document.getElementById(`cell-${idx}`);
   if (el) el.classList.add('active-cell');
-  activeElement = null;
+  
+  // Hapus seleksi elemen saat ganti kotak
+  activeElement = null; 
+  document.querySelectorAll('.element-layer').forEach(n => n.classList.remove('selected'));
   syncPanelToCell();
 }
 
@@ -538,21 +506,22 @@ function renderElements(idx) {
 
   cells[idx].elements.forEach(el => {
     const div = document.createElement('div');
-    div.className = 'text-layer' + (activeElement === el.id ? ' selected' : '');
+    // TAMBAHKAN CLASS 'element-layer'
+    div.className = 'element-layer' + (activeElement === el.id ? ' selected' : '');
     div.dataset.id = el.id;
     
     if (el.type === 'text') {
-      div.style.cssText = `left: ${el.x}px; top: ${el.y}px; font-size: ${el.fontSize * DISPLAY_SCALE}px; font-family: ${el.fontFamily}; font-weight: ${el.fontWeight}; color: ${el.color}; text-align: ${el.align}; line-height: ${el.lineHeight}; transform: rotate(${el.rotation}deg); opacity: ${el.opacity / 100}; max-width: ${el.maxWidth * DISPLAY_SCALE}px; position: absolute; cursor: move; white-space: pre-wrap; word-break: break-word; padding: ${el.bgOpacity > 0 ? '4px 8px' : '0'}; background: ${el.bgOpacity > 0 ? hexToRgba(el.bgColor, el.bgOpacity / 100) : 'transparent'}; border-radius: ${el.bgOpacity > 0 ? '4px' : '0'}; ${el.strokeWidth > 0 ? `-webkit-text-stroke: ${el.strokeWidth * DISPLAY_SCALE}px ${el.strokeColor}` : ''}; touch-action: none;`;
+      div.style.cssText = `left: ${el.x}px; top: ${el.y}px; font-size: ${el.fontSize * DISPLAY_SCALE}px; font-family: ${el.fontFamily}; font-weight: ${el.fontWeight}; color: ${el.color}; text-align: ${el.align}; line-height: ${el.lineHeight}; transform: rotate(${el.rotation}deg); max-width: ${el.maxWidth * DISPLAY_SCALE}px; padding: ${el.bgOpacity > 0 ? '4px 8px' : '0'}; background: ${el.bgOpacity > 0 ? hexToRgba(el.bgColor, el.bgOpacity / 100) : 'transparent'}; border-radius: ${el.bgOpacity > 0 ? '4px' : '0'}; ${el.strokeWidth > 0 ? `-webkit-text-stroke: ${el.strokeWidth * DISPLAY_SCALE}px ${el.strokeColor}` : ''}; white-space: pre-wrap; word-break: break-word;`;
       div.textContent = el.text;
     } else if (el.type === 'shape') {
       const sz = el.size * DISPLAY_SCALE;
-      div.style.cssText = `position:absolute;left:${el.x}px;top:${el.y}px;cursor:move;transform:rotate(${el.rotation||0}deg); touch-action: none;`;
+      div.style.cssText = `left:${el.x}px; top:${el.y}px; transform:rotate(${el.rotation||0}deg);`;
       if (el.subtype === 'line-h') { div.style.width = sz * 2 + 'px'; div.style.height = '2px'; div.style.background = el.color; }
       else if (el.subtype === 'rect') { div.style.width = sz + 'px'; div.style.height = sz * 0.6 + 'px'; div.style.border = `2px solid ${el.color}`; }
       else if (el.subtype === 'circle') { div.style.width = sz + 'px'; div.style.height = sz + 'px'; div.style.borderRadius = '50%'; div.style.border = `2px solid ${el.color}`; }
     } else if (el.type === 'trading') {
       const s = DISPLAY_SCALE;
-      div.style.cssText = `position:absolute;left:${el.x}px;top:${el.y}px;cursor:move;transform:rotate(${el.rotation||0}deg); touch-action: none;`;
+      div.style.cssText = `left:${el.x}px; top:${el.y}px; transform:rotate(${el.rotation||0}deg);`;
       if (el.subtype === 'profit') div.innerHTML = `<div style="background:rgba(64,200,80,0.2);border:1px solid #40c850;border-radius:${6*s}px;padding:${6*s}px ${12*s}px;font-size:${22*s}px;font-family:'Bebas Neue';color:#40c850;">+24.5% PROFIT</div>`;
       else if (el.subtype === 'price') div.innerHTML = `<div style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);border-radius:${6*s}px;padding:${8*s}px ${14*s}px;font-family:'Space Mono';color:white;font-size:${14*s}px;"><div style="color:#888;font-size:${10*s}px;">XAUUSD</div><div style="font-size:${24*s}px;color:#f0c040;">2,350.00</div></div>`;
       else if (el.subtype === 'roi') div.innerHTML = `<div style="text-align:center;"><div style="font-family:'Bebas Neue';font-size:${48*s}px;color:#f0c040;line-height:1;">150%</div><div style="font-family:'DM Sans';font-size:${12*s}px;color:#888;">ROI</div></div>`;
@@ -560,10 +529,19 @@ function renderElements(idx) {
 
     const startInteraction = (e) => {
       e.stopPropagation();
-      if (activeCellIdx !== idx) setActiveCell(idx);
+      // Pindahkan aktif cell jika beda kotak
+      if (activeCellIdx !== idx) {
+         activeCellIdx = idx;
+         document.querySelectorAll('.post-cell').forEach(c => c.classList.remove('active-cell'));
+         document.getElementById(`cell-${idx}`).classList.add('active-cell');
+         syncPanelToCell();
+      }
+      
       setActiveElement(el.id);
       startDrag(e, div, el, idx);
     };
+
+    // Event listener untuk klik dan sentuh
     div.addEventListener('mousedown', startInteraction);
     div.addEventListener('touchstart', startInteraction, { passive: false });
 
@@ -576,7 +554,7 @@ function renderElements(idx) {
 }
 
 // ============================
-// DRAG LOKAL & TOUCH
+// FIX: DRAG LOKAL & TOUCH (DOM UPDATE)
 // ============================
 function startDrag(e, div, elData, cellIdx) {
   isDragging = true;
@@ -590,23 +568,28 @@ function startDrag(e, div, elData, cellIdx) {
 
   const onMove = (me) => {
     if (!isDragging) return;
-    if (me.type.includes('touch') && me.cancelable) me.preventDefault(); // Cegah scroll layar
+    if (me.type.includes('touch') && me.cancelable) me.preventDefault(); // Mencegah pull-to-refresh
 
     const mx = me.type.includes('touch') ? me.touches[0].clientX : me.clientX;
     const my = me.type.includes('touch') ? me.touches[0].clientY : me.clientY;
     
+    // Hitung posisi baru
     elData.x = Math.max(-50, Math.min(mx - rect.left - dragOffX, CELL_SIZE + 50));
     elData.y = Math.max(-50, Math.min(my - rect.top - dragOffY, CELL_SIZE + 50));
     
+    // Update panel angka
     document.getElementById('posX').value = Math.round(elData.x / DISPLAY_SCALE);
     document.getElementById('posY').value = Math.round(elData.y / DISPLAY_SCALE);
-    renderElements(cellIdx);
+    
+    // KUNCI PERBAIKAN: Ubah style secara langsung tanpa menghancurkan (re-render) elemen DOM!
+    div.style.left = elData.x + 'px';
+    div.style.top = elData.y + 'px';
   };
 
   const onUp = () => {
     if(isDragging) {
        isDragging = false;
-       saveState(); // Simpan history setelah selesai drag
+       saveState(); // Simpan history hanya saat jari/mouse diangkat
     }
     document.removeEventListener('mousemove', onMove);
     document.removeEventListener('mouseup', onUp);
@@ -620,23 +603,39 @@ function startDrag(e, div, elData, cellIdx) {
   document.addEventListener('touchend', onUp);
 }
 
+// ============================
+// FIX: SET ACTIVE ELEMENT (DOM HIGHLIGHT)
+// ============================
 function setActiveElement(id) {
   activeElement = id;
   const el = getActiveEl();
-  if (!el) return;
-
-  if (el.type === 'text') {
-    document.getElementById('textContent').value = el.text;
-    document.getElementById('fontSelect').value = el.fontFamily;
-    document.getElementById('fontSize').value = el.fontSize;
-    document.getElementById('textColor').value = el.color;
-    document.getElementById('textColorHex').value = el.color;
+  
+  if (!el) {
+    document.querySelectorAll('.element-layer').forEach(n => n.classList.remove('selected'));
+    return;
   }
-  document.getElementById('posX').value = Math.round(el.x / DISPLAY_SCALE);
-  document.getElementById('posY').value = Math.round(el.y / DISPLAY_SCALE);
 
-  renderElements(activeCellIdx);
+  // 1. Update UI Panel di Kanan
+  if (el.type === 'text') {
+    document.getElementById('textContent').value = el.text || '';
+    document.getElementById('fontSelect').value = el.fontFamily || "'Bebas Neue'";
+    document.getElementById('fontSize').value = el.fontSize || 32;
+    document.getElementById('textColor').value = el.color || '#ffffff';
+    document.getElementById('textColorHex').value = el.color || '#ffffff';
+  }
+  document.getElementById('posX').value = Math.round((el.x||0) / DISPLAY_SCALE);
+  document.getElementById('posY').value = Math.round((el.y||0) / DISPLAY_SCALE);
+
+  // 2. Beri efek Visual Highlight menggunakan DOM Class (Tanpa re-render!)
+  document.querySelectorAll('.element-layer').forEach(node => {
+    if (node.dataset.id == id) {
+      node.classList.add('selected');
+    } else {
+      node.classList.remove('selected');
+    }
+  });
 }
+
 function getActiveEl() { return activeElement ? cells[activeCellIdx].elements.find(e => e.id === activeElement) : null; }
 
 // ============================
@@ -646,7 +645,7 @@ function nudgeEl(dir) {
   const el = getActiveEl();
   if (!el) { showToast('Pilih elemen dulu!'); return; }
   
-  const step = 5 * DISPLAY_SCALE; // Geser 5px per klik
+  const step = 5 * DISPLAY_SCALE; // Geser 5px
   if (dir === 'up') el.y -= step;
   if (dir === 'down') el.y += step;
   if (dir === 'left') el.x -= step;
@@ -654,8 +653,12 @@ function nudgeEl(dir) {
   
   document.getElementById('posX').value = Math.round(el.x / DISPLAY_SCALE);
   document.getElementById('posY').value = Math.round(el.y / DISPLAY_SCALE);
-  renderElements(activeCellIdx);
-  // Optional: saveState() disini bisa terlalu banyak merekam history. Kita skip saveState untuk nudge agar rapi.
+  
+  const node = document.querySelector(`.element-layer[data-id="${el.id}"]`);
+  if (node) {
+      node.style.left = el.x + 'px';
+      node.style.top = el.y + 'px';
+  }
 }
 
 function zoomEl(dir) {
@@ -682,14 +685,26 @@ function updateFontFamily() { const el = getActiveEl(); if(el) { el.fontFamily =
 function updateFontSize() { const el = getActiveEl(); if(el) { el.fontSize = parseInt(document.getElementById('fontSize').value); renderElements(activeCellIdx); saveState(); } }
 function updateTextColor() { const el = getActiveEl(); if(el) { el.color = document.getElementById('textColor').value; document.getElementById('textColorHex').value = el.color; renderElements(activeCellIdx); saveState(); } }
 function updateTextColorHex() { const el = getActiveEl(); const hex = document.getElementById('textColorHex').value; if(el && /^#[0-9A-Fa-f]{6}$/.test(hex)) { el.color = hex; document.getElementById('textColor').value = hex; renderElements(activeCellIdx); saveState(); } }
-function updatePosition() { const el = getActiveEl(); if(el) { el.x = parseInt(document.getElementById('posX').value) * DISPLAY_SCALE; el.y = parseInt(document.getElementById('posY').value) * DISPLAY_SCALE; renderElements(activeCellIdx); saveState(); } }
+
+function updatePosition() { 
+  const el = getActiveEl(); 
+  if(el) { 
+    el.x = parseInt(document.getElementById('posX').value) * DISPLAY_SCALE; 
+    el.y = parseInt(document.getElementById('posY').value) * DISPLAY_SCALE; 
+    const node = document.querySelector(`.element-layer[data-id="${el.id}"]`);
+    if (node) { node.style.left = el.x + 'px'; node.style.top = el.y + 'px'; }
+    saveState(); 
+  } 
+}
+
 function updateRotation() { const el = getActiveEl(); if(el) { el.rotation = parseInt(document.getElementById('rotation').value); renderElements(activeCellIdx); saveState(); } }
 
 function addTextLayer(text) {
   const t = createTextElement(text || 'TEKS BARU');
   t.x = 20 * DISPLAY_SCALE; t.y = (20 + cells[activeCellIdx].elements.length * 40) * DISPLAY_SCALE;
   cells[activeCellIdx].elements.push(t);
-  setActiveElement(t.id);
+  renderElements(activeCellIdx); // Buat DOM-nya dulu
+  setActiveElement(t.id);        // Baru Select
   document.getElementById('textContent').value = t.text;
   showToast('Teks ditambahkan!');
   saveState();
@@ -710,6 +725,7 @@ function duplicateElement() {
   copy.id = Date.now() + Math.random();
   copy.x += 10 * DISPLAY_SCALE; copy.y += 10 * DISPLAY_SCALE;
   cells[activeCellIdx].elements.push(copy);
+  renderElements(activeCellIdx);
   setActiveElement(copy.id);
   showToast('⧉ Diduplikasi');
   saveState();
@@ -734,21 +750,21 @@ function applyNewsTemplate() {
   saveState();
 }
 
-function addShape(type) { const el = { id: Date.now(), type: 'shape', subtype: type, x: 50*DISPLAY_SCALE, y: 50*DISPLAY_SCALE, color: document.getElementById('shapeColor').value, size: document.getElementById('shapeSize').value, rotation: 0 }; cells[activeCellIdx].elements.push(el); setActiveElement(el.id); saveState(); }
-function addTradingElement(type) { const el = { id: Date.now(), type: 'trading', subtype: type, x: 20*DISPLAY_SCALE, y: 20*DISPLAY_SCALE, rotation: 0 }; cells[activeCellIdx].elements.push(el); setActiveElement(el.id); saveState(); }
+function addShape(type) { const el = { id: Date.now(), type: 'shape', subtype: type, x: 50*DISPLAY_SCALE, y: 50*DISPLAY_SCALE, color: document.getElementById('shapeColor').value, size: document.getElementById('shapeSize').value, rotation: 0 }; cells[activeCellIdx].elements.push(el); renderElements(activeCellIdx); setActiveElement(el.id); saveState(); }
+function addTradingElement(type) { const el = { id: Date.now(), type: 'trading', subtype: type, x: 20*DISPLAY_SCALE, y: 20*DISPLAY_SCALE, rotation: 0 }; cells[activeCellIdx].elements.push(el); renderElements(activeCellIdx); setActiveElement(el.id); saveState(); }
 
 function syncPanelToCell() {
   const cell = cells[activeCellIdx];
   document.getElementById('bgColor').value = cell.bg.value || '#0a0a1a';
   document.getElementById('overlayOpacity').value = cell.overlay.opacity || 0;
-  renderCell(activeCellIdx);
+  // DIHAPUS: renderCell(activeCellIdx); -> Ini yang bikin layar kedip dan error.
 }
 
 // UTILS & EXPORT
 function hexToRgba(hex, alpha) { const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16); return `rgba(${r},${g},${b},${alpha})`; }
 function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
 function toggleSection(id) { const body = document.getElementById(`${id}-body`); const isOpen = body.style.display !== 'none'; body.style.display = isOpen ? 'none' : 'block'; }
-function clearCanvas() { if(!confirm('Reset post ini?')) return; cells[activeCellIdx] = createCell(); activeElement = null; syncPanelToCell(); saveState(); }
+function clearCanvas() { if(!confirm('Reset post ini?')) return; cells[activeCellIdx] = createCell(); activeElement = null; renderCell(activeCellIdx); syncPanelToCell(); saveState(); }
 function showExport() { document.getElementById('exportPanel').style.display = 'flex'; }
 function hideExport() { document.getElementById('exportPanel').style.display = 'none'; }
 function exportAs(format) { showToast('Gunakan fitur Screenshot HP untuk export saat ini!'); hideExport(); }
