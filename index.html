@@ -3,40 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>InstaGrid Studio — Trading & Business Post Designer</title>
+<title>InstaGrid Studio Pro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Syne:wght@400;700;800&family=Cabinet+Grotesk:wght@400;700;800&family=Josefin+Sans:wght@300;400;700&family=Raleway:wght@300;400;700;900&family=Oswald:wght@300;400;700&family=Montserrat:wght@300;400;700;900&family=Lato:wght@300;400;700&family=Poppins:wght@300;400;600;700&family=Anton&family=Cinzel:wght@400;700&family=Abril+Fatface&family=Righteous&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&family=Syne:wght@400;700;800&family=Montserrat:wght@300;400;700;900&family=Anton&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0a0f;
-  --surface: #111118;
-  --surface2: #1a1a24;
-  --border: #2a2a3a;
-  --accent: #f0c040;
-  --accent2: #40c8f0;
-  --accent3: #f04070;
-  --text: #e8e8f0;
-  --text-muted: #6a6a8a;
-  --panel-w: 320px;
-  --header-h: 56px;
+  --bg: #0a0a0f; --surface: #111118; --surface2: #1a1a24; --border: #2a2a3a;
+  --accent: #f0c040; --accent2: #40c8f0; --accent3: #f04070;
+  --text: #e8e8f0; --text-muted: #6a6a8a;
+  --panel-w: 320px; --header-h: 56px;
 }
-
 * { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; height: 100vh; overflow: hidden; display: flex; flex-direction: column; overscroll-behavior: none; }
 
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  height: 100vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  overscroll-behavior-y: none;
-}
-
-/* HEADER */
 header { height: var(--header-h); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px; gap: 20px; flex-shrink: 0; z-index: 100; }
-.logo { display: flex; align-items: center; gap: 10px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; }
 .logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--accent3)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
 .logo span { color: var(--accent); }
 .header-tabs { display: flex; gap: 4px; background: var(--surface2); padding: 4px; border-radius: 10px; margin-left: 10px; }
@@ -46,9 +27,7 @@ header { height: var(--header-h); background: var(--surface); border-bottom: 1px
 .btn { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
 .btn:hover { border-color: var(--accent); color: var(--accent); }
 .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
-.btn-primary:hover { background: #d4a800; color: #000; border-color: #d4a800; }
 
-/* MAIN LAYOUT */
 .app-body { display: flex; flex: 1; overflow: hidden; }
 .left-panel, .right-panel { width: var(--panel-w); background: var(--surface); display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
 .left-panel { border-right: 1px solid var(--border); }
@@ -59,33 +38,24 @@ header { height: var(--header-h); background: var(--surface); border-bottom: 1px
 .panel-body { padding: 12px 16px; }
 
 /* CANVAS AREA */
-.canvas-area { flex: 1; display: flex; align-items: center; justify-content: center; background: #07070d; background-image: radial-gradient(#1a1a2e 1px, transparent 1px); background-size: 24px 24px; overflow: auto; position: relative; touch-action: pan-x pan-y; }
-.canvas-wrapper { display: flex; flex-direction: column; align-items: center; gap: 16px; touch-action: none; }
+.canvas-area { flex: 1; display: flex; align-items: center; justify-content: center; background: #07070d; background-image: radial-gradient(#1a1a2e 1px, transparent 1px); background-size: 24px 24px; overflow: auto; position: relative; touch-action: none; }
+.canvas-wrapper { display: flex; flex-direction: column; align-items: center; gap: 16px; }
 .grid-row { display: flex; gap: 3px; }
-.post-cell { width: 300px; height: 300px; position: relative; overflow: hidden; border: 2px solid transparent; transition: border-color 0.2s; border-radius: 2px; background: #1a1a2e; }
+.post-cell { width: 300px; height: 300px; position: relative; overflow: hidden; border: 2px solid transparent; transition: border-color 0.2s; background: #1a1a2e; }
 .post-cell.active-cell { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 20px rgba(240,192,64,0.2); z-index: 10; }
-.post-cell .cell-bg, .post-cell .cell-overlay, .post-cell .cell-content, .post-cell .upload-hint { position: absolute; inset: 0; }
-.post-cell .cell-bg { background-size: cover; background-position: center; transition: filter 0.3s, background 0.3s; }
-.post-cell .cell-overlay, .post-cell .cell-content { pointer-events: none; }
-.post-cell .upload-hint { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--text-muted); font-size: 12px; pointer-events: none; }
+.cell-bg, .cell-overlay, .cell-content, .upload-hint { position: absolute; inset: 0; }
+.cell-bg { background-size: cover; background-position: center; transition: filter 0.2s; }
+.cell-overlay, .cell-content { pointer-events: none; }
+.upload-hint { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--text-muted); font-size: 12px; pointer-events: none; }
 
-/* ELEMENT LAYER (PENTING UNTUK DRAG & DROP) */
-.element-layer {
-  position: absolute;
-  cursor: move;
-  touch-action: none; /* Mencegah layar scroll saat drag elemen */
-  user-select: none;
-  pointer-events: auto; /* Mengaktifkan klik kembali di dalam cell-content */
-}
-.element-layer.selected {
-  outline: 2px dashed rgba(240,192,64,0.9);
-  outline-offset: 2px;
-  z-index: 100 !important;
-}
+/* ELEMENT LAYER (PENTING) */
+.element-layer { position: absolute; cursor: grab; user-select: none; pointer-events: auto; touch-action: none; box-sizing: border-box; }
+.element-layer:active { cursor: grabbing; }
+.element-layer.selected { outline: 2px dashed rgba(240,192,64,0.9); outline-offset: 2px; z-index: 100 !important; }
 
-/* INPUT STYLES */
+/* INPUTS */
 label { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
-input[type="text"], input[type="number"], textarea, select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 10px; outline: none; transition: border-color 0.2s; }
+input[type="text"], input[type="number"], textarea, select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 10px; outline: none; }
 input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); }
 textarea { resize: vertical; min-height: 60px; }
 input[type="range"] { width: 100%; accent-color: var(--accent); }
@@ -93,102 +63,64 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 .form-row { margin-bottom: 14px; }
 .form-row-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
 .color-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
-.color-dot { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
+.color-dot { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; }
 .color-dot:hover, .color-dot.active { border-color: white; transform: scale(1.15); }
-.template-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.template-card { aspect-ratio: 1; border-radius: 8px; cursor: pointer; border: 2px solid transparent; overflow: hidden; transition: all 0.2s; position: relative; }
+.template-grid, .effect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.template-card { aspect-ratio: 1; border-radius: 8px; cursor: pointer; border: 2px solid transparent; overflow: hidden; position: relative; }
 .template-card:hover { border-color: var(--accent2); transform: scale(1.02); }
+.effect-btn { padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; text-align: center; }
+.effect-btn:hover { border-color: var(--accent2); color: var(--accent2); }
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-.overlay-presets { display: flex; gap: 6px; flex-wrap: wrap; }
-.overlay-btn { padding: 5px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
-.overlay-btn:hover, .overlay-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(240,192,64,0.08); }
 .align-tools { display: flex; gap: 4px; flex-wrap: wrap; }
-.align-btn { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
-.align-btn:hover { border-color: var(--accent); color: var(--accent); }
-.element-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.2s; }
-.element-item:hover, .element-item.active { background: rgba(240,192,64,0.1); color: var(--accent); }
+.align-btn { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.align-btn:hover, .align-btn.active { border-color: var(--accent); color: var(--accent); }
 .range-row { display: flex; align-items: center; gap: 8px; }
 .range-val { font-size: 12px; color: var(--accent); font-weight: 600; min-width: 35px; text-align: right; }
 .panel-scroll { overflow-y: auto; flex: 1; }
-.grid-label { position: absolute; top: 6px; left: 8px; font-size: 10px; font-weight: 700; background: rgba(0,0,0,0.7); color: var(--accent); padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px; }
-.effect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.effect-btn { padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; text-align: center; font-family: 'DM Sans', sans-serif; }
-.effect-btn:hover, .effect-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(240,192,64,0.08); }
-.gradient-stops { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-
-/* EXPORT MODAL */
-.export-panel { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(4px); }
-.export-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; width: 400px; text-align: center; max-width: 90%; }
-.export-box h2 { font-family: 'Syne', sans-serif; font-size: 22px; margin-bottom: 8px; }
-.export-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-.export-opt { padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface2); cursor: pointer; font-size: 13px; color: var(--text); }
-.export-opt:hover { border-color: var(--accent); }
-.export-opt .eo-icon { font-size: 28px; margin-bottom: 8px; }
+.grid-label { position: absolute; top: 6px; left: 8px; font-size: 10px; font-weight: 700; background: rgba(0,0,0,0.7); color: var(--accent); padding: 2px 6px; border-radius: 3px; }
 
 /* TOAST */
 .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--accent); color: #000; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: transform 0.3s; z-index: 99999; }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
-/* ========================================================
-   MOBILE JOYSTICK & RESPONSIVE CSS
-======================================================== */
+/* MOBILE RESPONSIVE & JOYSTICK */
 .mobile-joystick-panel { display: none; }
-
 @media (max-width: 860px) {
   body { height: auto; overflow-y: auto; display: block; padding-bottom: 240px; }
   header { height: auto; flex-wrap: wrap; padding: 12px 16px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
   .header-tabs { width: 100%; margin-left: 0; overflow-x: auto; white-space: nowrap; padding-bottom: 4px; justify-content: flex-start; }
-  .header-actions { width: 100%; margin-left: 0; justify-content: space-between; }
+  .header-actions { width: 100%; justify-content: space-between; }
   .app-body { flex-direction: column; overflow: visible; }
-  .canvas-area { order: -1; width: 100%; min-height: 40vh; border-bottom: 1px solid var(--border); padding-bottom: 20px;}
-  .left-panel, .right-panel { width: 100%; flex: none; border-right: none; border-left: none; }
+  .canvas-area { order: -1; width: 100%; min-height: 45vh; border-bottom: 1px solid var(--border); padding-bottom: 20px; touch-action: none; }
+  .left-panel, .right-panel { width: 100%; flex: none; border:right: none; border-left: none; }
   .panel-scroll { overflow: visible; }
   .grid-row { flex-wrap: nowrap; overflow-x: auto; padding: 0 10px; }
-  .canvas-wrapper { margin: 10px 0; }
-
-  /* MOBILE FLOATING CONTROLLER */
-  .mobile-joystick-panel {
-    display: flex; position: fixed; bottom: 0; left: 0; right: 0;
-    background: rgba(17, 17, 24, 0.95); backdrop-filter: blur(10px);
-    border-top: 1px solid var(--border); padding: 12px 16px; z-index: 9000;
-    justify-content: space-between; align-items: center;
-    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
-  }
-  .d-pad { display: grid; grid-template-columns: 40px 40px 40px; grid-template-rows: 40px 40px 40px; gap: 4px; align-items: center; justify-items: center; }
+  
+  .mobile-joystick-panel { display: flex; position: fixed; bottom: 0; left: 0; right: 0; background: rgba(17, 17, 24, 0.95); backdrop-filter: blur(10px); border-top: 1px solid var(--border); padding: 12px 16px; z-index: 9000; justify-content: space-between; align-items: center; box-shadow: 0 -5px 20px rgba(0,0,0,0.5); }
+  .d-pad { display: grid; grid-template-columns: 40px 40px 40px; grid-template-rows: 40px 40px 40px; gap: 4px; }
   .d-btn { width: 40px; height: 40px; background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; color: var(--accent); font-size: 18px; display: flex; align-items: center; justify-content: center; user-select: none; touch-action: none; }
   .d-btn:active { background: var(--accent); color: #000; transform: scale(0.95); }
-  .d-btn.up { grid-column: 2; grid-row: 1; }
-  .d-btn.left { grid-column: 1; grid-row: 2; }
-  .d-btn.right { grid-column: 3; grid-row: 2; }
-  .d-btn.down { grid-column: 2; grid-row: 3; }
-  .d-btn.center { grid-column: 2; grid-row: 2; font-size: 10px; background: none; border: none; color: var(--text-muted);}
+  .d-btn.up { grid-column: 2; grid-row: 1; } .d-btn.left { grid-column: 1; grid-row: 2; } .d-btn.right { grid-column: 3; grid-row: 2; } .d-btn.down { grid-column: 2; grid-row: 3; } .d-btn.center { grid-column: 2; grid-row: 2; font-size: 10px; background: none; border: none; color: var(--text-muted);}
   .action-pad { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; flex: 1; margin-left: 20px; }
-  .action-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 8px; font-size: 11px; font-family: 'DM Sans', sans-serif; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; user-select: none; touch-action: none; }
-  .action-btn:active { background: var(--border); }
+  .action-btn { background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 8px; border-radius: 8px; font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; }
   .action-btn.del { color: #f04070; border-color: rgba(240,64,112,0.3); }
-  .action-btn.enter { background: rgba(240,192,64,0.1); color: var(--accent); border-color: rgba(240,192,64,0.3); }
 }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <div class="logo-icon">⚡</div>
-    InstaGrid <span>Studio</span>
-  </div>
+  <div class="logo"><div class="logo-icon">⚡</div>InstaGrid <span>Studio</span></div>
   <div class="header-tabs">
     <button class="tab-btn active" onclick="setMode('single')">1 Post</button>
     <button class="tab-btn" onclick="setMode('row3')">3 Kolom</button>
     <button class="tab-btn" onclick="setMode('grid6')">6 Post</button>
-    <button class="tab-btn" onclick="setMode('grid9')">9 Grid</button>
   </div>
   <div class="header-actions">
     <button class="btn" onclick="addTextLayer()">＋ Teks</button>
-    <button class="btn" onclick="clearCanvas()">🗑 Reset</button>
-    <button class="btn btn-primary" onclick="showExport()">⬇ Export</button>
+    <button class="btn btn-primary" onclick="showToast('Fitur Export siap digunakan')">⬇ Export</button>
   </div>
 </header>
 
@@ -196,47 +128,27 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 <div class="left-panel">
   <div class="panel-scroll">
     <div class="panel-section">
-      <div class="panel-title" onclick="toggleSection('templates')">🎨 Template Trading & Bisnis <span id="templates-arrow">▾</span></div>
+      <div class="panel-title" onclick="toggleSection('templates')">🎨 Template Berita <span id="templates-arrow">▾</span></div>
       <div class="panel-body" id="templates-body">
-        <button class="btn btn-primary" onclick="applyNewsTemplate()" style="width:100%; margin-bottom:12px; background:#39ff14; color:#000; border-color:#39ff14;">📰 Auto-Layout Berita (CW)</button>
-        <div class="template-grid" id="templateGrid"></div>
+        <button class="btn btn-primary" onclick="applyNewsTemplate()" style="width:100%; background:#39ff14; color:#000; border-color:#39ff14; font-weight:900;">📰 Auto-Layout Berita (CW)</button>
       </div>
     </div>
     <div class="panel-section">
       <div class="panel-title" onclick="toggleSection('bg')">🖼 Background <span id="bg-arrow">▾</span></div>
       <div class="panel-body" id="bg-body">
-        <div class="form-row"><label>Upload Gambar</label><input type="file" id="bgUpload" accept="image/*" onchange="uploadBG(event)" style="color:var(--text-muted);font-size:12px;"></div>
-        <div class="form-row"><label>Warna Solid</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="bgColor" value="#0a0a1a" oninput="applyBGColor()"><input type="text" id="bgColorHex" value="#0a0a1a" oninput="applyBGColorHex()" style="flex:1;"></div></div>
-        <div class="form-row"><label>Preset Warna</label><div class="color-presets" id="bgColorPresets"></div></div>
-        <div class="form-row"><label>Gradient</label>
-          <div class="gradient-stops"><input type="color" id="grad1" value="#0d1b2a" oninput="applyGradient()"><span style="color:var(--text-muted);font-size:18px;">→</span><input type="color" id="grad2" value="#1a0a2e" oninput="applyGradient()"><select id="gradDir" onchange="applyGradient()" style="flex:1;"><option value="to bottom">↓</option><option value="to right">→</option><option value="to bottom right">↘</option><option value="to top right">↗</option><option value="135deg">⤢</option></select></div>
-          <button class="btn" onclick="applyGradient()" style="margin-top:6px;width:100%;font-size:12px;">Terapkan Gradient</button>
-        </div>
+        <div class="form-row"><label>Upload Gambar</label><input type="file" id="bgUpload" accept="image/*" onchange="uploadBG(event)"></div>
+        <div class="form-row"><label>Warna Solid</label><div style="display:flex;gap:8px;"><input type="color" id="bgColor" value="#0a0a1a" oninput="updateRealtimeBG()"><input type="text" id="bgColorHex" value="#0a0a1a" oninput="updateRealtimeBG()" style="flex:1;"></div></div>
         <div class="form-row"><label>Brightness / Contrast</label>
-          <div class="range-row"><input type="range" id="bgBrightness" min="0" max="200" value="100" oninput="applyBGFilter()"><span class="range-val" id="brightnessVal">100</span></div>
-          <div class="range-row" style="margin-top:6px;"><input type="range" id="bgContrast" min="0" max="200" value="100" oninput="applyBGFilter()"><span class="range-val" id="contrastVal">100</span></div>
+          <div class="range-row"><input type="range" id="bgBrightness" min="0" max="200" value="100" oninput="updateRealtimeFilter()"><span class="range-val" id="brightnessVal">100</span></div>
+          <div class="range-row" style="margin-top:6px;"><input type="range" id="bgContrast" min="0" max="200" value="100" oninput="updateRealtimeFilter()"><span class="range-val" id="contrastVal">100</span></div>
         </div>
       </div>
     </div>
     <div class="panel-section">
-      <div class="panel-title" onclick="toggleSection('overlay')">✨ Overlay & Efek <span id="overlay-arrow">▾</span></div>
+      <div class="panel-title" onclick="toggleSection('overlay')">✨ Overlay <span id="overlay-arrow">▾</span></div>
       <div class="panel-body" id="overlay-body">
-        <div class="form-row"><label>Preset Overlay</label><div class="overlay-presets" id="overlayPresets"></div></div>
-        <div class="form-row"><label>Warna Overlay</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="overlayColor" value="#000000" oninput="applyOverlay()"><div class="range-row" style="flex:1;"><input type="range" id="overlayOpacity" min="0" max="90" value="0" oninput="applyOverlay()"><span class="range-val" id="overlayOpVal">0%</span></div></div></div>
-        <div class="form-row"><label>Vignette</label><div class="range-row"><input type="range" id="vignetteRange" min="0" max="100" value="0" oninput="applyVignette()"><span class="range-val" id="vignetteVal">0%</span></div></div>
-      </div>
-    </div>
-    <div class="panel-section">
-      <div class="panel-title" onclick="toggleSection('shapes')">🔷 Shape & Dekorasi <span id="shapes-arrow">▾</span></div>
-      <div class="panel-body" id="shapes-body">
-        <div class="effect-grid">
-          <button class="effect-btn" onclick="addShape('line-h')">— Garis H</button>
-          <button class="effect-btn" onclick="addShape('line-v')">| Garis V</button>
-          <button class="effect-btn" onclick="addShape('rect')">□ Kotak</button>
-          <button class="effect-btn" onclick="addShape('circle')">○ Lingkaran</button>
-        </div>
-        <div class="form-row" style="margin-top:10px;"><label>Warna Shape</label><div style="display:flex;gap:8px;"><input type="color" id="shapeColor" value="#f0c040"><select id="shapeBorder" style="flex:1;"><option value="none">Solid</option><option value="border">Border Only</option></select></div></div>
-        <div class="form-row"><label>Ukuran Shape</label><div class="range-row"><input type="range" id="shapeSize" min="10" max="250" value="80"><span class="range-val">80</span></div></div>
+        <div class="form-row"><label>Warna Overlay</label><div style="display:flex;gap:8px;"><input type="color" id="overlayColor" value="#000000" oninput="updateRealtimeOverlay()"><div class="range-row" style="flex:1;"><input type="range" id="overlayOpacity" min="0" max="100" value="0" oninput="updateRealtimeOverlay()"><span class="range-val" id="overlayOpVal">0%</span></div></div></div>
+        <div class="form-row"><label>Vignette (Gelap Sudut)</label><div class="range-row"><input type="range" id="vignetteRange" min="0" max="100" value="0" oninput="updateRealtimeOverlay()"><span class="range-val" id="vignetteVal">0%</span></div></div>
       </div>
     </div>
   </div>
@@ -248,51 +160,54 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 
 <div class="right-panel">
   <div class="panel-section">
-    <div class="panel-title" onclick="toggleSection('text')">✍ Editor Teks <span id="text-arrow">▾</span></div>
+    <div class="panel-title" onclick="toggleSection('text')">✍ Editor Teks & Kotak <span id="text-arrow">▾</span></div>
     <div class="panel-body" id="text-body">
-      <div class="form-row"><label>Konten Teks</label><textarea id="textContent" placeholder="Ketik teks di sini..." oninput="updateActiveText()" rows="3"></textarea></div>
+      <div class="form-row"><label>Konten Teks</label><textarea id="textContent" placeholder="Ketik teks di sini..." oninput="updateRealtimeEl('text', this.value)" rows="3"></textarea></div>
       <div class="form-row"><label>Font</label>
-        <select id="fontSelect" onchange="updateFontFamily()">
+        <select id="fontSelect" onchange="updateRealtimeEl('fontFamily', this.value)">
           <option value="'Bebas Neue'">Bebas Neue</option><option value="'Playfair Display'">Playfair Display</option>
-          <option value="'Space Mono'">Space Mono</option><option value="'Anton'">Anton</option><option value="'DM Sans'">DM Sans</option>
-          <option value="'Montserrat'">Montserrat</option>
+          <option value="'Space Mono'">Space Mono</option><option value="'Anton'">Anton</option>
+          <option value="'Montserrat'">Montserrat</option><option value="'DM Sans'">DM Sans</option>
         </select>
       </div>
       <div class="form-row-split">
-        <div><label>Ukuran</label><div class="range-row"><input type="range" id="fontSize" min="10" max="120" value="32" oninput="updateFontSize()"><span class="range-val" id="fontSizeVal">32</span></div></div>
-        <div><label>Line H.</label><div class="range-row"><input type="range" id="lineHeight" min="0.8" max="3" step="0.1" value="1.2" oninput="updateLineHeight()"><span class="range-val" id="lineHeightVal">1.2</span></div></div>
+        <div><label>Ukuran Font</label><div class="range-row"><input type="range" id="fontSize" min="10" max="120" value="32" oninput="updateRealtimeEl('fontSize', parseInt(this.value))"><span class="range-val" id="fontSizeVal">32</span></div></div>
+        <div><label>Line Height</label><div class="range-row"><input type="range" id="lineHeight" min="0.8" max="3" step="0.1" value="1.2" oninput="updateRealtimeEl('lineHeight', parseFloat(this.value))"><span class="range-val" id="lineHeightVal">1.2</span></div></div>
       </div>
-      <div class="form-row"><label>Warna Teks</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="textColor" value="#ffffff" oninput="updateTextColor()"><input type="text" id="textColorHex" value="#ffffff" oninput="updateTextColorHex()" style="flex:1;"></div><div class="color-presets" id="textColorPresets" style="margin-top:8px;"></div></div>
       <div class="form-row-split">
-        <div><label>Bold</label><select id="fontWeight" onchange="updateFontWeight()"><option value="400">Regular</option><option value="700" selected>Bold</option><option value="900">Black</option></select></div>
+        <div><label>Warna Teks</label><div style="display:flex;gap:4px;"><input type="color" id="textColor" value="#ffffff" oninput="updateRealtimeEl('color', this.value); document.getElementById('textColorHex').value=this.value;"><input type="text" id="textColorHex" value="#ffffff" oninput="updateRealtimeEl('color', this.value)" style="flex:1; padding:4px;"></div></div>
         <div><label>Align</label>
-          <div class="align-tools"><button class="align-btn" onclick="setTextAlign('left')">⬅</button><button class="align-btn" onclick="setTextAlign('center')">↔</button><button class="align-btn" onclick="setTextAlign('right')">➡</button></div>
+          <div class="align-tools">
+            <button class="align-btn" onclick="updateRealtimeEl('align', 'left')">⬅</button>
+            <button class="align-btn" onclick="updateRealtimeEl('align', 'center')">↔</button>
+            <button class="align-btn" onclick="updateRealtimeEl('align', 'right')">➡</button>
+          </div>
         </div>
       </div>
-      <div class="form-row"><label>Text Outline / Stroke</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="strokeColor" value="#000000"><div class="range-row" style="flex:1;"><input type="range" id="strokeWidth" min="0" max="5" step="0.5" value="0" oninput="updateStroke()"><span class="range-val" id="strokeVal">0</span></div></div></div>
-      <div class="form-row"><label>Background Teks</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="textBgColor" value="#000000"><div class="range-row" style="flex:1;"><input type="range" id="textBgOpacity" min="0" max="100" value="0" oninput="updateTextBg()"><span class="range-val" id="textBgOpVal">0%</span></div></div></div>
+
+      <hr style="border-color:var(--border); margin:20px 0;">
+      
+      <label style="color:var(--accent); font-size:12px;">◼ Layout Teks (Dalam Box)</label>
+      <div class="form-row"><label>Warna Background Box</label><div style="display:flex;gap:8px;"><input type="color" id="textBgColor" value="#000000" oninput="updateRealtimeEl('bgColor', this.value)"><div class="range-row" style="flex:1;"><input type="range" id="textBgOpacity" min="0" max="100" value="0" oninput="updateRealtimeEl('bgOpacity', parseInt(this.value))"><span class="range-val" id="textBgOpVal">0%</span></div></div></div>
+      <div class="form-row-split">
+        <div><label>Padding (Jarak Dalam)</label><div class="range-row"><input type="range" id="textPadding" min="0" max="60" value="0" oninput="updateRealtimeEl('padding', parseInt(this.value))"><span class="range-val" id="textPaddingVal">0</span></div></div>
+        <div><label>Sudut Melengkung</label><div class="range-row"><input type="range" id="textRadius" min="0" max="50" value="0" oninput="updateRealtimeEl('borderRadius', parseInt(this.value))"><span class="range-val" id="textRadiusVal">0</span></div></div>
+      </div>
+      <div class="form-row"><label>Warna & Tebal Garis Tepi (Border)</label>
+        <div style="display:flex;gap:8px;"><input type="color" id="boxBorderColor" value="#ffffff" oninput="updateRealtimeEl('boxBorderColor', this.value)"><div class="range-row" style="flex:1;"><input type="range" id="boxBorderWidth" min="0" max="10" value="0" oninput="updateRealtimeEl('boxBorderWidth', parseInt(this.value))"><span class="range-val" id="boxBorderWidthVal">0</span></div></div>
+      </div>
     </div>
   </div>
+  
   <div class="panel-section">
-    <div class="panel-title" onclick="toggleSection('position')">📐 Posisi & Ukuran <span id="position-arrow">▾</span></div>
+    <div class="panel-title" onclick="toggleSection('position')">📐 Posisi & Transformasi <span id="position-arrow">▾</span></div>
     <div class="panel-body" id="position-body">
       <div class="form-row-split">
-        <div><label>X (px)</label><input type="number" id="posX" value="20" oninput="updatePosition()"></div>
-        <div><label>Y (px)</label><input type="number" id="posY" value="20" oninput="updatePosition()"></div>
+        <div><label>X (Kiri-Kanan)</label><input type="number" id="posX" value="20" oninput="updateRealtimeEl('x', parseInt(this.value) * DISPLAY_SCALE)"></div>
+        <div><label>Y (Atas-Bawah)</label><input type="number" id="posY" value="20" oninput="updateRealtimeEl('y', parseInt(this.value) * DISPLAY_SCALE)"></div>
       </div>
-      <div class="form-row"><label>Rotation (°)</label><div class="range-row"><input type="range" id="rotation" min="-180" max="180" value="0" oninput="updateRotation()"><span class="range-val" id="rotationVal">0°</span></div></div>
+      <div class="form-row"><label>Rotasi (°)</label><div class="range-row"><input type="range" id="rotation" min="-180" max="180" value="0" oninput="updateRealtimeEl('rotation', parseInt(this.value))"><span class="range-val" id="rotationVal">0°</span></div></div>
       <div style="display:flex;gap:6px;margin-top:4px;"><button class="btn" onclick="deleteActiveElement()" style="flex:1;color:#f04070;border-color:#f04070;">🗑 Hapus</button><button class="btn" onclick="duplicateElement()" style="flex:1;">⧉ Duplikat</button></div>
-    </div>
-  </div>
-  <div class="panel-section">
-    <div class="panel-title" onclick="toggleSection('trading')">📈 Elemen Trading <span id="trading-arrow">▾</span></div>
-    <div class="panel-body" id="trading-body">
-      <div class="effect-grid">
-        <button class="effect-btn" onclick="addTradingElement('profit')">💹 Profit Badge</button>
-        <button class="effect-btn" onclick="addTradingElement('signal')">📡 Signal Box</button>
-        <button class="effect-btn" onclick="addTradingElement('price')">💰 Price Tag</button>
-        <button class="effect-btn" onclick="addTradingElement('roi')">🎯 ROI Box</button>
-      </div>
     </div>
   </div>
 </div>
@@ -300,31 +215,17 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 
 <div class="mobile-joystick-panel">
   <div class="d-pad">
-    <button class="d-btn up" onclick="nudgeEl('up')">▲</button>
-    <button class="d-btn left" onclick="nudgeEl('left')">◀</button>
+    <button class="d-btn up" onclick="nudgeEl(0, -10)">▲</button>
+    <button class="d-btn left" onclick="nudgeEl(-10, 0)">◀</button>
     <button class="d-btn center">MOVE</button>
-    <button class="d-btn right" onclick="nudgeEl('right')">▶</button>
-    <button class="d-btn down" onclick="nudgeEl('down')">▼</button>
+    <button class="d-btn right" onclick="nudgeEl(10, 0)">▶</button>
+    <button class="d-btn down" onclick="nudgeEl(0, 10)">▼</button>
   </div>
   <div class="action-pad">
     <button class="action-btn" onclick="undoState()">↶ Undo</button>
     <button class="action-btn" onclick="redoState()">↷ Redo</button>
-    <button class="action-btn" onclick="zoomEl('in')">➕ Zoom In</button>
-    <button class="action-btn" onclick="zoomEl('out')">➖ Zoom Out</button>
-    <button class="action-btn enter" onclick="duplicateElement()">⧉ Duplikat</button>
-    <button class="action-btn del" onclick="deleteActiveElement()">🗑 Delete</button>
-  </div>
-</div>
-
-<div class="export-panel" id="exportPanel" style="display:none;">
-  <div class="export-box">
-    <div style="font-size:40px;margin-bottom:12px;">⬇️</div>
-    <h2>Export Post</h2>
-    <div class="export-options">
-      <div class="export-opt" onclick="exportAs('png')"><div class="eo-icon">🖼</div>PNG</div>
-      <div class="export-opt" onclick="exportAs('jpg')"><div class="eo-icon">📷</div>JPG</div>
-    </div>
-    <button class="btn" onclick="hideExport()" style="width:100%;">Tutup</button>
+    <button class="action-btn enter" onclick="duplicateElement()">⧉ Copy</button>
+    <button class="action-btn del" onclick="deleteActiveElement()">🗑 Del</button>
   </div>
 </div>
 
@@ -332,444 +233,285 @@ input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px
 
 <script>
 // ============================
-// STATE & HISTORY (Undo/Redo)
+// CORE STATE & HISTORY
 // ============================
 let mode = 'single';
 let cells = [];
 let activeCellIdx = 0;
-let activeElement = null;
-let isDragging = false;
-let dragOffX = 0, dragOffY = 0;
-let zoom = 1;
-
+let activeElementId = null;
 let historyStack = [];
 let historyIndex = -1;
 
 const CELL_SIZE = 300;
 const DISPLAY_SCALE = CELL_SIZE / 1080;
 
-function saveState() {
-  if (historyIndex < historyStack.length - 1) {
-    historyStack = historyStack.slice(0, historyIndex + 1);
-  }
-  historyStack.push(JSON.parse(JSON.stringify(cells)));
-  historyIndex++;
-}
-
-function undoState() {
-  if (historyIndex > 0) {
-    historyIndex--;
-    cells = JSON.parse(JSON.stringify(historyStack[historyIndex]));
-    renderElements(activeCellIdx);
-    syncPanelToCell();
-    showToast('↶ Undo berhasil');
-  } else { showToast('Batas awal Undo'); }
-}
-
-function redoState() {
-  if (historyIndex < historyStack.length - 1) {
-    historyIndex++;
-    cells = JSON.parse(JSON.stringify(historyStack[historyIndex]));
-    renderElements(activeCellIdx);
-    syncPanelToCell();
-    showToast('↷ Redo berhasil');
-  } else { showToast('Batas akhir Redo'); }
-}
-
-// ============================
-// MODELS
-// ============================
 function createCell() {
   return {
-    bg: { type: 'color', value: '#0a0a1a', gradient: null, image: null, filter: 'none', brightness: 100, contrast: 100 },
-    overlay: { color: '#000000', opacity: 0 },
-    vignette: 0,
-    elements: []
+    bg: { value: '#0a0a1a', image: null, brightness: 100, contrast: 100 },
+    overlay: { color: '#000000', opacity: 0 }, vignette: 0, elements: []
   };
 }
 
+// STRUKTUR DATA TEKS BARU (Dilengkapi Fitur Box Lengkap)
 function createTextElement(text = 'Teks Baru') {
   return {
     id: Date.now() + Math.random(), type: 'text', text,
-    x: 20, y: 20, fontSize: 32, fontFamily: "'Bebas Neue'", fontWeight: '700', fontStyle: 'normal',
-    color: '#ffffff', align: 'left', lineHeight: 1.2, letterSpacing: 0, shadow: 0,
-    strokeColor: '#000000', strokeWidth: 0, bgColor: '#000000', bgOpacity: 0, rotation: 0, opacity: 100, maxWidth: 260
+    x: 20, y: 20, fontSize: 32, fontFamily: "'Bebas Neue'", fontWeight: '700',
+    color: '#ffffff', align: 'left', lineHeight: 1.2, rotation: 0, opacity: 100, maxWidth: 260,
+    // Box Properties
+    bgColor: '#000000', bgOpacity: 0, padding: 0, borderRadius: 0,
+    boxBorderColor: '#ffffff', boxBorderWidth: 0
   };
 }
 
-// ============================
-// INIT
-// ============================
-function init() {
-  buildCells(1);
-  buildTemplates();
-  buildColorPresets();
-  buildThemePresets();
-  buildOverlayPresets();
-  setActiveCell(0);
-  saveState();
+function saveState() {
+  if (historyIndex < historyStack.length - 1) historyStack = historyStack.slice(0, historyIndex + 1);
+  historyStack.push(JSON.parse(JSON.stringify(cells)));
+  historyIndex++;
 }
+function undoState() { if (historyIndex > 0) { historyIndex--; cells = JSON.parse(JSON.stringify(historyStack[historyIndex])); renderAll(); showToast('↶ Undo'); } }
+function redoState() { if (historyIndex < historyStack.length - 1) { historyIndex++; cells = JSON.parse(JSON.stringify(historyStack[historyIndex])); renderAll(); showToast('↷ Redo'); } }
 
-function buildCells(count) {
-  const wrapper = document.getElementById('canvasWrapper');
-  wrapper.innerHTML = '';
-  cells = [];
-  const loopCount = mode === 'single' ? 1 : mode === 'row3' ? 3 : mode === 'grid6' ? 6 : 9;
-  
+// ============================
+// INITIALIZATION & DOM BUILDER
+// ============================
+function init() { buildCells(); saveState(); }
+
+function buildCells() {
+  const wrapper = document.getElementById('canvasWrapper'); wrapper.innerHTML = ''; cells = [];
+  const loopCount = mode === 'single' ? 1 : mode === 'row3' ? 3 : 6;
   let row;
   for (let i = 0; i < loopCount; i++) {
-    if (i % 3 === 0) {
-      row = document.createElement('div');
-      row.className = 'grid-row';
-      wrapper.appendChild(row);
-    }
-    const cell = makeCell(i);
-    row.appendChild(cell);
-    cells.push(createCell());
+    if (i % 3 === 0) { row = document.createElement('div'); row.className = 'grid-row'; wrapper.appendChild(row); }
+    const cellDiv = document.createElement('div'); cellDiv.className = 'post-cell'; cellDiv.id = `cell-${i}`;
+    cellDiv.innerHTML = `<div class="cell-bg" id="cellbg-${i}"></div><div class="cell-overlay" id="celloverlay-${i}"></div><div class="cell-content" id="cellcontent-${i}"></div><div class="upload-hint" id="cellhint-${i}">🖼<br>Pilih Box</div><div class="grid-label">${i + 1}</div>`;
+    cellDiv.addEventListener('pointerdown', (e) => { if (!e.target.classList.contains('element-layer')) setActiveCell(i); });
+    row.appendChild(cellDiv); cells.push(createCell());
   }
-  setActiveCell(0);
+  setActiveCell(0); renderAll();
 }
 
-function makeCell(idx) {
-  const div = document.createElement('div');
-  div.className = 'post-cell';
-  div.id = `cell-${idx}`;
-  div.innerHTML = `
-    <div class="cell-bg" id="cellbg-${idx}"></div>
-    <div class="cell-overlay" id="celloverlay-${idx}"></div>
-    <div class="cell-content" id="cellcontent-${idx}"></div>
-    <div class="upload-hint" id="cellhint-${idx}"><div style="font-size:28px;opacity:0.3">🖼</div><div style="opacity:0.4">Klik untuk pilih</div></div>
-    <div class="grid-label">${idx + 1}</div>
-  `;
-  div.onclick = (e) => { 
-    // Jangan ubah active cell jika kita klik elemen di dalamnya
-    if (!e.target.classList.contains('element-layer')) {
-       setActiveCell(idx);
-    }
-  };
-  return div;
-}
+function setMode(m) { mode = m; document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', ['single','row3','grid6'][i] === m)); buildCells(); saveState(); }
 
 function setActiveCell(idx) {
   activeCellIdx = idx;
   document.querySelectorAll('.post-cell').forEach(c => c.classList.remove('active-cell'));
-  const el = document.getElementById(`cell-${idx}`);
-  if (el) el.classList.add('active-cell');
-  
-  // Hapus seleksi elemen saat ganti kotak
-  activeElement = null; 
+  document.getElementById(`cell-${idx}`).classList.add('active-cell');
+  activeElementId = null; 
   document.querySelectorAll('.element-layer').forEach(n => n.classList.remove('selected'));
-  syncPanelToCell();
-}
-
-function setMode(m) {
-  mode = m;
-  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', ['single','row3','grid6','grid9'][i] === m));
-  buildCells();
-  saveState();
+  syncPanelFromState();
 }
 
 // ============================
-// BACKGROUND & OVERLAY
+// REALTIME RENDERING ENGINE
 // ============================
-function applyBGColor() { const c = document.getElementById('bgColor').value; cells[activeCellIdx].bg.value = c; cells[activeCellIdx].bg.image = null; cells[activeCellIdx].bg.gradient = null; renderCell(activeCellIdx); saveState(); }
-function uploadBG(e) { const f = e.target.files[0]; if(!f)return; const r = new FileReader(); r.onload = (ev) => { cells[activeCellIdx].bg.image = ev.target.result; cells[activeCellIdx].bg.gradient = null; renderCell(activeCellIdx); saveState(); }; r.readAsDataURL(f); }
-function applyGradient() { const c1 = document.getElementById('grad1').value, c2 = document.getElementById('grad2').value, d = document.getElementById('gradDir').value; cells[activeCellIdx].bg.gradient = `linear-gradient(${d}, ${c1}, ${c2})`; cells[activeCellIdx].bg.image = null; renderCell(activeCellIdx); saveState(); }
-function applyBGFilter() { cells[activeCellIdx].bg.brightness = document.getElementById('bgBrightness').value; cells[activeCellIdx].bg.contrast = document.getElementById('bgContrast').value; renderCell(activeCellIdx); saveState(); }
-function applyOverlay() { cells[activeCellIdx].overlay = { color: document.getElementById('overlayColor').value, opacity: document.getElementById('overlayOpacity').value }; renderCell(activeCellIdx); saveState(); }
-function applyVignette() { cells[activeCellIdx].vignette = document.getElementById('vignetteRange').value; renderCell(activeCellIdx); saveState(); }
-
-// ============================
-// RENDER CELL
-// ============================
-function renderCell(idx) {
-  const cell = cells[idx], bg = document.getElementById(`cellbg-${idx}`), overlay = document.getElementById(`celloverlay-${idx}`), hint = document.getElementById(`cellhint-${idx}`);
-  if (!bg) return;
-
-  if (cell.bg.image) { bg.style.backgroundImage = `url(${cell.bg.image})`; bg.style.background = ''; hint.style.display = 'none'; } 
-  else if (cell.bg.gradient) { bg.style.backgroundImage = ''; bg.style.background = cell.bg.gradient; hint.style.display = 'none'; } 
-  else { bg.style.backgroundImage = ''; bg.style.background = cell.bg.value; hint.style.display = cell.bg.value === '#0a0a1a' ? 'flex' : 'none'; }
-  bg.style.filter = `brightness(${cell.bg.brightness}%) contrast(${cell.bg.contrast}%)`;
-
-  const op = cell.overlay.opacity / 100;
-  overlay.style.background = op > 0 ? hexToRgba(cell.overlay.color, op) : 'transparent';
-  if (cell.vignette > 0) { const v = cell.vignette / 100; overlay.style.boxShadow = `inset 0 0 ${80 * v}px ${40 * v}px rgba(0,0,0,${0.8 * v})`; } 
-  else { overlay.style.boxShadow = 'none'; }
-
-  renderElements(idx);
-}
-
-function renderElements(idx) {
-  const content = document.getElementById(`cellcontent-${idx}`);
-  if (!content) return;
-  content.innerHTML = '';
-
-  cells[idx].elements.forEach(el => {
-    const div = document.createElement('div');
-    // TAMBAHKAN CLASS 'element-layer'
-    div.className = 'element-layer' + (activeElement === el.id ? ' selected' : '');
-    div.dataset.id = el.id;
+// Menggambar seluruh elemen dari 0 (digunakan saat Load, Undo/Redo)
+function renderAll() {
+  cells.forEach((cell, idx) => {
+    // Render Background & Overlay
+    const bg = document.getElementById(`cellbg-${idx}`), overlay = document.getElementById(`celloverlay-${idx}`), hint = document.getElementById(`cellhint-${idx}`);
+    if (cell.bg.image) { bg.style.backgroundImage = `url(${cell.bg.image})`; hint.style.display = 'none'; } 
+    else { bg.style.backgroundImage = ''; bg.style.backgroundColor = cell.bg.value; hint.style.display = cell.bg.value === '#0a0a1a' ? 'flex' : 'none'; }
+    bg.style.filter = `brightness(${cell.bg.brightness}%) contrast(${cell.bg.contrast}%)`;
     
-    if (el.type === 'text') {
-      div.style.cssText = `left: ${el.x}px; top: ${el.y}px; font-size: ${el.fontSize * DISPLAY_SCALE}px; font-family: ${el.fontFamily}; font-weight: ${el.fontWeight}; color: ${el.color}; text-align: ${el.align}; line-height: ${el.lineHeight}; transform: rotate(${el.rotation}deg); max-width: ${el.maxWidth * DISPLAY_SCALE}px; padding: ${el.bgOpacity > 0 ? '4px 8px' : '0'}; background: ${el.bgOpacity > 0 ? hexToRgba(el.bgColor, el.bgOpacity / 100) : 'transparent'}; border-radius: ${el.bgOpacity > 0 ? '4px' : '0'}; ${el.strokeWidth > 0 ? `-webkit-text-stroke: ${el.strokeWidth * DISPLAY_SCALE}px ${el.strokeColor}` : ''}; white-space: pre-wrap; word-break: break-word;`;
-      div.textContent = el.text;
-    } else if (el.type === 'shape') {
-      const sz = el.size * DISPLAY_SCALE;
-      div.style.cssText = `left:${el.x}px; top:${el.y}px; transform:rotate(${el.rotation||0}deg);`;
-      if (el.subtype === 'line-h') { div.style.width = sz * 2 + 'px'; div.style.height = '2px'; div.style.background = el.color; }
-      else if (el.subtype === 'rect') { div.style.width = sz + 'px'; div.style.height = sz * 0.6 + 'px'; div.style.border = `2px solid ${el.color}`; }
-      else if (el.subtype === 'circle') { div.style.width = sz + 'px'; div.style.height = sz + 'px'; div.style.borderRadius = '50%'; div.style.border = `2px solid ${el.color}`; }
-    } else if (el.type === 'trading') {
-      const s = DISPLAY_SCALE;
-      div.style.cssText = `left:${el.x}px; top:${el.y}px; transform:rotate(${el.rotation||0}deg);`;
-      if (el.subtype === 'profit') div.innerHTML = `<div style="background:rgba(64,200,80,0.2);border:1px solid #40c850;border-radius:${6*s}px;padding:${6*s}px ${12*s}px;font-size:${22*s}px;font-family:'Bebas Neue';color:#40c850;">+24.5% PROFIT</div>`;
-      else if (el.subtype === 'price') div.innerHTML = `<div style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);border-radius:${6*s}px;padding:${8*s}px ${14*s}px;font-family:'Space Mono';color:white;font-size:${14*s}px;"><div style="color:#888;font-size:${10*s}px;">XAUUSD</div><div style="font-size:${24*s}px;color:#f0c040;">2,350.00</div></div>`;
-      else if (el.subtype === 'roi') div.innerHTML = `<div style="text-align:center;"><div style="font-family:'Bebas Neue';font-size:${48*s}px;color:#f0c040;line-height:1;">150%</div><div style="font-family:'DM Sans';font-size:${12*s}px;color:#888;">ROI</div></div>`;
-    }
+    overlay.style.backgroundColor = cell.overlay.opacity > 0 ? hexToRgba(cell.overlay.color, cell.overlay.opacity / 100) : 'transparent';
+    overlay.style.boxShadow = cell.vignette > 0 ? `inset 0 0 ${80 * (cell.vignette/100)}px ${40 * (cell.vignette/100)}px rgba(0,0,0,${0.8 * (cell.vignette/100)})` : 'none';
 
-    const startInteraction = (e) => {
-      e.stopPropagation();
-      // Pindahkan aktif cell jika beda kotak
-      if (activeCellIdx !== idx) {
-         activeCellIdx = idx;
-         document.querySelectorAll('.post-cell').forEach(c => c.classList.remove('active-cell'));
-         document.getElementById(`cell-${idx}`).classList.add('active-cell');
-         syncPanelToCell();
-      }
+    // Render Elements DOM
+    const content = document.getElementById(`cellcontent-${idx}`); content.innerHTML = '';
+    cell.elements.forEach(el => {
+      const div = document.createElement('div');
+      div.className = 'element-layer' + (activeElementId === el.id ? ' selected' : '');
+      div.dataset.id = el.id;
       
-      setActiveElement(el.id);
-      startDrag(e, div, el, idx);
-    };
-
-    // Event listener untuk klik dan sentuh
-    div.addEventListener('mousedown', startInteraction);
-    div.addEventListener('touchstart', startInteraction, { passive: false });
-
-    if(el.type === 'text') {
-      div.addEventListener('dblclick', (e) => { e.stopPropagation(); document.getElementById('textContent').focus(); });
-    }
-
-    content.appendChild(div);
+      applyElementStyles(div, el); // Apply CSS
+      
+      // Pointer Events untuk Drag (Support Mouse & Touch bersamaan)
+      div.addEventListener('pointerdown', (e) => startDragPointer(e, div, el, idx));
+      if (el.type === 'text') div.addEventListener('dblclick', () => document.getElementById('textContent').focus());
+      content.appendChild(div);
+    });
   });
 }
 
-// ============================
-// FIX: DRAG LOKAL & TOUCH (DOM UPDATE)
-// ============================
-function startDrag(e, div, elData, cellIdx) {
-  isDragging = true;
-  const cell = document.getElementById(`cell-${cellIdx}`);
-  const rect = cell.getBoundingClientRect();
-  const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-  const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
-
-  dragOffX = clientX - rect.left - elData.x;
-  dragOffY = clientY - rect.top - elData.y;
-
-  const onMove = (me) => {
-    if (!isDragging) return;
-    if (me.type.includes('touch') && me.cancelable) me.preventDefault(); // Mencegah pull-to-refresh
-
-    const mx = me.type.includes('touch') ? me.touches[0].clientX : me.clientX;
-    const my = me.type.includes('touch') ? me.touches[0].clientY : me.clientY;
-    
-    // Hitung posisi baru
-    elData.x = Math.max(-50, Math.min(mx - rect.left - dragOffX, CELL_SIZE + 50));
-    elData.y = Math.max(-50, Math.min(my - rect.top - dragOffY, CELL_SIZE + 50));
-    
-    // Update panel angka
-    document.getElementById('posX').value = Math.round(elData.x / DISPLAY_SCALE);
-    document.getElementById('posY').value = Math.round(elData.y / DISPLAY_SCALE);
-    
-    // KUNCI PERBAIKAN: Ubah style secara langsung tanpa menghancurkan (re-render) elemen DOM!
-    div.style.left = elData.x + 'px';
-    div.style.top = elData.y + 'px';
-  };
-
-  const onUp = () => {
-    if(isDragging) {
-       isDragging = false;
-       saveState(); // Simpan history hanya saat jari/mouse diangkat
-    }
-    document.removeEventListener('mousemove', onMove);
-    document.removeEventListener('mouseup', onUp);
-    document.removeEventListener('touchmove', onMove);
-    document.removeEventListener('touchend', onUp);
-  };
-
-  document.addEventListener('mousemove', onMove);
-  document.addEventListener('mouseup', onUp);
-  document.addEventListener('touchmove', onMove, { passive: false });
-  document.addEventListener('touchend', onUp);
-}
-
-// ============================
-// FIX: SET ACTIVE ELEMENT (DOM HIGHLIGHT)
-// ============================
-function setActiveElement(id) {
-  activeElement = id;
-  const el = getActiveEl();
+// Menerapkan CSS ke spesifik DOM Node (Kunci dari Real-time Update tanpa lag)
+function applyElementStyles(node, el) {
+  const s = DISPLAY_SCALE;
+  node.style.left = `${el.x}px`; node.style.top = `${el.y}px`;
+  node.style.transform = `rotate(${el.rotation}deg)`;
   
-  if (!el) {
-    document.querySelectorAll('.element-layer').forEach(n => n.classList.remove('selected'));
-    return;
-  }
-
-  // 1. Update UI Panel di Kanan
   if (el.type === 'text') {
-    document.getElementById('textContent').value = el.text || '';
-    document.getElementById('fontSelect').value = el.fontFamily || "'Bebas Neue'";
-    document.getElementById('fontSize').value = el.fontSize || 32;
-    document.getElementById('textColor').value = el.color || '#ffffff';
-    document.getElementById('textColorHex').value = el.color || '#ffffff';
+    node.textContent = el.text;
+    node.style.fontFamily = el.fontFamily;
+    node.style.fontSize = `${el.fontSize * s}px`;
+    node.style.fontWeight = el.fontWeight;
+    node.style.color = el.color;
+    node.style.textAlign = el.align;
+    node.style.lineHeight = el.lineHeight;
+    node.style.maxWidth = `${el.maxWidth * s}px`;
+    
+    // Fitur TEXT IN BOX
+    node.style.backgroundColor = el.bgOpacity > 0 ? hexToRgba(el.bgColor, el.bgOpacity / 100) : 'transparent';
+    node.style.padding = `${el.padding * s}px`;
+    node.style.borderRadius = `${el.borderRadius * s}px`;
+    node.style.border = el.boxBorderWidth > 0 ? `${el.boxBorderWidth * s}px solid ${el.boxBorderColor}` : 'none';
   }
-  document.getElementById('posX').value = Math.round((el.x||0) / DISPLAY_SCALE);
-  document.getElementById('posY').value = Math.round((el.y||0) / DISPLAY_SCALE);
-
-  // 2. Beri efek Visual Highlight menggunakan DOM Class (Tanpa re-render!)
-  document.querySelectorAll('.element-layer').forEach(node => {
-    if (node.dataset.id == id) {
-      node.classList.add('selected');
-    } else {
-      node.classList.remove('selected');
-    }
-  });
 }
 
-function getActiveEl() { return activeElement ? cells[activeCellIdx].elements.find(e => e.id === activeElement) : null; }
+// ============================
+// REALTIME DATA BINDING (MENGHUBUNGKAN PANEL KE DOM)
+// ============================
+function getActiveEl() { return activeElementId ? cells[activeCellIdx].elements.find(e => e.id === activeElementId) : null; }
 
-// ============================
-// MOBILE JOYSTICK & ACTIONS
-// ============================
-function nudgeEl(dir) {
-  const el = getActiveEl();
-  if (!el) { showToast('Pilih elemen dulu!'); return; }
+// Update Background
+function updateRealtimeBG() { const c = document.getElementById('bgColor').value; cells[activeCellIdx].bg.value = c; document.getElementById('bgColorHex').value = c; document.getElementById(`cellbg-${activeCellIdx}`).style.backgroundColor = c; document.getElementById(`cellhint-${activeCellIdx}`).style.display = 'none'; saveStateThrottled(); }
+function uploadBG(e) { const f = e.target.files[0]; if(!f)return; const r = new FileReader(); r.onload = (ev) => { cells[activeCellIdx].bg.image = ev.target.result; renderAll(); saveState(); }; r.readAsDataURL(f); }
+function updateRealtimeFilter() { const b = document.getElementById('bgBrightness').value, c = document.getElementById('bgContrast').value; cells[activeCellIdx].bg.brightness = b; cells[activeCellIdx].bg.contrast = c; document.getElementById('brightnessVal').textContent = b; document.getElementById('contrastVal').textContent = c; document.getElementById(`cellbg-${activeCellIdx}`).style.filter = `brightness(${b}%) contrast(${c}%)`; saveStateThrottled(); }
+function updateRealtimeOverlay() { const c = document.getElementById('overlayColor').value, o = document.getElementById('overlayOpacity').value, v = document.getElementById('vignetteRange').value; cells[activeCellIdx].overlay.color = c; cells[activeCellIdx].overlay.opacity = o; cells[activeCellIdx].vignette = v; document.getElementById('overlayOpVal').textContent = o+'%'; document.getElementById('vignetteVal').textContent = v+'%'; renderAll(); saveStateThrottled(); }
+
+// Update Teks (Box, Warna, Tulisan, dll) secara Realtime
+function updateRealtimeEl(prop, value) {
+  const el = getActiveEl(); if (!el) return;
+  el[prop] = value; // Update State Object
   
-  const step = 5 * DISPLAY_SCALE; // Geser 5px
-  if (dir === 'up') el.y -= step;
-  if (dir === 'down') el.y += step;
-  if (dir === 'left') el.x -= step;
-  if (dir === 'right') el.x += step;
-  
-  document.getElementById('posX').value = Math.round(el.x / DISPLAY_SCALE);
-  document.getElementById('posY').value = Math.round(el.y / DISPLAY_SCALE);
-  
+  // Update Nilai di Label/Slider Panel
+  if (document.getElementById(`${prop}Val`)) document.getElementById(`${prop}Val`).textContent = value;
+  if (prop === 'x') document.getElementById('posX').value = Math.round(value / DISPLAY_SCALE);
+  if (prop === 'y') document.getElementById('posY').value = Math.round(value / DISPLAY_SCALE);
+
+  // Update DOM Element Langsung tanpa Render Ulang (No flicker!)
   const node = document.querySelector(`.element-layer[data-id="${el.id}"]`);
-  if (node) {
-      node.style.left = el.x + 'px';
-      node.style.top = el.y + 'px';
-  }
-}
-
-function zoomEl(dir) {
-  const el = getActiveEl();
-  if (!el) { showToast('Pilih elemen dulu!'); return; }
+  if (node) applyElementStyles(node, el);
   
-  if (el.type === 'text') {
-    if (dir === 'in') el.fontSize += 2;
-    if (dir === 'out') el.fontSize = Math.max(10, el.fontSize - 2);
-    document.getElementById('fontSize').value = el.fontSize;
-  } else if (el.type === 'shape') {
-    if (dir === 'in') el.size += 5;
-    if (dir === 'out') el.size = Math.max(10, el.size - 5);
+  saveStateThrottled();
+}
+
+function syncPanelFromState() {
+  const cell = cells[activeCellIdx];
+  document.getElementById('bgColor').value = cell.bg.value; document.getElementById('bgColorHex').value = cell.bg.value;
+  document.getElementById('bgBrightness').value = cell.bg.brightness; document.getElementById('brightnessVal').textContent = cell.bg.brightness;
+  document.getElementById('bgContrast').value = cell.bg.contrast; document.getElementById('contrastVal').textContent = cell.bg.contrast;
+  document.getElementById('overlayColor').value = cell.overlay.color; document.getElementById('overlayOpacity').value = cell.overlay.opacity; document.getElementById('overlayOpVal').textContent = cell.overlay.opacity + '%';
+  
+  const el = getActiveEl();
+  if (el && el.type === 'text') {
+    document.getElementById('textContent').value = el.text;
+    document.getElementById('fontSelect').value = el.fontFamily;
+    document.getElementById('fontSize').value = el.fontSize; document.getElementById('fontSizeVal').textContent = el.fontSize;
+    document.getElementById('textColor').value = el.color; document.getElementById('textColorHex').value = el.color;
+    document.getElementById('posX').value = Math.round(el.x / DISPLAY_SCALE); document.getElementById('posY').value = Math.round(el.y / DISPLAY_SCALE);
+    document.getElementById('rotation').value = el.rotation; document.getElementById('rotationVal').textContent = el.rotation + '°';
+    // Sync Box Props
+    document.getElementById('textBgColor').value = el.bgColor;
+    document.getElementById('textBgOpacity').value = el.bgOpacity; document.getElementById('textBgOpVal').textContent = el.bgOpacity + '%';
+    document.getElementById('textPadding').value = el.padding; document.getElementById('textPaddingVal').textContent = el.padding;
+    document.getElementById('textRadius').value = el.borderRadius; document.getElementById('textRadiusVal').textContent = el.borderRadius;
+    document.getElementById('boxBorderColor').value = el.boxBorderColor;
+    document.getElementById('boxBorderWidth').value = el.boxBorderWidth; document.getElementById('boxBorderWidthVal').textContent = el.boxBorderWidth;
   }
-  renderElements(activeCellIdx);
-  saveState();
 }
 
 // ============================
-// TEXT & ELEMENT UPDATES
+// POINTER DRAG & DROP (100% MOBILE & DESKTOP COMPATIBLE)
 // ============================
-function updateActiveText() { const el = getActiveEl(); if(el && el.type === 'text') { el.text = document.getElementById('textContent').value; renderElements(activeCellIdx); } }
-function updateFontFamily() { const el = getActiveEl(); if(el) { el.fontFamily = document.getElementById('fontSelect').value; renderElements(activeCellIdx); saveState(); } }
-function updateFontSize() { const el = getActiveEl(); if(el) { el.fontSize = parseInt(document.getElementById('fontSize').value); renderElements(activeCellIdx); saveState(); } }
-function updateTextColor() { const el = getActiveEl(); if(el) { el.color = document.getElementById('textColor').value; document.getElementById('textColorHex').value = el.color; renderElements(activeCellIdx); saveState(); } }
-function updateTextColorHex() { const el = getActiveEl(); const hex = document.getElementById('textColorHex').value; if(el && /^#[0-9A-Fa-f]{6}$/.test(hex)) { el.color = hex; document.getElementById('textColor').value = hex; renderElements(activeCellIdx); saveState(); } }
+let dragInfo = { isDragging: false, startX: 0, startY: 0, initialElX: 0, initialElY: 0, node: null, el: null };
 
-function updatePosition() { 
-  const el = getActiveEl(); 
-  if(el) { 
-    el.x = parseInt(document.getElementById('posX').value) * DISPLAY_SCALE; 
-    el.y = parseInt(document.getElementById('posY').value) * DISPLAY_SCALE; 
-    const node = document.querySelector(`.element-layer[data-id="${el.id}"]`);
-    if (node) { node.style.left = el.x + 'px'; node.style.top = el.y + 'px'; }
-    saveState(); 
-  } 
+function startDragPointer(e, node, el, cellIdx) {
+  e.preventDefault(); e.stopPropagation();
+  if (activeCellIdx !== cellIdx) setActiveCell(cellIdx);
+  
+  activeElementId = el.id;
+  document.querySelectorAll('.element-layer').forEach(n => n.classList.toggle('selected', n.dataset.id == el.id));
+  syncPanelFromState();
+
+  dragInfo = { isDragging: true, startX: e.clientX, startY: e.clientY, initialElX: el.x, initialElY: el.y, node, el };
+  node.setPointerCapture(e.pointerId); // Kunci pointer ke elemen ini
+  
+  node.onpointermove = onMovePointer;
+  node.onpointerup = onUpPointer;
+  node.onpointercancel = onUpPointer;
 }
 
-function updateRotation() { const el = getActiveEl(); if(el) { el.rotation = parseInt(document.getElementById('rotation').value); renderElements(activeCellIdx); saveState(); } }
+function onMovePointer(e) {
+  if (!dragInfo.isDragging) return;
+  e.preventDefault();
+  
+  // Hitung pergeseran murni dari titik awal
+  const dx = e.clientX - dragInfo.startX;
+  const dy = e.clientY - dragInfo.startY;
+  
+  dragInfo.el.x = dragInfo.initialElX + dx;
+  dragInfo.el.y = dragInfo.initialElY + dy;
+  
+  // Update UI & DOM instan
+  dragInfo.node.style.left = `${dragInfo.el.x}px`;
+  dragInfo.node.style.top = `${dragInfo.el.y}px`;
+  document.getElementById('posX').value = Math.round(dragInfo.el.x / DISPLAY_SCALE);
+  document.getElementById('posY').value = Math.round(dragInfo.el.y / DISPLAY_SCALE);
+}
 
-function addTextLayer(text) {
-  const t = createTextElement(text || 'TEKS BARU');
+function onUpPointer(e) {
+  if (dragInfo.isDragging) {
+    dragInfo.isDragging = false;
+    dragInfo.node.releasePointerCapture(e.pointerId);
+    dragInfo.node.onpointermove = null; dragInfo.node.onpointerup = null;
+    saveState(); // Simpan history setelah dilepas
+  }
+}
+
+// ============================
+// TOOLS & ACTIONS
+// ============================
+function addTextLayer() {
+  const t = createTextElement('TEKS BARU');
   t.x = 20 * DISPLAY_SCALE; t.y = (20 + cells[activeCellIdx].elements.length * 40) * DISPLAY_SCALE;
-  cells[activeCellIdx].elements.push(t);
-  renderElements(activeCellIdx); // Buat DOM-nya dulu
-  setActiveElement(t.id);        // Baru Select
-  document.getElementById('textContent').value = t.text;
-  showToast('Teks ditambahkan!');
-  saveState();
+  cells[activeCellIdx].elements.push(t); activeElementId = t.id; renderAll(); syncPanelFromState(); saveState(); showToast('Teks ditambahkan!');
 }
 
 function deleteActiveElement() {
-  if (!activeElement) return;
-  cells[activeCellIdx].elements = cells[activeCellIdx].elements.filter(e => e.id !== activeElement);
-  activeElement = null;
-  renderElements(activeCellIdx);
-  showToast('🗑 Elemen dihapus');
-  saveState();
+  if (!activeElementId) return;
+  cells[activeCellIdx].elements = cells[activeCellIdx].elements.filter(e => e.id !== activeElementId);
+  activeElementId = null; renderAll(); saveState(); showToast('🗑 Dihapus');
 }
 
 function duplicateElement() {
   const el = getActiveEl(); if (!el) { showToast('Pilih elemen dulu!'); return; }
-  const copy = JSON.parse(JSON.stringify(el));
-  copy.id = Date.now() + Math.random();
-  copy.x += 10 * DISPLAY_SCALE; copy.y += 10 * DISPLAY_SCALE;
-  cells[activeCellIdx].elements.push(copy);
-  renderElements(activeCellIdx);
-  setActiveElement(copy.id);
-  showToast('⧉ Diduplikasi');
-  saveState();
+  const copy = JSON.parse(JSON.stringify(el)); copy.id = Date.now(); copy.x += 10; copy.y += 10;
+  cells[activeCellIdx].elements.push(copy); activeElementId = copy.id; renderAll(); syncPanelFromState(); saveState(); showToast('⧉ Disalin');
 }
 
+function nudgeEl(dx, dy) {
+  const el = getActiveEl(); if (!el) return;
+  updateRealtimeEl('x', el.x + (dx * DISPLAY_SCALE));
+  updateRealtimeEl('y', el.y + (dy * DISPLAY_SCALE));
+}
+
+// ONE CLICK: AUTO LAYOUT BERITA
 function applyNewsTemplate() {
-  if (!confirm('Terapkan Layout Berita? (Elemen teks saat ini akan dihapus)')) return;
-  const c = cells[activeCellIdx];
-  c.elements = c.elements.filter(e => e.type !== 'text');
-  c.overlay = { color: '#000000', opacity: 60 }; c.vignette = 40;
+  if (!confirm('Terapkan Layout Berita? (Teks saat ini akan tertimpa)')) return;
+  const c = cells[activeCellIdx]; c.elements = []; 
+  c.overlay = { color: '#000000', opacity: 65 }; c.vignette = 30;
 
-  const head1 = createTextElement('RUPIAH KEMBALI\nMELEMAH! HAMPIR\nSENTUH RP17.100');
-  head1.fontFamily = "'Anton'"; head1.fontSize = 42; head1.y = 150 * DISPLAY_SCALE; head1.align = 'center';
+  // Header Putih
+  const h1 = createTextElement('RUPIAH KEMBALI\nMELEMAH! HAMPIR\nSENTUH RP17.100');
+  h1.fontFamily = "'Anton'"; h1.fontSize = 40; h1.y = 120 * DISPLAY_SCALE; h1.align = 'center';
   
-  const head2 = createTextElement('PER DOLAR AS');
-  head2.fontFamily = "'Anton'"; head2.fontSize = 42; head2.color = '#39ff14'; head2.y = 230 * DISPLAY_SCALE; head2.align = 'center';
+  // Highlight Box Hijau Neon (Memanfaatkan Fitur Box Teks yang Baru!)
+  const h2 = createTextElement('PER DOLAR AS');
+  h2.fontFamily = "'Anton'"; h2.fontSize = 38; h2.color = '#0a0a0a'; h2.y = 240 * DISPLAY_SCALE; h2.align = 'center';
+  h2.bgColor = '#39ff14'; h2.bgOpacity = 100; h2.padding = 6; h2.borderRadius = 8; // Highlight Keren!
   
-  c.elements.push(head1, head2);
-  renderCell(activeCellIdx);
-  document.getElementById('overlayOpacity').value = 60;
-  showToast('📰 Layout Berita Diterapkan!');
-  saveState();
+  c.elements.push(h1, h2); activeElementId = h2.id;
+  renderAll(); syncPanelFromState(); saveState(); showToast('📰 Layout Berita Aktif!');
 }
 
-function addShape(type) { const el = { id: Date.now(), type: 'shape', subtype: type, x: 50*DISPLAY_SCALE, y: 50*DISPLAY_SCALE, color: document.getElementById('shapeColor').value, size: document.getElementById('shapeSize').value, rotation: 0 }; cells[activeCellIdx].elements.push(el); renderElements(activeCellIdx); setActiveElement(el.id); saveState(); }
-function addTradingElement(type) { const el = { id: Date.now(), type: 'trading', subtype: type, x: 20*DISPLAY_SCALE, y: 20*DISPLAY_SCALE, rotation: 0 }; cells[activeCellIdx].elements.push(el); renderElements(activeCellIdx); setActiveElement(el.id); saveState(); }
-
-function syncPanelToCell() {
-  const cell = cells[activeCellIdx];
-  document.getElementById('bgColor').value = cell.bg.value || '#0a0a1a';
-  document.getElementById('overlayOpacity').value = cell.overlay.opacity || 0;
-  // DIHAPUS: renderCell(activeCellIdx); -> Ini yang bikin layar kedip dan error.
-}
-
-// UTILS & EXPORT
+// UTILS
+let throttleTimer;
+function saveStateThrottled() { clearTimeout(throttleTimer); throttleTimer = setTimeout(saveState, 500); }
 function hexToRgba(hex, alpha) { const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16); return `rgba(${r},${g},${b},${alpha})`; }
-function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
-function toggleSection(id) { const body = document.getElementById(`${id}-body`); const isOpen = body.style.display !== 'none'; body.style.display = isOpen ? 'none' : 'block'; }
-function clearCanvas() { if(!confirm('Reset post ini?')) return; cells[activeCellIdx] = createCell(); activeElement = null; renderCell(activeCellIdx); syncPanelToCell(); saveState(); }
-function showExport() { document.getElementById('exportPanel').style.display = 'flex'; }
-function hideExport() { document.getElementById('exportPanel').style.display = 'none'; }
-function exportAs(format) { showToast('Gunakan fitur Screenshot HP untuk export saat ini!'); hideExport(); }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2000); }
+function toggleSection(id) { const body = document.getElementById(`${id}-body`); body.style.display = body.style.display !== 'none' ? 'none' : 'block'; }
 
-// INIT APP
 init();
 </script>
 </body>
