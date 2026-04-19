@@ -192,41 +192,6 @@ header {
   flex-shrink: 0;
 }
 
-/* GRID SELECTOR */
-.grid-selector {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.grid-opt {
-  flex: 1;
-  min-width: 80px;
-  padding: 10px 8px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  background: var(--surface2);
-  color: var(--text-muted);
-  cursor: pointer;
-  text-align: center;
-  font-size: 11px;
-  font-weight: 600;
-  transition: all 0.2s;
-  font-family: 'DM Sans', sans-serif;
-}
-
-.grid-opt:hover { border-color: var(--accent); color: var(--accent); }
-.grid-opt.active { border-color: var(--accent); background: rgba(240,192,64,0.1); color: var(--accent); }
-
-.grid-opt .grid-icon {
-  margin: 0 auto 4px;
-  display: grid;
-  gap: 2px;
-  width: 28px;
-}
-
-.grid-icon .cell { background: currentColor; border-radius: 1px; opacity: 0.7; }
-
 /* CANVAS GRID */
 .canvas-wrapper {
   display: flex;
@@ -335,301 +300,143 @@ input[type="color"] {
   padding: 2px;
 }
 
-.form-row {
-  margin-bottom: 14px;
-}
-
-.form-row-split {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin-bottom: 14px;
-}
+.form-row { margin-bottom: 14px; }
+.form-row-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
 
 /* COLOR PRESETS */
-.color-presets {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.color-dot {
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.2s;
-}
-
+.color-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.color-dot { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
 .color-dot:hover, .color-dot.active { border-color: white; transform: scale(1.15); }
 
-/* FONT PICKER */
-.font-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.font-opt {
-  padding: 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  cursor: pointer;
-  text-align: center;
-  font-size: 14px;
-  background: var(--surface2);
-  transition: all 0.2s;
-  color: var(--text);
-}
-
-.font-opt:hover { border-color: var(--accent2); }
-.font-opt.active { border-color: var(--accent); background: rgba(240,192,64,0.1); }
-
 /* TEMPLATE GALLERY */
-.template-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
-.template-card {
-  aspect-ratio: 1;
-  border-radius: 8px;
-  cursor: pointer;
-  border: 2px solid transparent;
-  overflow: hidden;
-  transition: all 0.2s;
-  position: relative;
-}
-
+.template-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.template-card { aspect-ratio: 1; border-radius: 8px; cursor: pointer; border: 2px solid transparent; overflow: hidden; transition: all 0.2s; position: relative; }
 .template-card:hover { border-color: var(--accent2); transform: scale(1.02); }
 .template-card.active { border-color: var(--accent); }
 
 /* LAYER TEXT */
-.text-layer {
-  position: absolute;
-  cursor: move;
-  user-select: none;
-  min-width: 40px;
-  min-height: 20px;
-  word-break: break-word;
-  line-height: 1.2;
-}
-
-.text-layer.selected {
-  outline: 1px dashed rgba(240,192,64,0.8);
-}
+.text-layer { position: absolute; cursor: move; user-select: none; min-width: 40px; min-height: 20px; word-break: break-word; line-height: 1.2; }
+.text-layer.selected { outline: 1px dashed rgba(240,192,64,0.8); }
 
 /* SCROLLBAR */
-::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
-/* BADGES & TAGS */
-.badge {
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-}
-
-.badge-green { background: rgba(64,200,100,0.2); color: #40c864; }
-.badge-yellow { background: rgba(240,192,64,0.2); color: var(--accent); }
-
 /* OVERLAY PRESETS */
-.overlay-presets {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.overlay-btn {
-  padding: 5px 10px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  background: var(--surface2);
-  color: var(--text-muted);
-  font-size: 11px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  transition: all 0.2s;
-}
-
+.overlay-presets { display: flex; gap: 6px; flex-wrap: wrap; }
+.overlay-btn { padding: 5px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
 .overlay-btn:hover { border-color: var(--accent2); color: var(--accent2); }
 .overlay-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(240,192,64,0.08); }
 
 /* ALIGN TOOLS */
 .align-tools { display: flex; gap: 4px; flex-wrap: wrap; }
-.align-btn {
-  width: 32px; height: 32px;
-  border: 1px solid var(--border);
-  border-radius: 5px;
-  background: var(--surface2);
-  color: var(--text-muted);
-  cursor: pointer;
-  font-size: 14px;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s;
-}
+.align-btn { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
 .align-btn:hover { border-color: var(--accent); color: var(--accent); }
 
 /* ELEMENT LIST */
-.element-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-  transition: all 0.2s;
-}
-
+.element-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.2s; }
 .element-item:hover { background: var(--surface2); }
 .element-item.active { background: rgba(240,192,64,0.1); color: var(--accent); }
-
 .element-icon { font-size: 14px; width: 20px; text-align: center; }
 
 /* RANGE WITH VALUE */
-.range-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.range-val {
-  font-size: 12px;
-  color: var(--accent);
-  font-weight: 600;
-  min-width: 35px;
-  text-align: right;
-}
+.range-row { display: flex; align-items: center; gap: 8px; }
+.range-val { font-size: 12px; color: var(--accent); font-weight: 600; min-width: 35px; text-align: right; }
 
 /* TOAST */
-.toast {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%) translateY(80px);
-  background: var(--accent);
-  color: #000;
-  padding: 10px 24px;
-  border-radius: 8px;
-  font-weight: 700;
-  font-size: 13px;
-  transition: transform 0.3s;
-  z-index: 9999;
-}
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--accent); color: #000; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: transform 0.3s; z-index: 9999; }
 .toast.show { transform: translateX(-50%) translateY(0); }
 
 /* PANEL SCROLL */
-.panel-scroll {
-  overflow-y: auto;
-  flex: 1;
-}
+.panel-scroll { overflow-y: auto; flex: 1; }
 
 /* GRID SIZE INDICATOR */
-.grid-label {
-  position: absolute;
-  top: 6px;
-  left: 8px;
-  font-size: 10px;
-  font-weight: 700;
-  background: rgba(0,0,0,0.7);
-  color: var(--accent);
-  padding: 2px 6px;
-  border-radius: 3px;
-  letter-spacing: 0.5px;
-}
+.grid-label { position: absolute; top: 6px; left: 8px; font-size: 10px; font-weight: 700; background: rgba(0,0,0,0.7); color: var(--accent); padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px; }
 
 /* EFFECT BUTTONS */
-.effect-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px;
-}
-
-.effect-btn {
-  padding: 8px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--surface2);
-  color: var(--text-muted);
-  font-size: 11px;
-  cursor: pointer;
-  text-align: center;
-  font-family: 'DM Sans', sans-serif;
-  transition: all 0.2s;
-}
-
+.effect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.effect-btn { padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; text-align: center; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
 .effect-btn:hover { border-color: var(--accent2); color: var(--accent2); }
 .effect-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(240,192,64,0.08); }
 
 /* GRADIENT EDITOR */
-.gradient-stops {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  flex-wrap: wrap;
-}
+.gradient-stops { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
 
-.export-panel {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-  backdrop-filter: blur(4px);
-}
-
-.export-box {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 32px;
-  width: 400px;
-  text-align: center;
-}
-
-.export-box h2 {
-  font-family: 'Syne', sans-serif;
-  font-size: 22px;
-  margin-bottom: 8px;
-}
-
-.export-options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  margin: 20px 0;
-}
-
-.export-opt {
-  padding: 16px;
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  background: var(--surface2);
-  cursor: pointer;
-  transition: all 0.2s;
-  font-size: 13px;
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-}
-
+/* EXPORT PANEL */
+.export-panel { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(4px); }
+.export-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; width: 400px; text-align: center; max-width: 90%; }
+.export-box h2 { font-family: 'Syne', sans-serif; font-size: 22px; margin-bottom: 8px; }
+.export-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+.export-opt { padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface2); cursor: pointer; transition: all 0.2s; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; }
 .export-opt:hover { border-color: var(--accent); }
 .export-opt .eo-icon { font-size: 28px; margin-bottom: 8px; }
+
+/* ========================================================
+   MOBILE RESPONSIVENESS UPDATES
+======================================================== */
+@media (max-width: 860px) {
+  body {
+    height: auto;
+    overflow-y: auto;
+    display: block;
+  }
+  header {
+    height: auto;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  .header-tabs {
+    width: 100%;
+    margin-left: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 4px;
+    justify-content: flex-start;
+  }
+  .header-actions {
+    width: 100%;
+    margin-left: 0;
+    justify-content: space-between;
+  }
+  .app-body {
+    flex-direction: column;
+    overflow: visible;
+  }
+  /* Mengatur Kanvas selalu berada di atas Editor di layar mobile */
+  .canvas-area {
+    order: -1; 
+    width: 100%;
+    min-height: 45vh;
+    max-height: 55vh;
+    border-bottom: 1px solid var(--border);
+  }
+  .left-panel, .right-panel {
+    width: 100%;
+    flex: none;
+    border-right: none;
+    border-left: none;
+  }
+  .panel-scroll {
+    overflow: visible;
+  }
+  .grid-row {
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Memungkinkan pan canvas horizontal jika melewati layar */
+  }
+  .canvas-wrapper {
+    margin: 20px 0;
+  }
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
   <div class="logo">
     <div class="logo-icon">⚡</div>
@@ -648,14 +455,11 @@ input[type="color"] {
   </div>
 </header>
 
-<!-- BODY -->
 <div class="app-body">
 
-<!-- LEFT PANEL: Templates & Elements -->
 <div class="left-panel">
   <div class="panel-scroll">
 
-    <!-- TEMPLATES -->
     <div class="panel-section">
       <div class="panel-title" onclick="toggleSection('templates')">
         🎨 Template Trading & Bisnis
@@ -666,7 +470,6 @@ input[type="color"] {
       </div>
     </div>
 
-    <!-- BACKGROUND -->
     <div class="panel-section">
       <div class="panel-title" onclick="toggleSection('bg')">
         🖼 Background
@@ -718,7 +521,6 @@ input[type="color"] {
       </div>
     </div>
 
-    <!-- OVERLAY EFFECTS -->
     <div class="panel-section">
       <div class="panel-title" onclick="toggleSection('overlay')">
         ✨ Overlay & Efek
@@ -760,7 +562,6 @@ input[type="color"] {
       </div>
     </div>
 
-    <!-- SHAPE & DECORATIONS -->
     <div class="panel-section">
       <div class="panel-title" onclick="toggleSection('shapes')">
         🔷 Shape & Dekorasi
@@ -795,7 +596,6 @@ input[type="color"] {
       </div>
     </div>
 
-    <!-- ELEMENT LIST -->
     <div class="panel-section">
       <div class="panel-title" onclick="toggleSection('elements')">
         📋 Elemen Aktif
@@ -811,17 +611,13 @@ input[type="color"] {
   </div>
 </div>
 
-<!-- CANVAS -->
 <div class="canvas-area" id="canvasArea">
   <div class="canvas-wrapper" id="canvasWrapper">
-    <!-- Generated by JS -->
-  </div>
+    </div>
 </div>
 
-<!-- RIGHT PANEL: Text & Style -->
 <div class="right-panel">
 
-  <!-- TEXT EDITOR -->
   <div class="panel-section">
     <div class="panel-title" onclick="toggleSection('text')">
       ✍ Editor Teks
@@ -943,7 +739,6 @@ input[type="color"] {
     </div>
   </div>
 
-  <!-- POSITION & SIZE -->
   <div class="panel-section">
     <div class="panel-title" onclick="toggleSection('position')">
       📐 Posisi & Ukuran
@@ -999,7 +794,6 @@ input[type="color"] {
     </div>
   </div>
 
-  <!-- BRANDING -->
   <div class="panel-section">
     <div class="panel-title" onclick="toggleSection('brand')">
       🏷 Branding Cepat
@@ -1022,7 +816,6 @@ input[type="color"] {
     </div>
   </div>
 
-  <!-- TRADING ELEMENTS -->
   <div class="panel-section">
     <div class="panel-title" onclick="toggleSection('trading')">
       📈 Elemen Trading
@@ -1042,7 +835,6 @@ input[type="color"] {
     </div>
   </div>
 
-  <!-- GLOBAL STYLE -->
   <div class="panel-section">
     <div class="panel-title" onclick="toggleSection('global')">
       🌐 Style Global
@@ -1074,7 +866,6 @@ input[type="color"] {
 </div>
 </div>
 
-<!-- EXPORT MODAL -->
 <div class="export-panel" id="exportPanel" style="display:none;">
   <div class="export-box">
     <div style="font-size:40px;margin-bottom:12px;">⬇️</div>
@@ -1102,7 +893,6 @@ input[type="color"] {
   </div>
 </div>
 
-<!-- TOAST -->
 <div class="toast" id="toast">✅ Berhasil!</div>
 
 <script>
@@ -1427,12 +1217,14 @@ function renderElements(idx) {
       `;
       div.textContent = el.text;
 
-      div.addEventListener('mousedown', (e) => {
+      const startInteraction = (e) => {
         e.stopPropagation();
         if (activeCellIdx !== idx) setActiveCell(idx);
         setActiveElement(el.id);
         startDrag(e, div, el, idx);
-      });
+      };
+      div.addEventListener('mousedown', startInteraction);
+      div.addEventListener('touchstart', startInteraction, { passive: true });
 
       div.addEventListener('dblclick', (e) => {
         e.stopPropagation();
@@ -1449,19 +1241,31 @@ function renderElements(idx) {
 }
 
 // ============================
-// DRAG
+// DRAG (MOBILE TOUCH + MOUSE)
 // ============================
 function startDrag(e, div, elData, cellIdx) {
   isDragging = true;
   const cell = document.getElementById(`cell-${cellIdx}`);
   const rect = cell.getBoundingClientRect();
-  dragOffX = e.clientX - rect.left - elData.x;
-  dragOffY = e.clientY - rect.top - elData.y;
+
+  const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+  const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
+
+  dragOffX = clientX - rect.left - elData.x;
+  dragOffY = clientY - rect.top - elData.y;
 
   const onMove = (me) => {
     if (!isDragging) return;
-    const nx = Math.round((me.clientX - rect.left - dragOffX));
-    const ny = Math.round((me.clientY - rect.top - dragOffY));
+    const mx = me.type.includes('touch') ? me.touches[0].clientX : me.clientX;
+    const my = me.type.includes('touch') ? me.touches[0].clientY : me.clientY;
+    
+    // Prevent scrolling while moving element on touch devices
+    if (me.type.includes('touch') && me.cancelable) {
+      me.preventDefault(); 
+    }
+
+    const nx = Math.round((mx - rect.left - dragOffX));
+    const ny = Math.round((my - rect.top - dragOffY));
     elData.x = Math.max(0, Math.min(nx, CELL_SIZE - 10));
     elData.y = Math.max(0, Math.min(ny, CELL_SIZE - 10));
     document.getElementById('posX').value = Math.round(elData.x / DISPLAY_SCALE);
@@ -1473,10 +1277,14 @@ function startDrag(e, div, elData, cellIdx) {
     isDragging = false;
     document.removeEventListener('mousemove', onMove);
     document.removeEventListener('mouseup', onUp);
+    document.removeEventListener('touchmove', onMove);
+    document.removeEventListener('touchend', onUp);
   };
 
   document.addEventListener('mousemove', onMove);
   document.addEventListener('mouseup', onUp);
+  document.addEventListener('touchmove', onMove, { passive: false });
+  document.addEventListener('touchend', onUp);
 }
 
 function setActiveElement(id) {
@@ -1783,11 +1591,13 @@ function renderTradingEl(container, el) {
     div.innerHTML = `<div style="width:${200*s}px;height:${2*s}px;background:linear-gradient(to right, transparent, #f0c040, transparent);"></div>`;
   }
 
-  div.addEventListener('mousedown', (e) => {
+  const startInteraction = (e) => {
     e.stopPropagation();
     setActiveElement(el.id);
     startDrag(e, div, el, activeCellIdx);
-  });
+  };
+  div.addEventListener('mousedown', startInteraction);
+  div.addEventListener('touchstart', startInteraction, { passive: true });
 
   container.appendChild(div);
 }
@@ -1850,11 +1660,13 @@ function renderShape(container, el) {
     div.style.border = `2px solid ${el.color}`;
   }
 
-  div.addEventListener('mousedown', (e) => {
+  const startInteraction = (e) => {
     e.stopPropagation();
     setActiveElement(el.id);
     startDrag(e, div, el, activeCellIdx);
-  });
+  };
+  div.addEventListener('mousedown', startInteraction);
+  div.addEventListener('touchstart', startInteraction, { passive: true });
 
   container.appendChild(div);
 }
