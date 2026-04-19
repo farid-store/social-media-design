@@ -408,7 +408,6 @@ input[type="color"] {
     flex-direction: column;
     overflow: visible;
   }
-  /* Mengatur Kanvas selalu berada di atas Editor di layar mobile */
   .canvas-area {
     order: -1; 
     width: 100%;
@@ -427,7 +426,7 @@ input[type="color"] {
   }
   .grid-row {
     flex-wrap: nowrap;
-    overflow-x: auto; /* Memungkinkan pan canvas horizontal jika melewati layar */
+    overflow-x: auto;
   }
   .canvas-wrapper {
     margin: 20px 0;
@@ -466,6 +465,7 @@ input[type="color"] {
         <span id="templates-arrow">▾</span>
       </div>
       <div class="panel-body" id="templates-body">
+        <button class="btn btn-primary" onclick="applyNewsTemplate()" style="width:100%; margin-bottom:12px; background:#39ff14; color:#000; border-color:#39ff14;">📰 Auto-Layout Berita (CW)</button>
         <div class="template-grid" id="templateGrid"></div>
       </div>
     </div>
@@ -1490,7 +1490,7 @@ function snapPosition(pos) {
 }
 
 // ============================
-// ADD ELEMENTS
+// ADD ELEMENTS & TEMPLATES
 // ============================
 function addTextLayer(text) {
   const t = createTextElement(text || 'TEKS BARU');
@@ -1536,6 +1536,80 @@ function duplicateElement() {
   cells[activeCellIdx].elements.push(copy);
   setActiveElement(copy.id);
   renderElements(activeCellIdx);
+}
+
+// FUNGSI BARU: AUTO-LAYOUT BERITA (CW STYLE)
+function applyNewsTemplate() {
+  if (!confirm('Terapkan Layout Berita? (Elemen teks saat ini akan dihapus)')) return;
+
+  const c = cells[activeCellIdx];
+  // Bersihkan teks lama, pertahankan background gambar jika ada
+  c.elements = c.elements.filter(e => e.type !== 'text');
+
+  // Set overlay gelap agar teks putih terbaca
+  c.overlay = { color: '#000000', opacity: 60 };
+  c.vignette = 40;
+
+  const s = DISPLAY_SCALE;
+
+  // 1. Logo Watermark
+  const logo = createTextElement('CW █');
+  logo.fontFamily = "'Montserrat'";
+  logo.fontWeight = '900';
+  logo.fontSize = 28;
+  logo.color = '#ffffff';
+  logo.x = 20 * s;
+  logo.y = 120 * s;
+  logo.align = 'center';
+  logo.maxWidth = 260;
+  c.elements.push(logo);
+
+  // 2. Headline Utama (Putih)
+  const head1 = createTextElement('RUPIAH KEMBALI\nMELEMAH! HAMPIR\nSENTUH RP17.100');
+  head1.fontFamily = "'Anton'"; 
+  head1.fontSize = 42;
+  head1.color = '#ffffff';
+  head1.lineHeight = 1.1;
+  head1.x = 20 * s;
+  head1.y = 150 * s;
+  head1.align = 'center';
+  head1.maxWidth = 260;
+  c.elements.push(head1);
+
+  // 3. Highlight Text (Hijau Neon)
+  const head2 = createTextElement('PER DOLAR AS');
+  head2.fontFamily = "'Anton'";
+  head2.fontSize = 42;
+  head2.color = '#39ff14'; // Lime Green
+  head2.lineHeight = 1.1;
+  head2.x = 20 * s;
+  head2.y = 230 * s;
+  head2.align = 'center';
+  head2.maxWidth = 260;
+  c.elements.push(head2);
+
+  // 4. Pill Badge (Kredit / Akun)
+  const pill = createTextElement('Tiktok & IG | @username_anda');
+  pill.fontFamily = "'DM Sans'";
+  pill.fontWeight = '400';
+  pill.fontSize = 11;
+  pill.color = '#ffffff';
+  pill.bgColor = '#000000';
+  pill.bgOpacity = 70;
+  pill.strokeWidth = 0;
+  pill.x = 100 * s;
+  pill.y = 275 * s;
+  c.elements.push(pill);
+
+  renderCell(activeCellIdx);
+  updateElementList();
+  syncPanelToCell();
+  
+  // Sinkronisasi slider overlay di UI
+  document.getElementById('overlayOpacity').value = 60;
+  document.getElementById('overlayOpVal').textContent = '60%';
+  
+  showToast('📰 Layout Berita Diterapkan!');
 }
 
 // ============================
@@ -1716,7 +1790,8 @@ function applyTemplate(t) {
 // COLOR PRESETS
 // ============================
 const BG_COLORS = ['#0a0a1a','#001a00','#1a0000','#050518','#1a1000','#f5f5f0','#051020','#2a2a00','#0a1a1a','#1a001a','#ffffff','#000000'];
-const TEXT_COLORS = ['#ffffff','#f0c040','#40c850','#f04070','#40c8f0','#a040f0','#ff8040','#c0c0c0','#000000','#1a1a1a'];
+const TEXT_COLORS = ['#ffffff','#f0c040','#40c850','#f04070','#40c8f0','#a040f0','#ff8040','#c0c0c0','#000000','#1a1a1a','#39ff14']; // Ditambahkan #39ff14 (Lime Green)
+
 const THEMES = [
   { name: 'Gold', bg: '#0a0a1a', ac: '#f0c040' },
   { name: 'Green', bg: '#001a00', ac: '#40c850' },
