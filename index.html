@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>InstaGrid Studio — Trading & Business Post Designer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;700&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300&family=Syne:wght@400;700;800&family=Cabinet+Grotesk:wght@400;700;800&family=Josefin+Sans:wght@300;400;700&family=Raleway:wght@300;400;700;900&family=Oswald:wght@300;400;700&family=Montserrat:wght@300;400;700;900&family=Lato:wght@300;400;700&family=Poppins:wght@300;400;600;700&family=Anton&family=Cinzel:wght@400;700&family=Abril+Fatface&family=Righteous&family=Orbitron:wght@400;700;900&family=Exo+2:wght@300;400;700&display=swap" rel="stylesheet">
@@ -31,406 +31,175 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  overscroll-behavior-y: none; /* Cegah pull-to-refresh di mobile */
 }
 
 /* HEADER */
-header {
-  height: var(--header-h);
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  align-items: center;
-  padding: 0 20px;
-  gap: 20px;
-  flex-shrink: 0;
-  z-index: 100;
-}
-
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: 'Syne', sans-serif;
-  font-weight: 800;
-  font-size: 18px;
-  letter-spacing: -0.5px;
-}
-
-.logo-icon {
-  width: 32px; height: 32px;
-  background: linear-gradient(135deg, var(--accent), var(--accent3));
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
-}
-
+header { height: var(--header-h); background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 20px; gap: 20px; flex-shrink: 0; z-index: 100; }
+.logo { display: flex; align-items: center; gap: 10px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 18px; letter-spacing: -0.5px; }
+.logo-icon { width: 32px; height: 32px; background: linear-gradient(135deg, var(--accent), var(--accent3)); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; }
 .logo span { color: var(--accent); }
-
-.header-tabs {
-  display: flex;
-  gap: 4px;
-  background: var(--surface2);
-  padding: 4px;
-  border-radius: 10px;
-  margin-left: 10px;
-}
-
-.tab-btn {
-  padding: 6px 16px;
-  border-radius: 7px;
-  border: none;
-  background: none;
-  color: var(--text-muted);
-  font-size: 13px;
-  font-family: 'DM Sans', sans-serif;
-  cursor: pointer;
-  transition: all 0.2s;
-  font-weight: 500;
-}
-
-.tab-btn.active {
-  background: var(--accent);
-  color: #000;
-}
-
-.header-actions {
-  margin-left: auto;
-  display: flex;
-  gap: 10px;
-}
-
-.btn {
-  padding: 8px 18px;
-  border-radius: 8px;
-  border: 1px solid var(--border);
-  background: var(--surface2);
-  color: var(--text);
-  font-size: 13px;
-  cursor: pointer;
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 500;
-  transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
+.header-tabs { display: flex; gap: 4px; background: var(--surface2); padding: 4px; border-radius: 10px; margin-left: 10px; }
+.tab-btn { padding: 6px 16px; border-radius: 7px; border: none; background: none; color: var(--text-muted); font-size: 13px; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; font-weight: 500; }
+.tab-btn.active { background: var(--accent); color: #000; }
+.header-actions { margin-left: auto; display: flex; gap: 10px; }
+.btn { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border); background: var(--surface2); color: var(--text); font-size: 13px; cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500; transition: all 0.2s; display: flex; align-items: center; gap: 6px; }
 .btn:hover { border-color: var(--accent); color: var(--accent); }
-
-.btn-primary {
-  background: var(--accent);
-  color: #000;
-  border-color: var(--accent);
-  font-weight: 700;
-}
-
+.btn-primary { background: var(--accent); color: #000; border-color: var(--accent); font-weight: 700; }
 .btn-primary:hover { background: #d4a800; color: #000; border-color: #d4a800; }
 
 /* MAIN LAYOUT */
-.app-body {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-}
-
-/* LEFT PANEL */
-.left-panel {
-  width: var(--panel-w);
-  background: var(--surface);
-  border-right: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  flex-shrink: 0;
-}
-
-.panel-section {
-  border-bottom: 1px solid var(--border);
-}
-
-.panel-title {
-  padding: 12px 16px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  user-select: none;
-}
-
+.app-body { display: flex; flex: 1; overflow: hidden; }
+.left-panel, .right-panel { width: var(--panel-w); background: var(--surface); display: flex; flex-direction: column; overflow: hidden; flex-shrink: 0; }
+.left-panel { border-right: 1px solid var(--border); }
+.right-panel { border-left: 1px solid var(--border); overflow-y: auto; }
+.panel-section { border-bottom: 1px solid var(--border); }
+.panel-title { padding: 12px 16px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); display: flex; align-items: center; justify-content: space-between; cursor: pointer; user-select: none; }
 .panel-title:hover { color: var(--text); }
-
-.panel-body {
-  padding: 12px 16px;
-}
+.panel-body { padding: 12px 16px; }
 
 /* CANVAS AREA */
-.canvas-area {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #07070d;
-  background-image: radial-gradient(#1a1a2e 1px, transparent 1px);
-  background-size: 24px 24px;
-  overflow: auto;
-  position: relative;
-}
-
-/* RIGHT PANEL */
-.right-panel {
-  width: var(--panel-w);
-  background: var(--surface);
-  border-left: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  overflow-y: auto;
-  flex-shrink: 0;
-}
-
-/* CANVAS GRID */
-.canvas-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 16px;
-}
-
-.grid-row {
-  display: flex;
-  gap: 3px;
-}
-
-.post-cell {
-  width: 300px;
-  height: 300px;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition: all 0.2s;
-  border-radius: 2px;
-  background: #1a1a2e;
-}
-
-.post-cell.active-cell {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 1px var(--accent), 0 0 20px rgba(240,192,64,0.2);
-}
-
-.post-cell .cell-bg {
-  position: absolute; inset: 0;
-  background-size: cover;
-  background-position: center;
-  transition: all 0.3s;
-}
-
-.post-cell .cell-overlay {
-  position: absolute; inset: 0;
-  pointer-events: none;
-}
-
-.post-cell .cell-content {
-  position: absolute; inset: 0;
-  display: flex;
-  flex-direction: column;
-  padding: 20px;
-  pointer-events: none;
-}
-
-.post-cell .upload-hint {
-  position: absolute; inset: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  color: var(--text-muted);
-  font-size: 12px;
-  pointer-events: none;
-}
+.canvas-area { flex: 1; display: flex; align-items: center; justify-content: center; background: #07070d; background-image: radial-gradient(#1a1a2e 1px, transparent 1px); background-size: 24px 24px; overflow: auto; position: relative; touch-action: pan-x pan-y; }
+.canvas-wrapper { display: flex; flex-direction: column; align-items: center; gap: 16px; touch-action: none; /* Penting agar elemen bisa di drag tanpa scroll layar */ }
+.grid-row { display: flex; gap: 3px; }
+.post-cell { width: 300px; height: 300px; position: relative; overflow: hidden; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; border-radius: 2px; background: #1a1a2e; }
+.post-cell.active-cell { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), 0 0 20px rgba(240,192,64,0.2); }
+.post-cell .cell-bg, .post-cell .cell-overlay, .post-cell .cell-content, .post-cell .upload-hint { position: absolute; inset: 0; }
+.post-cell .cell-bg { background-size: cover; background-position: center; transition: all 0.3s; }
+.post-cell .cell-overlay, .post-cell .cell-content { pointer-events: none; }
+.post-cell .upload-hint { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--text-muted); font-size: 12px; pointer-events: none; }
 
 /* INPUT STYLES */
-label {
-  display: block;
-  font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted);
-  letter-spacing: 0.5px;
-  margin-bottom: 6px;
-  text-transform: uppercase;
-}
-
-input[type="text"], input[type="number"], textarea, select {
-  width: 100%;
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text);
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
-  padding: 8px 10px;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-input[type="text"]:focus, textarea:focus, select:focus {
-  border-color: var(--accent);
-}
-
+label { display: block; font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; margin-bottom: 6px; text-transform: uppercase; }
+input[type="text"], input[type="number"], textarea, select { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 13px; padding: 8px 10px; outline: none; transition: border-color 0.2s; }
+input[type="text"]:focus, textarea:focus, select:focus { border-color: var(--accent); }
 textarea { resize: vertical; min-height: 60px; }
-
-select option { background: var(--surface2); }
-
-input[type="range"] {
-  width: 100%;
-  accent-color: var(--accent);
-}
-
-input[type="color"] {
-  width: 36px; height: 36px;
-  border-radius: 6px;
-  border: 1px solid var(--border);
-  cursor: pointer;
-  background: none;
-  padding: 2px;
-}
-
+input[type="range"] { width: 100%; accent-color: var(--accent); }
+input[type="color"] { width: 36px; height: 36px; border-radius: 6px; border: 1px solid var(--border); cursor: pointer; background: none; padding: 2px; }
 .form-row { margin-bottom: 14px; }
 .form-row-split { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
-
-/* COLOR PRESETS */
 .color-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
 .color-dot { width: 24px; height: 24px; border-radius: 50%; cursor: pointer; border: 2px solid transparent; transition: all 0.2s; }
 .color-dot:hover, .color-dot.active { border-color: white; transform: scale(1.15); }
-
-/* TEMPLATE GALLERY */
 .template-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .template-card { aspect-ratio: 1; border-radius: 8px; cursor: pointer; border: 2px solid transparent; overflow: hidden; transition: all 0.2s; position: relative; }
 .template-card:hover { border-color: var(--accent2); transform: scale(1.02); }
-.template-card.active { border-color: var(--accent); }
-
-/* LAYER TEXT */
-.text-layer { position: absolute; cursor: move; user-select: none; min-width: 40px; min-height: 20px; word-break: break-word; line-height: 1.2; }
+.text-layer { position: absolute; cursor: move; user-select: none; min-width: 40px; min-height: 20px; word-break: break-word; line-height: 1.2; touch-action: none; }
 .text-layer.selected { outline: 1px dashed rgba(240,192,64,0.8); }
-
-/* SCROLLBAR */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
-
-/* OVERLAY PRESETS */
 .overlay-presets { display: flex; gap: 6px; flex-wrap: wrap; }
 .overlay-btn { padding: 5px 10px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
-.overlay-btn:hover { border-color: var(--accent2); color: var(--accent2); }
-.overlay-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(240,192,64,0.08); }
-
-/* ALIGN TOOLS */
+.overlay-btn:hover, .overlay-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(240,192,64,0.08); }
 .align-tools { display: flex; gap: 4px; flex-wrap: wrap; }
-.align-btn { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; }
+.align-btn { width: 32px; height: 32px; border: 1px solid var(--border); border-radius: 5px; background: var(--surface2); color: var(--text-muted); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
 .align-btn:hover { border-color: var(--accent); color: var(--accent); }
-
-/* ELEMENT LIST */
 .element-item { display: flex; align-items: center; gap: 8px; padding: 7px 10px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all 0.2s; }
-.element-item:hover { background: var(--surface2); }
-.element-item.active { background: rgba(240,192,64,0.1); color: var(--accent); }
-.element-icon { font-size: 14px; width: 20px; text-align: center; }
-
-/* RANGE WITH VALUE */
+.element-item:hover, .element-item.active { background: rgba(240,192,64,0.1); color: var(--accent); }
 .range-row { display: flex; align-items: center; gap: 8px; }
 .range-val { font-size: 12px; color: var(--accent); font-weight: 600; min-width: 35px; text-align: right; }
-
-/* TOAST */
-.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--accent); color: #000; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: transform 0.3s; z-index: 9999; }
-.toast.show { transform: translateX(-50%) translateY(0); }
-
-/* PANEL SCROLL */
 .panel-scroll { overflow-y: auto; flex: 1; }
-
-/* GRID SIZE INDICATOR */
 .grid-label { position: absolute; top: 6px; left: 8px; font-size: 10px; font-weight: 700; background: rgba(0,0,0,0.7); color: var(--accent); padding: 2px 6px; border-radius: 3px; letter-spacing: 0.5px; }
-
-/* EFFECT BUTTONS */
 .effect-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-.effect-btn { padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; text-align: center; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
-.effect-btn:hover { border-color: var(--accent2); color: var(--accent2); }
-.effect-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(240,192,64,0.08); }
-
-/* GRADIENT EDITOR */
+.effect-btn { padding: 8px; border: 1px solid var(--border); border-radius: 6px; background: var(--surface2); color: var(--text-muted); font-size: 11px; cursor: pointer; text-align: center; font-family: 'DM Sans', sans-serif; }
+.effect-btn:hover, .effect-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(240,192,64,0.08); }
 .gradient-stops { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
 
-/* EXPORT PANEL */
+/* EXPORT MODAL */
 .export-panel { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; z-index: 9999; backdrop-filter: blur(4px); }
 .export-box { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 32px; width: 400px; text-align: center; max-width: 90%; }
 .export-box h2 { font-family: 'Syne', sans-serif; font-size: 22px; margin-bottom: 8px; }
 .export-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-.export-opt { padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface2); cursor: pointer; transition: all 0.2s; font-size: 13px; color: var(--text); font-family: 'DM Sans', sans-serif; }
+.export-opt { padding: 16px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface2); cursor: pointer; font-size: 13px; color: var(--text); }
 .export-opt:hover { border-color: var(--accent); }
 .export-opt .eo-icon { font-size: 28px; margin-bottom: 8px; }
 
+/* TOAST */
+.toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: var(--accent); color: #000; padding: 10px 24px; border-radius: 8px; font-weight: 700; font-size: 13px; transition: transform 0.3s; z-index: 99999; }
+.toast.show { transform: translateX(-50%) translateY(0); }
+
 /* ========================================================
-   MOBILE RESPONSIVENESS UPDATES
+   MOBILE JOYSTICK & RESPONSIVE CSS
 ======================================================== */
+.mobile-joystick-panel {
+  display: none; /* Hide by default on desktop */
+}
+
 @media (max-width: 860px) {
-  body {
-    height: auto;
-    overflow-y: auto;
-    display: block;
-  }
-  header {
-    height: auto;
-    flex-wrap: wrap;
+  body { height: auto; overflow-y: auto; display: block; padding-bottom: 240px; /* Space for joystick */ }
+  header { height: auto; flex-wrap: wrap; padding: 12px 16px; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+  .header-tabs { width: 100%; margin-left: 0; overflow-x: auto; white-space: nowrap; padding-bottom: 4px; justify-content: flex-start; }
+  .header-actions { width: 100%; margin-left: 0; justify-content: space-between; }
+  .app-body { flex-direction: column; overflow: visible; }
+  .canvas-area { order: -1; width: 100%; min-height: 40vh; border-bottom: 1px solid var(--border); padding-bottom: 20px;}
+  .left-panel, .right-panel { width: 100%; flex: none; border-right: none; border-left: none; }
+  .panel-scroll { overflow: visible; }
+  .grid-row { flex-wrap: nowrap; overflow-x: auto; padding: 0 10px; }
+  .canvas-wrapper { margin: 10px 0; }
+
+  /* MOBILE FLOATING CONTROLLER */
+  .mobile-joystick-panel {
+    display: flex;
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: rgba(17, 17, 24, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
     padding: 12px 16px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-  .header-tabs {
-    width: 100%;
-    margin-left: 0;
-    overflow-x: auto;
-    white-space: nowrap;
-    padding-bottom: 4px;
-    justify-content: flex-start;
-  }
-  .header-actions {
-    width: 100%;
-    margin-left: 0;
+    z-index: 9000;
     justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.5);
   }
-  .app-body {
-    flex-direction: column;
-    overflow: visible;
+
+  .d-pad {
+    display: grid;
+    grid-template-columns: 40px 40px 40px;
+    grid-template-rows: 40px 40px 40px;
+    gap: 4px;
+    align-items: center;
+    justify-items: center;
   }
-  .canvas-area {
-    order: -1; 
-    width: 100%;
-    min-height: 45vh;
-    max-height: 55vh;
-    border-bottom: 1px solid var(--border);
+  .d-btn {
+    width: 40px; height: 40px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--accent);
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    user-select: none; touch-action: none;
   }
-  .left-panel, .right-panel {
-    width: 100%;
-    flex: none;
-    border-right: none;
-    border-left: none;
+  .d-btn:active { background: var(--accent); color: #000; transform: scale(0.95); }
+  .d-btn.up { grid-column: 2; grid-row: 1; }
+  .d-btn.left { grid-column: 1; grid-row: 2; }
+  .d-btn.right { grid-column: 3; grid-row: 2; }
+  .d-btn.down { grid-column: 2; grid-row: 3; }
+  .d-btn.center { grid-column: 2; grid-row: 2; font-size: 10px; background: none; border: none; color: var(--text-muted);}
+
+  .action-pad {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    flex: 1;
+    margin-left: 20px;
   }
-  .panel-scroll {
-    overflow: visible;
+  .action-btn {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    user-select: none; touch-action: none;
   }
-  .grid-row {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-  }
-  .canvas-wrapper {
-    margin: 20px 0;
-  }
+  .action-btn:active { background: var(--border); }
+  .action-btn.del { color: #f04070; border-color: rgba(240,64,112,0.3); }
+  .action-btn.enter { background: rgba(240,192,64,0.1); color: var(--accent); border-color: rgba(240,192,64,0.3); }
 }
 </style>
 </head>
@@ -455,10 +224,8 @@ input[type="color"] {
 </header>
 
 <div class="app-body">
-
 <div class="left-panel">
   <div class="panel-scroll">
-
     <div class="panel-section">
       <div class="panel-title" onclick="toggleSection('templates')">
         🎨 Template Trading & Bisnis
@@ -469,425 +236,127 @@ input[type="color"] {
         <div class="template-grid" id="templateGrid"></div>
       </div>
     </div>
-
     <div class="panel-section">
-      <div class="panel-title" onclick="toggleSection('bg')">
-        🖼 Background
-        <span id="bg-arrow">▾</span>
-      </div>
+      <div class="panel-title" onclick="toggleSection('bg')">🖼 Background <span id="bg-arrow">▾</span></div>
       <div class="panel-body" id="bg-body">
-        <div class="form-row">
-          <label>Upload Gambar</label>
-          <input type="file" id="bgUpload" accept="image/*" onchange="uploadBG(event)" style="color:var(--text-muted);font-size:12px;">
-        </div>
-        <div class="form-row">
-          <label>Warna Solid</label>
-          <div style="display:flex;gap:8px;align-items:center;">
-            <input type="color" id="bgColor" value="#0a0a1a" oninput="applyBGColor()">
-            <input type="text" id="bgColorHex" value="#0a0a1a" oninput="applyBGColorHex()" style="flex:1;">
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Preset Warna</label>
-          <div class="color-presets" id="bgColorPresets"></div>
-        </div>
-        <div class="form-row">
-          <label>Gradient</label>
-          <div class="gradient-stops">
-            <input type="color" id="grad1" value="#0d1b2a" oninput="applyGradient()">
-            <span style="color:var(--text-muted);font-size:18px;">→</span>
-            <input type="color" id="grad2" value="#1a0a2e" oninput="applyGradient()">
-            <select id="gradDir" onchange="applyGradient()" style="flex:1;">
-              <option value="to bottom">↓</option>
-              <option value="to right">→</option>
-              <option value="to bottom right">↘</option>
-              <option value="to top right">↗</option>
-              <option value="135deg">⤢</option>
-            </select>
-          </div>
+        <div class="form-row"><label>Upload Gambar</label><input type="file" id="bgUpload" accept="image/*" onchange="uploadBG(event)" style="color:var(--text-muted);font-size:12px;"></div>
+        <div class="form-row"><label>Warna Solid</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="bgColor" value="#0a0a1a" oninput="applyBGColor()"><input type="text" id="bgColorHex" value="#0a0a1a" oninput="applyBGColorHex()" style="flex:1;"></div></div>
+        <div class="form-row"><label>Preset Warna</label><div class="color-presets" id="bgColorPresets"></div></div>
+        <div class="form-row"><label>Gradient</label>
+          <div class="gradient-stops"><input type="color" id="grad1" value="#0d1b2a" oninput="applyGradient()"><span style="color:var(--text-muted);font-size:18px;">→</span><input type="color" id="grad2" value="#1a0a2e" oninput="applyGradient()"><select id="gradDir" onchange="applyGradient()" style="flex:1;"><option value="to bottom">↓</option><option value="to right">→</option><option value="to bottom right">↘</option><option value="to top right">↗</option><option value="135deg">⤢</option></select></div>
           <button class="btn" onclick="applyGradient()" style="margin-top:6px;width:100%;font-size:12px;">Terapkan Gradient</button>
         </div>
-        <div class="form-row">
-          <label>Brightness / Contrast</label>
-          <div class="range-row">
-            <input type="range" id="bgBrightness" min="0" max="200" value="100" oninput="applyBGFilter()">
-            <span class="range-val" id="brightnessVal">100</span>
-          </div>
-          <div class="range-row" style="margin-top:6px;">
-            <input type="range" id="bgContrast" min="0" max="200" value="100" oninput="applyBGFilter()">
-            <span class="range-val" id="contrastVal">100</span>
-          </div>
+        <div class="form-row"><label>Brightness / Contrast</label>
+          <div class="range-row"><input type="range" id="bgBrightness" min="0" max="200" value="100" oninput="applyBGFilter()"><span class="range-val" id="brightnessVal">100</span></div>
+          <div class="range-row" style="margin-top:6px;"><input type="range" id="bgContrast" min="0" max="200" value="100" oninput="applyBGFilter()"><span class="range-val" id="contrastVal">100</span></div>
         </div>
       </div>
     </div>
-
     <div class="panel-section">
-      <div class="panel-title" onclick="toggleSection('overlay')">
-        ✨ Overlay & Efek
-        <span id="overlay-arrow">▾</span>
-      </div>
+      <div class="panel-title" onclick="toggleSection('overlay')">✨ Overlay & Efek <span id="overlay-arrow">▾</span></div>
       <div class="panel-body" id="overlay-body">
-        <div class="form-row">
-          <label>Preset Overlay</label>
-          <div class="overlay-presets" id="overlayPresets"></div>
-        </div>
-        <div class="form-row">
-          <label>Warna Overlay</label>
-          <div style="display:flex;gap:8px;align-items:center;">
-            <input type="color" id="overlayColor" value="#000000" oninput="applyOverlay()">
-            <div class="range-row" style="flex:1;">
-              <input type="range" id="overlayOpacity" min="0" max="90" value="0" oninput="applyOverlay()">
-              <span class="range-val" id="overlayOpVal">0%</span>
-            </div>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Filter Efek</label>
-          <div class="effect-grid">
-            <button class="effect-btn" onclick="setFilter('none')">Normal</button>
-            <button class="effect-btn" onclick="setFilter('grayscale(100%)')">Grayscale</button>
-            <button class="effect-btn" onclick="setFilter('sepia(80%)')">Sepia</button>
-            <button class="effect-btn" onclick="setFilter('hue-rotate(180deg)')">Hue Shift</button>
-            <button class="effect-btn" onclick="setFilter('blur(2px)')">Blur</button>
-            <button class="effect-btn" onclick="setFilter('saturate(200%)')">Vivid</button>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Vignette</label>
-          <div class="range-row">
-            <input type="range" id="vignetteRange" min="0" max="100" value="0" oninput="applyVignette()">
-            <span class="range-val" id="vignetteVal">0%</span>
-          </div>
-        </div>
+        <div class="form-row"><label>Preset Overlay</label><div class="overlay-presets" id="overlayPresets"></div></div>
+        <div class="form-row"><label>Warna Overlay</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="overlayColor" value="#000000" oninput="applyOverlay()"><div class="range-row" style="flex:1;"><input type="range" id="overlayOpacity" min="0" max="90" value="0" oninput="applyOverlay()"><span class="range-val" id="overlayOpVal">0%</span></div></div></div>
+        <div class="form-row"><label>Vignette</label><div class="range-row"><input type="range" id="vignetteRange" min="0" max="100" value="0" oninput="applyVignette()"><span class="range-val" id="vignetteVal">0%</span></div></div>
       </div>
     </div>
-
     <div class="panel-section">
-      <div class="panel-title" onclick="toggleSection('shapes')">
-        🔷 Shape & Dekorasi
-        <span id="shapes-arrow">▾</span>
-      </div>
+      <div class="panel-title" onclick="toggleSection('shapes')">🔷 Shape & Dekorasi <span id="shapes-arrow">▾</span></div>
       <div class="panel-body" id="shapes-body">
         <div class="effect-grid">
           <button class="effect-btn" onclick="addShape('line-h')">— Garis H</button>
           <button class="effect-btn" onclick="addShape('line-v')">| Garis V</button>
           <button class="effect-btn" onclick="addShape('rect')">□ Kotak</button>
           <button class="effect-btn" onclick="addShape('circle')">○ Lingkaran</button>
-          <button class="effect-btn" onclick="addShape('triangle')">△ Segitiga</button>
-          <button class="effect-btn" onclick="addShape('diamond')">◇ Diamond</button>
         </div>
-        <div class="form-row" style="margin-top:10px;">
-          <label>Warna Shape</label>
-          <div style="display:flex;gap:8px;">
-            <input type="color" id="shapeColor" value="#f0c040">
-            <select id="shapeBorder" style="flex:1;">
-              <option value="none">Solid</option>
-              <option value="border">Border Only</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <label>Ukuran Shape</label>
-          <div class="range-row">
-            <input type="range" id="shapeSize" min="10" max="250" value="80">
-            <span class="range-val">80</span>
-          </div>
-        </div>
+        <div class="form-row" style="margin-top:10px;"><label>Warna Shape</label><div style="display:flex;gap:8px;"><input type="color" id="shapeColor" value="#f0c040"><select id="shapeBorder" style="flex:1;"><option value="none">Solid</option><option value="border">Border Only</option></select></div></div>
+        <div class="form-row"><label>Ukuran Shape</label><div class="range-row"><input type="range" id="shapeSize" min="10" max="250" value="80"><span class="range-val">80</span></div></div>
       </div>
     </div>
-
-    <div class="panel-section">
-      <div class="panel-title" onclick="toggleSection('elements')">
-        📋 Elemen Aktif
-        <span id="elements-arrow">▾</span>
-      </div>
-      <div class="panel-body" id="elements-body">
-        <div id="elementList" style="font-size:12px;color:var(--text-muted);">
-          Belum ada elemen. Tambah teks atau shape.
-        </div>
-      </div>
-    </div>
-
   </div>
 </div>
 
 <div class="canvas-area" id="canvasArea">
-  <div class="canvas-wrapper" id="canvasWrapper">
-    </div>
+  <div class="canvas-wrapper" id="canvasWrapper"></div>
 </div>
 
 <div class="right-panel">
-
   <div class="panel-section">
-    <div class="panel-title" onclick="toggleSection('text')">
-      ✍ Editor Teks
-      <span id="text-arrow">▾</span>
-    </div>
+    <div class="panel-title" onclick="toggleSection('text')">✍ Editor Teks <span id="text-arrow">▾</span></div>
     <div class="panel-body" id="text-body">
-      <div class="form-row">
-        <label>Konten Teks</label>
-        <textarea id="textContent" placeholder="Ketik teks di sini..." oninput="updateActiveText()" rows="3"></textarea>
-      </div>
-      <div class="form-row">
-        <label>Font</label>
+      <div class="form-row"><label>Konten Teks</label><textarea id="textContent" placeholder="Ketik teks di sini..." oninput="updateActiveText()" rows="3"></textarea></div>
+      <div class="form-row"><label>Font</label>
         <select id="fontSelect" onchange="updateFontFamily()">
-          <option value="'Bebas Neue'">Bebas Neue</option>
-          <option value="'Playfair Display'">Playfair Display</option>
-          <option value="'Syne', sans-serif">Syne</option>
-          <option value="'Space Mono'">Space Mono</option>
-          <option value="'Oswald'">Oswald</option>
+          <option value="'Bebas Neue'">Bebas Neue</option><option value="'Playfair Display'">Playfair Display</option>
+          <option value="'Space Mono'">Space Mono</option><option value="'Anton'">Anton</option><option value="'DM Sans'">DM Sans</option>
           <option value="'Montserrat'">Montserrat</option>
-          <option value="'Raleway'">Raleway</option>
-          <option value="'Josefin Sans'">Josefin Sans</option>
-          <option value="'Anton'">Anton</option>
-          <option value="'Cinzel'">Cinzel</option>
-          <option value="'Abril Fatface'">Abril Fatface</option>
-          <option value="'Righteous'">Righteous</option>
-          <option value="'Orbitron'">Orbitron</option>
-          <option value="'Exo 2'">Exo 2</option>
-          <option value="'Cormorant Garamond'">Cormorant Garamond</option>
-          <option value="'Poppins'">Poppins</option>
-          <option value="'Lato'">Lato</option>
-          <option value="'DM Sans'">DM Sans</option>
         </select>
       </div>
       <div class="form-row-split">
-        <div>
-          <label>Ukuran</label>
-          <div class="range-row">
-            <input type="range" id="fontSize" min="10" max="120" value="32" oninput="updateFontSize()">
-            <span class="range-val" id="fontSizeVal">32</span>
-          </div>
-        </div>
-        <div>
-          <label>Line H.</label>
-          <div class="range-row">
-            <input type="range" id="lineHeight" min="0.8" max="3" step="0.1" value="1.2" oninput="updateLineHeight()">
-            <span class="range-val" id="lineHeightVal">1.2</span>
-          </div>
-        </div>
+        <div><label>Ukuran</label><div class="range-row"><input type="range" id="fontSize" min="10" max="120" value="32" oninput="updateFontSize()"><span class="range-val" id="fontSizeVal">32</span></div></div>
+        <div><label>Line H.</label><div class="range-row"><input type="range" id="lineHeight" min="0.8" max="3" step="0.1" value="1.2" oninput="updateLineHeight()"><span class="range-val" id="lineHeightVal">1.2</span></div></div>
       </div>
-      <div class="form-row">
-        <label>Warna Teks</label>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input type="color" id="textColor" value="#ffffff" oninput="updateTextColor()">
-          <input type="text" id="textColorHex" value="#ffffff" oninput="updateTextColorHex()" style="flex:1;">
-        </div>
-        <div class="color-presets" id="textColorPresets" style="margin-top:8px;"></div>
-      </div>
+      <div class="form-row"><label>Warna Teks</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="textColor" value="#ffffff" oninput="updateTextColor()"><input type="text" id="textColorHex" value="#ffffff" oninput="updateTextColorHex()" style="flex:1;"></div><div class="color-presets" id="textColorPresets" style="margin-top:8px;"></div></div>
       <div class="form-row-split">
-        <div>
-          <label>Bold</label>
-          <select id="fontWeight" onchange="updateFontWeight()">
-            <option value="300">Light</option>
-            <option value="400">Regular</option>
-            <option value="600">Semi Bold</option>
-            <option value="700" selected>Bold</option>
-            <option value="900">Black</option>
-          </select>
-        </div>
-        <div>
-          <label>Style</label>
-          <select id="fontStyle" onchange="updateFontStyle()">
-            <option value="normal">Normal</option>
-            <option value="italic">Italic</option>
-          </select>
+        <div><label>Bold</label><select id="fontWeight" onchange="updateFontWeight()"><option value="400">Regular</option><option value="700" selected>Bold</option><option value="900">Black</option></select></div>
+        <div><label>Align</label>
+          <div class="align-tools"><button class="align-btn" onclick="setTextAlign('left')">⬅</button><button class="align-btn" onclick="setTextAlign('center')">↔</button><button class="align-btn" onclick="setTextAlign('right')">➡</button></div>
         </div>
       </div>
-      <div class="form-row">
-        <label>Letter Spacing</label>
-        <div class="range-row">
-          <input type="range" id="letterSpacing" min="-2" max="20" value="0" oninput="updateLetterSpacing()">
-          <span class="range-val" id="letterSpacingVal">0px</span>
-        </div>
-      </div>
-      <div class="form-row">
-        <label>Text Align</label>
-        <div class="align-tools">
-          <button class="align-btn" onclick="setTextAlign('left')" title="Left">⬅</button>
-          <button class="align-btn" onclick="setTextAlign('center')" title="Center">↔</button>
-          <button class="align-btn" onclick="setTextAlign('right')" title="Right">➡</button>
-        </div>
-      </div>
-      <div class="form-row">
-        <label>Text Shadow</label>
-        <div class="range-row">
-          <input type="range" id="textShadow" min="0" max="30" value="0" oninput="updateTextShadow()">
-          <span class="range-val" id="textShadowVal">0</span>
-        </div>
-      </div>
-      <div class="form-row">
-        <label>Text Outline / Stroke</label>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input type="color" id="strokeColor" value="#000000">
-          <div class="range-row" style="flex:1;">
-            <input type="range" id="strokeWidth" min="0" max="5" step="0.5" value="0" oninput="updateStroke()">
-            <span class="range-val" id="strokeVal">0</span>
-          </div>
-        </div>
-      </div>
-      <div class="form-row">
-        <label>Background Teks</label>
-        <div style="display:flex;gap:8px;align-items:center;">
-          <input type="color" id="textBgColor" value="#000000">
-          <div class="range-row" style="flex:1;">
-            <input type="range" id="textBgOpacity" min="0" max="100" value="0" oninput="updateTextBg()">
-            <span class="range-val" id="textBgOpVal">0%</span>
-          </div>
-        </div>
-      </div>
+      <div class="form-row"><label>Text Outline / Stroke</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="strokeColor" value="#000000"><div class="range-row" style="flex:1;"><input type="range" id="strokeWidth" min="0" max="5" step="0.5" value="0" oninput="updateStroke()"><span class="range-val" id="strokeVal">0</span></div></div></div>
+      <div class="form-row"><label>Background Teks</label><div style="display:flex;gap:8px;align-items:center;"><input type="color" id="textBgColor" value="#000000"><div class="range-row" style="flex:1;"><input type="range" id="textBgOpacity" min="0" max="100" value="0" oninput="updateTextBg()"><span class="range-val" id="textBgOpVal">0%</span></div></div></div>
     </div>
   </div>
-
   <div class="panel-section">
-    <div class="panel-title" onclick="toggleSection('position')">
-      📐 Posisi & Ukuran
-      <span id="position-arrow">▾</span>
-    </div>
+    <div class="panel-title" onclick="toggleSection('position')">📐 Posisi & Ukuran <span id="position-arrow">▾</span></div>
     <div class="panel-body" id="position-body">
-      <div class="form-row">
-        <label>Snap Posisi</label>
-        <div class="align-tools" style="flex-wrap:wrap;">
-          <button class="align-btn" onclick="snapPosition('top-left')" title="Top Left">↖</button>
-          <button class="align-btn" onclick="snapPosition('top-center')" title="Top Center">⬆</button>
-          <button class="align-btn" onclick="snapPosition('top-right')" title="Top Right">↗</button>
-          <button class="align-btn" onclick="snapPosition('mid-left')" title="Mid Left">⬅</button>
-          <button class="align-btn" onclick="snapPosition('center')" title="Center">⊙</button>
-          <button class="align-btn" onclick="snapPosition('mid-right')" title="Mid Right">➡</button>
-          <button class="align-btn" onclick="snapPosition('bot-left')" title="Bottom Left">↙</button>
-          <button class="align-btn" onclick="snapPosition('bot-center')" title="Bottom Center">⬇</button>
-          <button class="align-btn" onclick="snapPosition('bot-right')" title="Bottom Right">↘</button>
-        </div>
-      </div>
       <div class="form-row-split">
-        <div>
-          <label>X (px)</label>
-          <input type="number" id="posX" value="20" oninput="updatePosition()">
-        </div>
-        <div>
-          <label>Y (px)</label>
-          <input type="number" id="posY" value="20" oninput="updatePosition()">
-        </div>
+        <div><label>X (px)</label><input type="number" id="posX" value="20" oninput="updatePosition()"></div>
+        <div><label>Y (px)</label><input type="number" id="posY" value="20" oninput="updatePosition()"></div>
       </div>
-      <div class="form-row">
-        <label>Rotation (°)</label>
-        <div class="range-row">
-          <input type="range" id="rotation" min="-180" max="180" value="0" oninput="updateRotation()">
-          <span class="range-val" id="rotationVal">0°</span>
-        </div>
-      </div>
-      <div class="form-row">
-        <label>Opacity (%)</label>
-        <div class="range-row">
-          <input type="range" id="elemOpacity" min="0" max="100" value="100" oninput="updateElemOpacity()">
-          <span class="range-val" id="elemOpacityVal">100%</span>
-        </div>
-      </div>
-      <div class="form-row">
-        <label>Max Width (px)</label>
-        <input type="number" id="textMaxWidth" value="260" min="50" max="300" oninput="updateMaxWidth()">
-      </div>
-      <div style="display:flex;gap:6px;margin-top:4px;">
-        <button class="btn" onclick="deleteActiveElement()" style="flex:1;color:#f04070;border-color:#f04070;">🗑 Hapus</button>
-        <button class="btn" onclick="duplicateElement()" style="flex:1;">⧉ Duplikat</button>
-      </div>
+      <div class="form-row"><label>Rotation (°)</label><div class="range-row"><input type="range" id="rotation" min="-180" max="180" value="0" oninput="updateRotation()"><span class="range-val" id="rotationVal">0°</span></div></div>
+      <div style="display:flex;gap:6px;margin-top:4px;"><button class="btn" onclick="deleteActiveElement()" style="flex:1;color:#f04070;border-color:#f04070;">🗑 Hapus</button><button class="btn" onclick="duplicateElement()" style="flex:1;">⧉ Duplikat</button></div>
     </div>
   </div>
-
   <div class="panel-section">
-    <div class="panel-title" onclick="toggleSection('brand')">
-      🏷 Branding Cepat
-      <span id="brand-arrow">▾</span>
-    </div>
-    <div class="panel-body" id="brand-body">
-      <div class="form-row">
-        <label>Nama Akun / Username</label>
-        <input type="text" id="brandName" placeholder="@tradingpro" oninput="addBrandText('name')">
-      </div>
-      <div class="form-row">
-        <label>Slogan / Tagline</label>
-        <input type="text" id="brandSlogan" placeholder="Profit Every Day">
-      </div>
-      <div class="form-row">
-        <label>Hashtag</label>
-        <input type="text" id="brandHashtag" placeholder="#trading #forex #bisnis">
-      </div>
-      <button class="btn btn-primary" onclick="insertBranding()" style="width:100%;margin-top:4px;">Sisipkan Branding</button>
-    </div>
-  </div>
-
-  <div class="panel-section">
-    <div class="panel-title" onclick="toggleSection('trading')">
-      📈 Elemen Trading
-      <span id="trading-arrow">▾</span>
-    </div>
+    <div class="panel-title" onclick="toggleSection('trading')">📈 Elemen Trading <span id="trading-arrow">▾</span></div>
     <div class="panel-body" id="trading-body">
       <div class="effect-grid">
         <button class="effect-btn" onclick="addTradingElement('profit')">💹 Profit Badge</button>
         <button class="effect-btn" onclick="addTradingElement('signal')">📡 Signal Box</button>
-        <button class="effect-btn" onclick="addTradingElement('chart')">📊 Chart Mini</button>
         <button class="effect-btn" onclick="addTradingElement('price')">💰 Price Tag</button>
         <button class="effect-btn" onclick="addTradingElement('roi')">🎯 ROI Box</button>
-        <button class="effect-btn" onclick="addTradingElement('candle')">🕯 Candlestick</button>
-        <button class="effect-btn" onclick="addTradingElement('arrow-up')">↑ Arrow Up</button>
-        <button class="effect-btn" onclick="addTradingElement('divider')">— Divider</button>
       </div>
     </div>
   </div>
-
-  <div class="panel-section">
-    <div class="panel-title" onclick="toggleSection('global')">
-      🌐 Style Global
-      <span id="global-arrow">▾</span>
-    </div>
-    <div class="panel-body" id="global-body">
-      <div class="form-row">
-        <label>Palet Tema</label>
-        <div class="color-presets" id="themePresets"></div>
-      </div>
-      <div class="form-row">
-        <label>Ukuran Canvas</label>
-        <select id="canvasSize" onchange="updateCanvasSize()">
-          <option value="1080">1080×1080 (Standar)</option>
-          <option value="1080x1350">1080×1350 (Portrait)</option>
-          <option value="1080x566">1080×566 (Landscape)</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label>Zoom</label>
-        <div class="range-row">
-          <input type="range" id="canvasZoom" min="30" max="150" value="100" oninput="updateZoom()">
-          <span class="range-val" id="zoomVal">100%</span>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
+</div>
+
+<div class="mobile-joystick-panel">
+  <div class="d-pad">
+    <button class="d-btn up" onclick="nudgeEl('up')">▲</button>
+    <button class="d-btn left" onclick="nudgeEl('left')">◀</button>
+    <button class="d-btn center">MOVE</button>
+    <button class="d-btn right" onclick="nudgeEl('right')">▶</button>
+    <button class="d-btn down" onclick="nudgeEl('down')">▼</button>
+  </div>
+  <div class="action-pad">
+    <button class="action-btn" onclick="undoState()">↶ Undo</button>
+    <button class="action-btn" onclick="redoState()">↷ Redo</button>
+    <button class="action-btn" onclick="zoomEl('in')">➕ Zoom In</button>
+    <button class="action-btn" onclick="zoomEl('out')">➖ Zoom Out</button>
+    <button class="action-btn enter" onclick="duplicateElement()">⧉ Duplikat</button>
+    <button class="action-btn del" onclick="deleteActiveElement()">🗑 Delete</button>
+  </div>
 </div>
 
 <div class="export-panel" id="exportPanel" style="display:none;">
   <div class="export-box">
     <div style="font-size:40px;margin-bottom:12px;">⬇️</div>
     <h2>Export Post</h2>
-    <p style="color:var(--text-muted);font-size:13px;margin-bottom:4px;">Pilih format export</p>
     <div class="export-options">
-      <div class="export-opt" onclick="exportAs('png')">
-        <div class="eo-icon">🖼</div>
-        PNG<br><span style="font-size:10px;color:var(--text-muted);">Transparan</span>
-      </div>
-      <div class="export-opt" onclick="exportAs('jpg')">
-        <div class="eo-icon">📷</div>
-        JPG<br><span style="font-size:10px;color:var(--text-muted);">Compressed</span>
-      </div>
-      <div class="export-opt" onclick="exportAs('all')">
-        <div class="eo-icon">📦</div>
-        Semua Post<br><span style="font-size:10px;color:var(--text-muted);">ZIP (segera)</span>
-      </div>
-      <div class="export-opt" onclick="copyToClipboard()">
-        <div class="eo-icon">📋</div>
-        Copy<br><span style="font-size:10px;color:var(--text-muted);">Clipboard</span>
-      </div>
+      <div class="export-opt" onclick="exportAs('png')"><div class="eo-icon">🖼</div>PNG</div>
+      <div class="export-opt" onclick="exportAs('jpg')"><div class="eo-icon">📷</div>JPG</div>
     </div>
     <button class="btn" onclick="hideExport()" style="width:100%;">Tutup</button>
   </div>
@@ -897,7 +366,7 @@ input[type="color"] {
 
 <script>
 // ============================
-// STATE
+// STATE & HISTORY (Undo/Redo)
 // ============================
 let mode = 'single';
 let cells = [];
@@ -907,10 +376,49 @@ let isDragging = false;
 let dragOffX = 0, dragOffY = 0;
 let zoom = 1;
 
+let historyStack = [];
+let historyIndex = -1;
+
 const CELL_SIZE = 300;
 const DISPLAY_SCALE = CELL_SIZE / 1080;
 
-// Cell data model
+function saveState() {
+  // Potong masa depan jika kita sedang di tengah undo lalu melakukan aksi baru
+  if (historyIndex < historyStack.length - 1) {
+    historyStack = historyStack.slice(0, historyIndex + 1);
+  }
+  // Simpan salinan (deep copy) dari state cells saat ini
+  historyStack.push(JSON.parse(JSON.stringify(cells)));
+  historyIndex++;
+}
+
+function undoState() {
+  if (historyIndex > 0) {
+    historyIndex--;
+    cells = JSON.parse(JSON.stringify(historyStack[historyIndex]));
+    renderElements(activeCellIdx);
+    syncPanelToCell();
+    showToast('↶ Undo berhasil');
+  } else {
+    showToast('Batas awal Undo');
+  }
+}
+
+function redoState() {
+  if (historyIndex < historyStack.length - 1) {
+    historyIndex++;
+    cells = JSON.parse(JSON.stringify(historyStack[historyIndex]));
+    renderElements(activeCellIdx);
+    syncPanelToCell();
+    showToast('↷ Redo berhasil');
+  } else {
+    showToast('Batas akhir Redo');
+  }
+}
+
+// ============================
+// MODELS
+// ============================
 function createCell() {
   return {
     bg: { type: 'color', value: '#0a0a1a', gradient: null, image: null, filter: 'none', brightness: 100, contrast: 100 },
@@ -922,26 +430,10 @@ function createCell() {
 
 function createTextElement(text = 'Teks Baru') {
   return {
-    id: Date.now() + Math.random(),
-    type: 'text',
-    text,
-    x: 20, y: 20,
-    fontSize: 32,
-    fontFamily: "'Bebas Neue'",
-    fontWeight: '700',
-    fontStyle: 'normal',
-    color: '#ffffff',
-    align: 'left',
-    lineHeight: 1.2,
-    letterSpacing: 0,
-    shadow: 0,
-    strokeColor: '#000000',
-    strokeWidth: 0,
-    bgColor: '#000000',
-    bgOpacity: 0,
-    rotation: 0,
-    opacity: 100,
-    maxWidth: 260
+    id: Date.now() + Math.random(), type: 'text', text,
+    x: 20, y: 20, fontSize: 32, fontFamily: "'Bebas Neue'", fontWeight: '700', fontStyle: 'normal',
+    color: '#ffffff', align: 'left', lineHeight: 1.2, letterSpacing: 0, shadow: 0,
+    strokeColor: '#000000', strokeWidth: 0, bgColor: '#000000', bgOpacity: 0, rotation: 0, opacity: 100, maxWidth: 260
   };
 }
 
@@ -955,56 +447,26 @@ function init() {
   buildThemePresets();
   buildOverlayPresets();
   setActiveCell(0);
-  updateZoom();
+  saveState(); // Simpan state kosong pertama
 }
 
 function buildCells(count) {
   const wrapper = document.getElementById('canvasWrapper');
   wrapper.innerHTML = '';
   cells = [];
-
-  if (mode === 'single') {
-    const row = document.createElement('div');
-    row.className = 'grid-row';
-    const cell = makeCell(0);
+  const loopCount = mode === 'single' ? 1 : mode === 'row3' ? 3 : mode === 'grid6' ? 6 : 9;
+  
+  let row;
+  for (let i = 0; i < loopCount; i++) {
+    if (i % 3 === 0) {
+      row = document.createElement('div');
+      row.className = 'grid-row';
+      wrapper.appendChild(row);
+    }
+    const cell = makeCell(i);
     row.appendChild(cell);
-    wrapper.appendChild(row);
     cells.push(createCell());
-  } else if (mode === 'row3') {
-    const row = document.createElement('div');
-    row.className = 'grid-row';
-    for (let i = 0; i < 3; i++) {
-      const cell = makeCell(i);
-      row.appendChild(cell);
-      cells.push(createCell());
-    }
-    wrapper.appendChild(row);
-  } else if (mode === 'grid6') {
-    for (let r = 0; r < 2; r++) {
-      const row = document.createElement('div');
-      row.className = 'grid-row';
-      for (let c = 0; c < 3; c++) {
-        const idx = r * 3 + c;
-        const cell = makeCell(idx);
-        row.appendChild(cell);
-        cells.push(createCell());
-      }
-      wrapper.appendChild(row);
-    }
-  } else if (mode === 'grid9') {
-    for (let r = 0; r < 3; r++) {
-      const row = document.createElement('div');
-      row.className = 'grid-row';
-      for (let c = 0; c < 3; c++) {
-        const idx = r * 3 + c;
-        const cell = makeCell(idx);
-        row.appendChild(cell);
-        cells.push(createCell());
-      }
-      wrapper.appendChild(row);
-    }
   }
-
   setActiveCell(0);
 }
 
@@ -1012,24 +474,14 @@ function makeCell(idx) {
   const div = document.createElement('div');
   div.className = 'post-cell';
   div.id = `cell-${idx}`;
-  div.dataset.idx = idx;
-
   div.innerHTML = `
     <div class="cell-bg" id="cellbg-${idx}"></div>
     <div class="cell-overlay" id="celloverlay-${idx}"></div>
     <div class="cell-content" id="cellcontent-${idx}"></div>
-    <div class="upload-hint" id="cellhint-${idx}">
-      <div style="font-size:28px;opacity:0.3">🖼</div>
-      <div style="opacity:0.4">Klik untuk pilih</div>
-    </div>
+    <div class="upload-hint" id="cellhint-${idx}"><div style="font-size:28px;opacity:0.3">🖼</div><div style="opacity:0.4">Klik untuk pilih</div></div>
     <div class="grid-label">${idx + 1}</div>
   `;
-
-  div.onclick = (e) => {
-    if (e.target.classList.contains('text-layer')) return;
-    setActiveCell(idx);
-  };
-
+  div.onclick = (e) => { if (!e.target.classList.contains('text-layer')) setActiveCell(idx); };
   return div;
 }
 
@@ -1038,145 +490,44 @@ function setActiveCell(idx) {
   document.querySelectorAll('.post-cell').forEach(c => c.classList.remove('active-cell'));
   const el = document.getElementById(`cell-${idx}`);
   if (el) el.classList.add('active-cell');
-
   activeElement = null;
   syncPanelToCell();
-  updateElementList();
 }
 
 function setMode(m) {
   mode = m;
-  document.querySelectorAll('.tab-btn').forEach((b, i) => {
-    b.classList.toggle('active', ['single','row3','grid6','grid9'][i] === m);
-  });
+  document.querySelectorAll('.tab-btn').forEach((b, i) => b.classList.toggle('active', ['single','row3','grid6','grid9'][i] === m));
   buildCells();
+  saveState();
 }
 
 // ============================
-// BACKGROUND
+// BACKGROUND & OVERLAY
 // ============================
-function applyBGColor() {
-  const color = document.getElementById('bgColor').value;
-  document.getElementById('bgColorHex').value = color;
-  const cell = cells[activeCellIdx];
-  cell.bg.value = color;
-  cell.bg.gradient = null;
-  cell.bg.image = null;
-  renderCell(activeCellIdx);
-}
-
-function applyBGColorHex() {
-  const hex = document.getElementById('bgColorHex').value;
-  if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
-    document.getElementById('bgColor').value = hex;
-    cells[activeCellIdx].bg.value = hex;
-    cells[activeCellIdx].bg.gradient = null;
-    cells[activeCellIdx].bg.image = null;
-    renderCell(activeCellIdx);
-  }
-}
-
-function uploadBG(event) {
-  const file = event.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    cells[activeCellIdx].bg.image = e.target.result;
-    cells[activeCellIdx].bg.gradient = null;
-    renderCell(activeCellIdx);
-  };
-  reader.readAsDataURL(file);
-}
-
-function applyGradient() {
-  const c1 = document.getElementById('grad1').value;
-  const c2 = document.getElementById('grad2').value;
-  const dir = document.getElementById('gradDir').value;
-  cells[activeCellIdx].bg.gradient = `linear-gradient(${dir}, ${c1}, ${c2})`;
-  cells[activeCellIdx].bg.image = null;
-  renderCell(activeCellIdx);
-}
-
-function applyBGFilter() {
-  const b = document.getElementById('bgBrightness').value;
-  const c = document.getElementById('bgContrast').value;
-  document.getElementById('brightnessVal').textContent = b;
-  document.getElementById('contrastVal').textContent = c;
-  cells[activeCellIdx].bg.brightness = b;
-  cells[activeCellIdx].bg.contrast = c;
-  renderCell(activeCellIdx);
-}
-
-function setFilter(f) {
-  cells[activeCellIdx].bg.filter = f;
-  document.querySelectorAll('.effect-btn').forEach(b => {
-    if (b.onclick && b.onclick.toString().includes(f)) b.classList.add('active');
-    else b.classList.remove('active');
-  });
-  renderCell(activeCellIdx);
-}
-
-// ============================
-// OVERLAY
-// ============================
-function applyOverlay() {
-  const color = document.getElementById('overlayColor').value;
-  const opacity = document.getElementById('overlayOpacity').value;
-  document.getElementById('overlayOpVal').textContent = opacity + '%';
-  cells[activeCellIdx].overlay = { color, opacity: parseInt(opacity) };
-  renderCell(activeCellIdx);
-}
-
-function applyVignette() {
-  const v = document.getElementById('vignetteRange').value;
-  document.getElementById('vignetteVal').textContent = v + '%';
-  cells[activeCellIdx].vignette = parseInt(v);
-  renderCell(activeCellIdx);
-}
+function applyBGColor() { const c = document.getElementById('bgColor').value; cells[activeCellIdx].bg.value = c; cells[activeCellIdx].bg.image = null; cells[activeCellIdx].bg.gradient = null; renderCell(activeCellIdx); saveState(); }
+function uploadBG(e) { const f = e.target.files[0]; if(!f)return; const r = new FileReader(); r.onload = (ev) => { cells[activeCellIdx].bg.image = ev.target.result; cells[activeCellIdx].bg.gradient = null; renderCell(activeCellIdx); saveState(); }; r.readAsDataURL(f); }
+function applyGradient() { const c1 = document.getElementById('grad1').value, c2 = document.getElementById('grad2').value, d = document.getElementById('gradDir').value; cells[activeCellIdx].bg.gradient = `linear-gradient(${d}, ${c1}, ${c2})`; cells[activeCellIdx].bg.image = null; renderCell(activeCellIdx); saveState(); }
+function applyBGFilter() { cells[activeCellIdx].bg.brightness = document.getElementById('bgBrightness').value; cells[activeCellIdx].bg.contrast = document.getElementById('bgContrast').value; renderCell(activeCellIdx); saveState(); }
+function applyOverlay() { cells[activeCellIdx].overlay = { color: document.getElementById('overlayColor').value, opacity: document.getElementById('overlayOpacity').value }; renderCell(activeCellIdx); saveState(); }
+function applyVignette() { cells[activeCellIdx].vignette = document.getElementById('vignetteRange').value; renderCell(activeCellIdx); saveState(); }
 
 // ============================
 // RENDER CELL
 // ============================
 function renderCell(idx) {
-  const cell = cells[idx];
-  const bg = document.getElementById(`cellbg-${idx}`);
-  const overlay = document.getElementById(`celloverlay-${idx}`);
-  const hint = document.getElementById(`cellhint-${idx}`);
-
+  const cell = cells[idx], bg = document.getElementById(`cellbg-${idx}`), overlay = document.getElementById(`celloverlay-${idx}`), hint = document.getElementById(`cellhint-${idx}`);
   if (!bg) return;
 
-  // BG
-  if (cell.bg.image) {
-    bg.style.backgroundImage = `url(${cell.bg.image})`;
-    bg.style.background = '';
-    hint.style.display = 'none';
-  } else if (cell.bg.gradient) {
-    bg.style.backgroundImage = '';
-    bg.style.background = cell.bg.gradient;
-    hint.style.display = 'none';
-  } else {
-    bg.style.backgroundImage = '';
-    bg.style.background = cell.bg.value;
-    const isDefault = cell.bg.value === '#0a0a1a';
-    hint.style.display = isDefault ? 'flex' : 'none';
-  }
+  if (cell.bg.image) { bg.style.backgroundImage = `url(${cell.bg.image})`; bg.style.background = ''; hint.style.display = 'none'; } 
+  else if (cell.bg.gradient) { bg.style.backgroundImage = ''; bg.style.background = cell.bg.gradient; hint.style.display = 'none'; } 
+  else { bg.style.backgroundImage = ''; bg.style.background = cell.bg.value; hint.style.display = cell.bg.value === '#0a0a1a' ? 'flex' : 'none'; }
+  bg.style.filter = `brightness(${cell.bg.brightness}%) contrast(${cell.bg.contrast}%)`;
 
-  bg.style.filter = `brightness(${cell.bg.brightness}%) contrast(${cell.bg.contrast}%) ${cell.bg.filter !== 'none' ? cell.bg.filter : ''}`;
-
-  // Overlay
-  const hex2 = cell.overlay.color;
   const op = cell.overlay.opacity / 100;
-  overlay.style.background = op > 0 ? hexToRgba(hex2, op) : 'transparent';
+  overlay.style.background = op > 0 ? hexToRgba(cell.overlay.color, op) : 'transparent';
+  if (cell.vignette > 0) { const v = cell.vignette / 100; overlay.style.boxShadow = `inset 0 0 ${80 * v}px ${40 * v}px rgba(0,0,0,${0.8 * v})`; } 
+  else { overlay.style.boxShadow = 'none'; }
 
-  // Vignette
-  if (cell.vignette > 0) {
-    const v = cell.vignette / 100;
-    overlay.style.boxShadow = `inset 0 0 ${80 * v}px ${40 * v}px rgba(0,0,0,${0.8 * v})`;
-  } else {
-    overlay.style.boxShadow = 'none';
-  }
-
-  // Render elements
   renderElements(idx);
 }
 
@@ -1185,69 +536,52 @@ function renderElements(idx) {
   if (!content) return;
   content.innerHTML = '';
 
-  const cell = cells[idx];
-  cell.elements.forEach(el => {
+  cells[idx].elements.forEach(el => {
+    const div = document.createElement('div');
+    div.className = 'text-layer' + (activeElement === el.id ? ' selected' : '');
+    div.dataset.id = el.id;
+    
     if (el.type === 'text') {
-      const div = document.createElement('div');
-      div.className = 'text-layer' + (activeElement === el.id ? ' selected' : '');
-      div.dataset.id = el.id;
-      div.style.cssText = `
-        left: ${el.x}px;
-        top: ${el.y}px;
-        font-size: ${el.fontSize * DISPLAY_SCALE}px;
-        font-family: ${el.fontFamily};
-        font-weight: ${el.fontWeight};
-        font-style: ${el.fontStyle};
-        color: ${el.color};
-        text-align: ${el.align};
-        line-height: ${el.lineHeight};
-        letter-spacing: ${el.letterSpacing * DISPLAY_SCALE}px;
-        transform: rotate(${el.rotation}deg);
-        opacity: ${el.opacity / 100};
-        max-width: ${el.maxWidth * DISPLAY_SCALE}px;
-        position: absolute;
-        cursor: move;
-        white-space: pre-wrap;
-        word-break: break-word;
-        padding: ${el.bgOpacity > 0 ? '4px 8px' : '0'};
-        background: ${el.bgOpacity > 0 ? hexToRgba(el.bgColor, el.bgOpacity / 100) : 'transparent'};
-        border-radius: ${el.bgOpacity > 0 ? '4px' : '0'};
-        ${el.shadow > 0 ? `text-shadow: 0 ${el.shadow * DISPLAY_SCALE}px ${el.shadow * 2 * DISPLAY_SCALE}px rgba(0,0,0,0.8)` : ''};
-        ${el.strokeWidth > 0 ? `-webkit-text-stroke: ${el.strokeWidth * DISPLAY_SCALE}px ${el.strokeColor}` : ''};
-      `;
+      div.style.cssText = `left: ${el.x}px; top: ${el.y}px; font-size: ${el.fontSize * DISPLAY_SCALE}px; font-family: ${el.fontFamily}; font-weight: ${el.fontWeight}; color: ${el.color}; text-align: ${el.align}; line-height: ${el.lineHeight}; transform: rotate(${el.rotation}deg); opacity: ${el.opacity / 100}; max-width: ${el.maxWidth * DISPLAY_SCALE}px; position: absolute; cursor: move; white-space: pre-wrap; word-break: break-word; padding: ${el.bgOpacity > 0 ? '4px 8px' : '0'}; background: ${el.bgOpacity > 0 ? hexToRgba(el.bgColor, el.bgOpacity / 100) : 'transparent'}; border-radius: ${el.bgOpacity > 0 ? '4px' : '0'}; ${el.strokeWidth > 0 ? `-webkit-text-stroke: ${el.strokeWidth * DISPLAY_SCALE}px ${el.strokeColor}` : ''}; touch-action: none;`;
       div.textContent = el.text;
-
-      const startInteraction = (e) => {
-        e.stopPropagation();
-        if (activeCellIdx !== idx) setActiveCell(idx);
-        setActiveElement(el.id);
-        startDrag(e, div, el, idx);
-      };
-      div.addEventListener('mousedown', startInteraction);
-      div.addEventListener('touchstart', startInteraction, { passive: true });
-
-      div.addEventListener('dblclick', (e) => {
-        e.stopPropagation();
-        document.getElementById('textContent').focus();
-      });
-
-      content.appendChild(div);
     } else if (el.type === 'shape') {
-      renderShape(content, el);
+      const sz = el.size * DISPLAY_SCALE;
+      div.style.cssText = `position:absolute;left:${el.x}px;top:${el.y}px;cursor:move;transform:rotate(${el.rotation||0}deg); touch-action: none;`;
+      if (el.subtype === 'line-h') { div.style.width = sz * 2 + 'px'; div.style.height = '2px'; div.style.background = el.color; }
+      else if (el.subtype === 'rect') { div.style.width = sz + 'px'; div.style.height = sz * 0.6 + 'px'; div.style.border = `2px solid ${el.color}`; }
+      else if (el.subtype === 'circle') { div.style.width = sz + 'px'; div.style.height = sz + 'px'; div.style.borderRadius = '50%'; div.style.border = `2px solid ${el.color}`; }
     } else if (el.type === 'trading') {
-      renderTradingEl(content, el);
+      const s = DISPLAY_SCALE;
+      div.style.cssText = `position:absolute;left:${el.x}px;top:${el.y}px;cursor:move;transform:rotate(${el.rotation||0}deg); touch-action: none;`;
+      if (el.subtype === 'profit') div.innerHTML = `<div style="background:rgba(64,200,80,0.2);border:1px solid #40c850;border-radius:${6*s}px;padding:${6*s}px ${12*s}px;font-size:${22*s}px;font-family:'Bebas Neue';color:#40c850;">+24.5% PROFIT</div>`;
+      else if (el.subtype === 'price') div.innerHTML = `<div style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);border-radius:${6*s}px;padding:${8*s}px ${14*s}px;font-family:'Space Mono';color:white;font-size:${14*s}px;"><div style="color:#888;font-size:${10*s}px;">XAUUSD</div><div style="font-size:${24*s}px;color:#f0c040;">2,350.00</div></div>`;
+      else if (el.subtype === 'roi') div.innerHTML = `<div style="text-align:center;"><div style="font-family:'Bebas Neue';font-size:${48*s}px;color:#f0c040;line-height:1;">150%</div><div style="font-family:'DM Sans';font-size:${12*s}px;color:#888;">ROI</div></div>`;
     }
+
+    const startInteraction = (e) => {
+      e.stopPropagation();
+      if (activeCellIdx !== idx) setActiveCell(idx);
+      setActiveElement(el.id);
+      startDrag(e, div, el, idx);
+    };
+    div.addEventListener('mousedown', startInteraction);
+    div.addEventListener('touchstart', startInteraction, { passive: false });
+
+    if(el.type === 'text') {
+      div.addEventListener('dblclick', (e) => { e.stopPropagation(); document.getElementById('textContent').focus(); });
+    }
+
+    content.appendChild(div);
   });
 }
 
 // ============================
-// DRAG (MOBILE TOUCH + MOUSE)
+// DRAG LOKAL & TOUCH
 // ============================
 function startDrag(e, div, elData, cellIdx) {
   isDragging = true;
   const cell = document.getElementById(`cell-${cellIdx}`);
   const rect = cell.getBoundingClientRect();
-
   const clientX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
   const clientY = e.type.includes('touch') ? e.touches[0].clientY : e.clientY;
 
@@ -1256,25 +590,24 @@ function startDrag(e, div, elData, cellIdx) {
 
   const onMove = (me) => {
     if (!isDragging) return;
+    if (me.type.includes('touch') && me.cancelable) me.preventDefault(); // Cegah scroll layar
+
     const mx = me.type.includes('touch') ? me.touches[0].clientX : me.clientX;
     const my = me.type.includes('touch') ? me.touches[0].clientY : me.clientY;
     
-    // Prevent scrolling while moving element on touch devices
-    if (me.type.includes('touch') && me.cancelable) {
-      me.preventDefault(); 
-    }
-
-    const nx = Math.round((mx - rect.left - dragOffX));
-    const ny = Math.round((my - rect.top - dragOffY));
-    elData.x = Math.max(0, Math.min(nx, CELL_SIZE - 10));
-    elData.y = Math.max(0, Math.min(ny, CELL_SIZE - 10));
+    elData.x = Math.max(-50, Math.min(mx - rect.left - dragOffX, CELL_SIZE + 50));
+    elData.y = Math.max(-50, Math.min(my - rect.top - dragOffY, CELL_SIZE + 50));
+    
     document.getElementById('posX').value = Math.round(elData.x / DISPLAY_SCALE);
     document.getElementById('posY').value = Math.round(elData.y / DISPLAY_SCALE);
     renderElements(cellIdx);
   };
 
   const onUp = () => {
-    isDragging = false;
+    if(isDragging) {
+       isDragging = false;
+       saveState(); // Simpan history setelah selesai drag
+    }
     document.removeEventListener('mousemove', onMove);
     document.removeEventListener('mouseup', onUp);
     document.removeEventListener('touchmove', onMove);
@@ -1289,234 +622,77 @@ function startDrag(e, div, elData, cellIdx) {
 
 function setActiveElement(id) {
   activeElement = id;
-  const cell = cells[activeCellIdx];
-  const el = cell.elements.find(e => e.id === id);
+  const el = getActiveEl();
   if (!el) return;
 
   if (el.type === 'text') {
     document.getElementById('textContent').value = el.text;
     document.getElementById('fontSelect').value = el.fontFamily;
     document.getElementById('fontSize').value = el.fontSize;
-    document.getElementById('fontSizeVal').textContent = el.fontSize;
-    document.getElementById('fontWeight').value = el.fontWeight;
-    document.getElementById('fontStyle').value = el.fontStyle;
     document.getElementById('textColor').value = el.color;
     document.getElementById('textColorHex').value = el.color;
-    document.getElementById('lineHeight').value = el.lineHeight;
-    document.getElementById('lineHeightVal').textContent = el.lineHeight;
-    document.getElementById('letterSpacing').value = el.letterSpacing;
-    document.getElementById('letterSpacingVal').textContent = el.letterSpacing + 'px';
-    document.getElementById('textShadow').value = el.shadow;
-    document.getElementById('textShadowVal').textContent = el.shadow;
-    document.getElementById('strokeWidth').value = el.strokeWidth;
-    document.getElementById('strokeVal').textContent = el.strokeWidth;
-    document.getElementById('strokeColor').value = el.strokeColor;
-    document.getElementById('textBgOpacity').value = el.bgOpacity;
-    document.getElementById('textBgOpVal').textContent = el.bgOpacity + '%';
-    document.getElementById('textBgColor').value = el.bgColor;
   }
-
   document.getElementById('posX').value = Math.round(el.x / DISPLAY_SCALE);
   document.getElementById('posY').value = Math.round(el.y / DISPLAY_SCALE);
-  document.getElementById('rotation').value = el.rotation || 0;
-  document.getElementById('rotationVal').textContent = (el.rotation || 0) + '°';
-  document.getElementById('elemOpacity').value = el.opacity || 100;
-  document.getElementById('elemOpacityVal').textContent = (el.opacity || 100) + '%';
-  if (el.maxWidth) document.getElementById('textMaxWidth').value = el.maxWidth;
 
   renderElements(activeCellIdx);
-  updateElementList();
 }
+function getActiveEl() { return activeElement ? cells[activeCellIdx].elements.find(e => e.id === activeElement) : null; }
 
 // ============================
-// TEXT UPDATES
+// MOBILE JOYSTICK & ACTIONS
 // ============================
-function getActiveEl() {
-  if (!activeElement) return null;
-  return cells[activeCellIdx].elements.find(e => e.id === activeElement);
-}
-
-function updateActiveText() {
+function nudgeEl(dir) {
   const el = getActiveEl();
-  if (!el || el.type !== 'text') return;
-  el.text = document.getElementById('textContent').value;
+  if (!el) { showToast('Pilih elemen dulu!'); return; }
+  
+  const step = 5 * DISPLAY_SCALE; // Geser 5px per klik
+  if (dir === 'up') el.y -= step;
+  if (dir === 'down') el.y += step;
+  if (dir === 'left') el.x -= step;
+  if (dir === 'right') el.x += step;
+  
+  document.getElementById('posX').value = Math.round(el.x / DISPLAY_SCALE);
+  document.getElementById('posY').value = Math.round(el.y / DISPLAY_SCALE);
   renderElements(activeCellIdx);
+  // Optional: saveState() disini bisa terlalu banyak merekam history. Kita skip saveState untuk nudge agar rapi.
 }
 
-function updateFontFamily() {
-  const el = getActiveEl(); if (!el) return;
-  el.fontFamily = document.getElementById('fontSelect').value;
-  renderElements(activeCellIdx);
-}
-
-function updateFontSize() {
-  const v = parseInt(document.getElementById('fontSize').value);
-  document.getElementById('fontSizeVal').textContent = v;
-  const el = getActiveEl(); if (!el) return;
-  el.fontSize = v;
-  renderElements(activeCellIdx);
-}
-
-function updateLineHeight() {
-  const v = parseFloat(document.getElementById('lineHeight').value);
-  document.getElementById('lineHeightVal').textContent = v;
-  const el = getActiveEl(); if (!el) return;
-  el.lineHeight = v;
-  renderElements(activeCellIdx);
-}
-
-function updateLetterSpacing() {
-  const v = parseInt(document.getElementById('letterSpacing').value);
-  document.getElementById('letterSpacingVal').textContent = v + 'px';
-  const el = getActiveEl(); if (!el) return;
-  el.letterSpacing = v;
-  renderElements(activeCellIdx);
-}
-
-function updateTextColor() {
-  const color = document.getElementById('textColor').value;
-  document.getElementById('textColorHex').value = color;
-  const el = getActiveEl(); if (!el) return;
-  el.color = color;
-  renderElements(activeCellIdx);
-}
-
-function updateTextColorHex() {
-  const hex = document.getElementById('textColorHex').value;
-  if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
-    document.getElementById('textColor').value = hex;
-    const el = getActiveEl(); if (!el) return;
-    el.color = hex;
-    renderElements(activeCellIdx);
+function zoomEl(dir) {
+  const el = getActiveEl();
+  if (!el) { showToast('Pilih elemen dulu!'); return; }
+  
+  if (el.type === 'text') {
+    if (dir === 'in') el.fontSize += 2;
+    if (dir === 'out') el.fontSize = Math.max(10, el.fontSize - 2);
+    document.getElementById('fontSize').value = el.fontSize;
+  } else if (el.type === 'shape') {
+    if (dir === 'in') el.size += 5;
+    if (dir === 'out') el.size = Math.max(10, el.size - 5);
   }
-}
-
-function updateFontWeight() {
-  const el = getActiveEl(); if (!el) return;
-  el.fontWeight = document.getElementById('fontWeight').value;
   renderElements(activeCellIdx);
-}
-
-function updateFontStyle() {
-  const el = getActiveEl(); if (!el) return;
-  el.fontStyle = document.getElementById('fontStyle').value;
-  renderElements(activeCellIdx);
-}
-
-function setTextAlign(a) {
-  const el = getActiveEl(); if (!el) return;
-  el.align = a;
-  renderElements(activeCellIdx);
-}
-
-function updateTextShadow() {
-  const v = parseInt(document.getElementById('textShadow').value);
-  document.getElementById('textShadowVal').textContent = v;
-  const el = getActiveEl(); if (!el) return;
-  el.shadow = v;
-  renderElements(activeCellIdx);
-}
-
-function updateStroke() {
-  const v = parseFloat(document.getElementById('strokeWidth').value);
-  document.getElementById('strokeVal').textContent = v;
-  const el = getActiveEl(); if (!el) return;
-  el.strokeWidth = v;
-  el.strokeColor = document.getElementById('strokeColor').value;
-  renderElements(activeCellIdx);
-}
-
-function updateTextBg() {
-  const v = parseInt(document.getElementById('textBgOpacity').value);
-  document.getElementById('textBgOpVal').textContent = v + '%';
-  const el = getActiveEl(); if (!el) return;
-  el.bgOpacity = v;
-  el.bgColor = document.getElementById('textBgColor').value;
-  renderElements(activeCellIdx);
+  saveState();
 }
 
 // ============================
-// POSITION
+// TEXT & ELEMENT UPDATES
 // ============================
-function updatePosition() {
-  const el = getActiveEl(); if (!el) return;
-  el.x = parseInt(document.getElementById('posX').value) * DISPLAY_SCALE;
-  el.y = parseInt(document.getElementById('posY').value) * DISPLAY_SCALE;
-  renderElements(activeCellIdx);
-}
+function updateActiveText() { const el = getActiveEl(); if(el && el.type === 'text') { el.text = document.getElementById('textContent').value; renderElements(activeCellIdx); } }
+function updateFontFamily() { const el = getActiveEl(); if(el) { el.fontFamily = document.getElementById('fontSelect').value; renderElements(activeCellIdx); saveState(); } }
+function updateFontSize() { const el = getActiveEl(); if(el) { el.fontSize = parseInt(document.getElementById('fontSize').value); renderElements(activeCellIdx); saveState(); } }
+function updateTextColor() { const el = getActiveEl(); if(el) { el.color = document.getElementById('textColor').value; document.getElementById('textColorHex').value = el.color; renderElements(activeCellIdx); saveState(); } }
+function updateTextColorHex() { const el = getActiveEl(); const hex = document.getElementById('textColorHex').value; if(el && /^#[0-9A-Fa-f]{6}$/.test(hex)) { el.color = hex; document.getElementById('textColor').value = hex; renderElements(activeCellIdx); saveState(); } }
+function updatePosition() { const el = getActiveEl(); if(el) { el.x = parseInt(document.getElementById('posX').value) * DISPLAY_SCALE; el.y = parseInt(document.getElementById('posY').value) * DISPLAY_SCALE; renderElements(activeCellIdx); saveState(); } }
+function updateRotation() { const el = getActiveEl(); if(el) { el.rotation = parseInt(document.getElementById('rotation').value); renderElements(activeCellIdx); saveState(); } }
 
-function updateRotation() {
-  const v = parseInt(document.getElementById('rotation').value);
-  document.getElementById('rotationVal').textContent = v + '°';
-  const el = getActiveEl(); if (!el) return;
-  el.rotation = v;
-  renderElements(activeCellIdx);
-}
-
-function updateElemOpacity() {
-  const v = parseInt(document.getElementById('elemOpacity').value);
-  document.getElementById('elemOpacityVal').textContent = v + '%';
-  const el = getActiveEl(); if (!el) return;
-  el.opacity = v;
-  renderElements(activeCellIdx);
-}
-
-function updateMaxWidth() {
-  const v = parseInt(document.getElementById('textMaxWidth').value);
-  const el = getActiveEl(); if (!el) return;
-  el.maxWidth = v;
-  renderElements(activeCellIdx);
-}
-
-function snapPosition(pos) {
-  const el = getActiveEl(); if (!el) return;
-  const pad = 16 * DISPLAY_SCALE;
-  const positions = {
-    'top-left': [pad, pad],
-    'top-center': [CELL_SIZE / 2 - 50, pad],
-    'top-right': [CELL_SIZE - 100, pad],
-    'mid-left': [pad, CELL_SIZE / 2 - 20],
-    'center': [CELL_SIZE / 2 - 50, CELL_SIZE / 2 - 20],
-    'mid-right': [CELL_SIZE - 100, CELL_SIZE / 2 - 20],
-    'bot-left': [pad, CELL_SIZE - 60],
-    'bot-center': [CELL_SIZE / 2 - 50, CELL_SIZE - 60],
-    'bot-right': [CELL_SIZE - 100, CELL_SIZE - 60],
-  };
-  const [x, y] = positions[pos] || [pad, pad];
-  el.x = x; el.y = y;
-  document.getElementById('posX').value = Math.round(x / DISPLAY_SCALE);
-  document.getElementById('posY').value = Math.round(y / DISPLAY_SCALE);
-  renderElements(activeCellIdx);
-}
-
-// ============================
-// ADD ELEMENTS & TEMPLATES
-// ============================
 function addTextLayer(text) {
   const t = createTextElement(text || 'TEKS BARU');
-  t.x = 20 * DISPLAY_SCALE;
-  t.y = (20 + cells[activeCellIdx].elements.length * 40) * DISPLAY_SCALE;
+  t.x = 20 * DISPLAY_SCALE; t.y = (20 + cells[activeCellIdx].elements.length * 40) * DISPLAY_SCALE;
   cells[activeCellIdx].elements.push(t);
   setActiveElement(t.id);
-  renderElements(activeCellIdx);
-  updateElementList();
   document.getElementById('textContent').value = t.text;
-  document.getElementById('textContent').focus();
   showToast('Teks ditambahkan!');
-}
-
-function insertBranding() {
-  const name = document.getElementById('brandName').value;
-  const slogan = document.getElementById('brandSlogan').value;
-  const hashtag = document.getElementById('brandHashtag').value;
-
-  if (name) addTextLayer(name);
-  if (slogan) {
-    setTimeout(() => addTextLayer(slogan), 50);
-  }
-  if (hashtag) {
-    setTimeout(() => addTextLayer(hashtag), 100);
-  }
+  saveState();
 }
 
 function deleteActiveElement() {
@@ -1524,538 +700,60 @@ function deleteActiveElement() {
   cells[activeCellIdx].elements = cells[activeCellIdx].elements.filter(e => e.id !== activeElement);
   activeElement = null;
   renderElements(activeCellIdx);
-  updateElementList();
+  showToast('🗑 Elemen dihapus');
+  saveState();
 }
 
 function duplicateElement() {
-  const el = getActiveEl(); if (!el) return;
+  const el = getActiveEl(); if (!el) { showToast('Pilih elemen dulu!'); return; }
   const copy = JSON.parse(JSON.stringify(el));
   copy.id = Date.now() + Math.random();
-  copy.x += 10 * DISPLAY_SCALE;
-  copy.y += 10 * DISPLAY_SCALE;
+  copy.x += 10 * DISPLAY_SCALE; copy.y += 10 * DISPLAY_SCALE;
   cells[activeCellIdx].elements.push(copy);
   setActiveElement(copy.id);
-  renderElements(activeCellIdx);
+  showToast('⧉ Diduplikasi');
+  saveState();
 }
 
-// FUNGSI BARU: AUTO-LAYOUT BERITA (CW STYLE)
 function applyNewsTemplate() {
   if (!confirm('Terapkan Layout Berita? (Elemen teks saat ini akan dihapus)')) return;
-
   const c = cells[activeCellIdx];
-  // Bersihkan teks lama, pertahankan background gambar jika ada
   c.elements = c.elements.filter(e => e.type !== 'text');
+  c.overlay = { color: '#000000', opacity: 60 }; c.vignette = 40;
 
-  // Set overlay gelap agar teks putih terbaca
-  c.overlay = { color: '#000000', opacity: 60 };
-  c.vignette = 40;
-
-  const s = DISPLAY_SCALE;
-
-  // 1. Logo Watermark
-  const logo = createTextElement('CW █');
-  logo.fontFamily = "'Montserrat'";
-  logo.fontWeight = '900';
-  logo.fontSize = 28;
-  logo.color = '#ffffff';
-  logo.x = 20 * s;
-  logo.y = 120 * s;
-  logo.align = 'center';
-  logo.maxWidth = 260;
-  c.elements.push(logo);
-
-  // 2. Headline Utama (Putih)
   const head1 = createTextElement('RUPIAH KEMBALI\nMELEMAH! HAMPIR\nSENTUH RP17.100');
-  head1.fontFamily = "'Anton'"; 
-  head1.fontSize = 42;
-  head1.color = '#ffffff';
-  head1.lineHeight = 1.1;
-  head1.x = 20 * s;
-  head1.y = 150 * s;
-  head1.align = 'center';
-  head1.maxWidth = 260;
-  c.elements.push(head1);
-
-  // 3. Highlight Text (Hijau Neon)
+  head1.fontFamily = "'Anton'"; head1.fontSize = 42; head1.y = 150 * DISPLAY_SCALE; head1.align = 'center';
+  
   const head2 = createTextElement('PER DOLAR AS');
-  head2.fontFamily = "'Anton'";
-  head2.fontSize = 42;
-  head2.color = '#39ff14'; // Lime Green
-  head2.lineHeight = 1.1;
-  head2.x = 20 * s;
-  head2.y = 230 * s;
-  head2.align = 'center';
-  head2.maxWidth = 260;
-  c.elements.push(head2);
-
-  // 4. Pill Badge (Kredit / Akun)
-  const pill = createTextElement('Tiktok & IG | @username_anda');
-  pill.fontFamily = "'DM Sans'";
-  pill.fontWeight = '400';
-  pill.fontSize = 11;
-  pill.color = '#ffffff';
-  pill.bgColor = '#000000';
-  pill.bgOpacity = 70;
-  pill.strokeWidth = 0;
-  pill.x = 100 * s;
-  pill.y = 275 * s;
-  c.elements.push(pill);
-
-  renderCell(activeCellIdx);
-  updateElementList();
-  syncPanelToCell();
+  head2.fontFamily = "'Anton'"; head2.fontSize = 42; head2.color = '#39ff14'; head2.y = 230 * DISPLAY_SCALE; head2.align = 'center';
   
-  // Sinkronisasi slider overlay di UI
+  c.elements.push(head1, head2);
+  renderCell(activeCellIdx);
   document.getElementById('overlayOpacity').value = 60;
-  document.getElementById('overlayOpVal').textContent = '60%';
-  
   showToast('📰 Layout Berita Diterapkan!');
+  saveState();
 }
 
-// ============================
-// TRADING ELEMENTS
-// ============================
-function addTradingElement(type) {
-  const el = {
-    id: Date.now() + Math.random(),
-    type: 'trading',
-    subtype: type,
-    x: 20 * DISPLAY_SCALE,
-    y: 20 * DISPLAY_SCALE,
-    rotation: 0,
-    opacity: 100
-  };
-  cells[activeCellIdx].elements.push(el);
-  setActiveElement(el.id);
-  renderElements(activeCellIdx);
-  updateElementList();
-}
+function addShape(type) { const el = { id: Date.now(), type: 'shape', subtype: type, x: 50*DISPLAY_SCALE, y: 50*DISPLAY_SCALE, color: document.getElementById('shapeColor').value, size: document.getElementById('shapeSize').value, rotation: 0 }; cells[activeCellIdx].elements.push(el); setActiveElement(el.id); saveState(); }
+function addTradingElement(type) { const el = { id: Date.now(), type: 'trading', subtype: type, x: 20*DISPLAY_SCALE, y: 20*DISPLAY_SCALE, rotation: 0 }; cells[activeCellIdx].elements.push(el); setActiveElement(el.id); saveState(); }
 
-function renderTradingEl(container, el) {
-  const div = document.createElement('div');
-  div.style.cssText = `position:absolute;left:${el.x}px;top:${el.y}px;cursor:move;opacity:${el.opacity/100};transform:rotate(${el.rotation||0}deg);`;
-  div.dataset.id = el.id;
-
-  const s = DISPLAY_SCALE;
-
-  if (el.subtype === 'profit') {
-    div.innerHTML = `<div style="background:rgba(64,200,80,0.2);border:1px solid #40c850;border-radius:${6*s}px;padding:${6*s}px ${12*s}px;font-size:${22*s}px;font-family:'Bebas Neue';color:#40c850;letter-spacing:${2*s}px;">+24.5% PROFIT</div>`;
-  } else if (el.subtype === 'signal') {
-    div.innerHTML = `<div style="background:rgba(240,192,64,0.15);border:1px solid #f0c040;border-radius:${8*s}px;padding:${10*s}px ${16*s}px;color:#f0c040;font-size:${14*s}px;font-family:'Space Mono';line-height:1.6;min-width:${140*s}px;"><div style="font-size:${20*s}px;font-weight:700;margin-bottom:${4*s}px;">📡 SIGNAL</div><div>BUY XAUUSD</div><div>TP: 2380.00</div><div>SL: 2340.00</div></div>`;
-  } else if (el.subtype === 'chart') {
-    div.innerHTML = `<svg width="${120*s}" height="${60*s}" viewBox="0 0 120 60"><polyline points="0,50 20,35 40,40 60,20 80,25 100,10 120,15" fill="none" stroke="#40c8f0" stroke-width="2"/><polyline points="0,50 20,35 40,40 60,20 80,25 100,10 120,15 120,60 0,60" fill="rgba(64,200,240,0.1)" stroke="none"/></svg>`;
-  } else if (el.subtype === 'price') {
-    div.innerHTML = `<div style="background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.2);border-radius:${6*s}px;padding:${8*s}px ${14*s}px;font-family:'Space Mono';color:white;font-size:${14*s}px;"><div style="color:#888;font-size:${10*s}px;letter-spacing:1px;margin-bottom:2px;">XAUUSD</div><div style="font-size:${24*s}px;color:#f0c040;">2,350.00</div><div style="color:#40c850;font-size:${11*s}px;">▲ +12.50 (0.53%)</div></div>`;
-  } else if (el.subtype === 'roi') {
-    div.innerHTML = `<div style="text-align:center;"><div style="font-family:'Bebas Neue';font-size:${48*s}px;color:#f0c040;line-height:1;">150%</div><div style="font-family:'DM Sans';font-size:${12*s}px;color:#888;letter-spacing:${2*s}px;text-transform:uppercase;">Return on Investment</div></div>`;
-  } else if (el.subtype === 'candle') {
-    div.innerHTML = `<svg width="${100*s}" height="${80*s}" viewBox="0 0 100 80">
-      <line x1="15" y1="5" x2="15" y2="75" stroke="#40c850" stroke-width="1"/>
-      <rect x="10" y="20" width="10" height="30" fill="#40c850"/>
-      <line x1="35" y1="10" x2="35" y2="70" stroke="#f04070" stroke-width="1"/>
-      <rect x="30" y="30" width="10" height="25" fill="#f04070"/>
-      <line x1="55" y1="15" x2="55" y2="65" stroke="#40c850" stroke-width="1"/>
-      <rect x="50" y="25" width="10" height="20" fill="#40c850"/>
-      <line x1="75" y1="20" x2="75" y2="70" stroke="#40c850" stroke-width="1"/>
-      <rect x="70" y="30" width="10" height="15" fill="#40c850"/>
-    </svg>`;
-  } else if (el.subtype === 'arrow-up') {
-    div.innerHTML = `<div style="font-size:${48*s}px;color:#40c850;line-height:1;font-family:'Bebas Neue';">↑</div>`;
-  } else if (el.subtype === 'divider') {
-    div.innerHTML = `<div style="width:${200*s}px;height:${2*s}px;background:linear-gradient(to right, transparent, #f0c040, transparent);"></div>`;
-  }
-
-  const startInteraction = (e) => {
-    e.stopPropagation();
-    setActiveElement(el.id);
-    startDrag(e, div, el, activeCellIdx);
-  };
-  div.addEventListener('mousedown', startInteraction);
-  div.addEventListener('touchstart', startInteraction, { passive: true });
-
-  container.appendChild(div);
-}
-
-// ============================
-// SHAPES
-// ============================
-function addShape(type) {
-  const color = document.getElementById('shapeColor').value;
-  const size = parseInt(document.getElementById('shapeSize').value);
-  const el = {
-    id: Date.now() + Math.random(),
-    type: 'shape',
-    subtype: type,
-    x: 50 * DISPLAY_SCALE, y: 50 * DISPLAY_SCALE,
-    color, size,
-    rotation: 0, opacity: 100
-  };
-  cells[activeCellIdx].elements.push(el);
-  setActiveElement(el.id);
-  renderElements(activeCellIdx);
-  updateElementList();
-}
-
-function renderShape(container, el) {
-  const div = document.createElement('div');
-  const s = DISPLAY_SCALE;
-  const sz = el.size * s;
-  div.style.cssText = `position:absolute;left:${el.x}px;top:${el.y}px;cursor:move;opacity:${el.opacity/100};transform:rotate(${el.rotation||0}deg);`;
-  div.dataset.id = el.id;
-
-  if (el.subtype === 'line-h') {
-    div.style.width = sz * 2 + 'px';
-    div.style.height = '2px';
-    div.style.background = el.color;
-  } else if (el.subtype === 'line-v') {
-    div.style.width = '2px';
-    div.style.height = sz + 'px';
-    div.style.background = el.color;
-  } else if (el.subtype === 'rect') {
-    div.style.width = sz + 'px';
-    div.style.height = sz * 0.6 + 'px';
-    div.style.border = `2px solid ${el.color}`;
-  } else if (el.subtype === 'circle') {
-    div.style.width = sz + 'px';
-    div.style.height = sz + 'px';
-    div.style.borderRadius = '50%';
-    div.style.border = `2px solid ${el.color}`;
-  } else if (el.subtype === 'triangle') {
-    div.style.width = '0';
-    div.style.height = '0';
-    div.style.borderLeft = `${sz/2}px solid transparent`;
-    div.style.borderRight = `${sz/2}px solid transparent`;
-    div.style.borderBottom = `${sz}px solid ${el.color}`;
-  } else if (el.subtype === 'diamond') {
-    div.style.width = sz + 'px';
-    div.style.height = sz + 'px';
-    div.style.background = 'none';
-    div.style.transform = (div.style.transform || '') + ' rotate(45deg)';
-    div.style.border = `2px solid ${el.color}`;
-  }
-
-  const startInteraction = (e) => {
-    e.stopPropagation();
-    setActiveElement(el.id);
-    startDrag(e, div, el, activeCellIdx);
-  };
-  div.addEventListener('mousedown', startInteraction);
-  div.addEventListener('touchstart', startInteraction, { passive: true });
-
-  container.appendChild(div);
-}
-
-// ============================
-// TEMPLATES
-// ============================
-const TEMPLATES = [
-  { name: 'Dark Gold', colors: ['#0a0a1a', '#1a1000'], accent: '#f0c040', style: 'trading' },
-  { name: 'Bull Market', colors: ['#001a00', '#003300'], accent: '#40c850', style: 'bull' },
-  { name: 'Bear Warning', colors: ['#1a0000', '#330000'], accent: '#f04070', style: 'bear' },
-  { name: 'Crypto Night', colors: ['#050518', '#15052a'], accent: '#40c8f0', style: 'crypto' },
-  { name: 'Luxury Gold', colors: ['#1a1000', '#2a1a00'], accent: '#c8a000', style: 'luxury' },
-  { name: 'Neon Finance', colors: ['#050520', '#100520'], accent: '#a040f0', style: 'neon' },
-  { name: 'Clean White', colors: ['#f5f5f0', '#ebebeb'], accent: '#1a1a2a', style: 'light' },
-  { name: 'Steel Blue', colors: ['#051020', '#0a1e3a'], accent: '#60a0e0', style: 'steel' },
-];
-
-function buildTemplates() {
-  const grid = document.getElementById('templateGrid');
-  TEMPLATES.forEach((t, i) => {
-    const card = document.createElement('div');
-    card.className = 'template-card';
-    card.style.background = `linear-gradient(135deg, ${t.colors[0]}, ${t.colors[1]})`;
-    card.innerHTML = `
-      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;">
-        <div style="font-family:'Bebas Neue';font-size:14px;color:${t.accent};letter-spacing:1px;">${t.name}</div>
-        <div style="width:30px;height:2px;background:${t.accent};border-radius:1px;"></div>
-        <div style="font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:0.5px;text-transform:uppercase;">${t.style}</div>
-      </div>
-    `;
-    card.onclick = () => applyTemplate(t);
-    grid.appendChild(card);
-  });
-}
-
-function applyTemplate(t) {
-  const cell = cells[activeCellIdx];
-  cell.bg.gradient = `linear-gradient(135deg, ${t.colors[0]}, ${t.colors[1]})`;
-  cell.bg.image = null;
-  cell.bg.value = t.colors[0];
-  renderCell(activeCellIdx);
-  showToast(`Template "${t.name}" diterapkan!`);
-}
-
-// ============================
-// COLOR PRESETS
-// ============================
-const BG_COLORS = ['#0a0a1a','#001a00','#1a0000','#050518','#1a1000','#f5f5f0','#051020','#2a2a00','#0a1a1a','#1a001a','#ffffff','#000000'];
-const TEXT_COLORS = ['#ffffff','#f0c040','#40c850','#f04070','#40c8f0','#a040f0','#ff8040','#c0c0c0','#000000','#1a1a1a','#39ff14']; // Ditambahkan #39ff14 (Lime Green)
-
-const THEMES = [
-  { name: 'Gold', bg: '#0a0a1a', ac: '#f0c040' },
-  { name: 'Green', bg: '#001a00', ac: '#40c850' },
-  { name: 'Red', bg: '#1a0000', ac: '#f04070' },
-  { name: 'Cyan', bg: '#050520', ac: '#40c8f0' },
-  { name: 'Purple', bg: '#10051a', ac: '#a040f0' },
-  { name: 'Orange', bg: '#1a0800', ac: '#ff8040' },
-];
-
-function buildColorPresets() {
-  const bgC = document.getElementById('bgColorPresets');
-  BG_COLORS.forEach(c => {
-    const d = document.createElement('div');
-    d.className = 'color-dot';
-    d.style.background = c;
-    d.style.border = c === '#ffffff' ? '1px solid #666' : '';
-    d.onclick = () => {
-      document.getElementById('bgColor').value = c;
-      document.getElementById('bgColorHex').value = c;
-      cells[activeCellIdx].bg.value = c;
-      cells[activeCellIdx].bg.gradient = null;
-      cells[activeCellIdx].bg.image = null;
-      renderCell(activeCellIdx);
-    };
-    bgC.appendChild(d);
-  });
-
-  const txC = document.getElementById('textColorPresets');
-  TEXT_COLORS.forEach(c => {
-    const d = document.createElement('div');
-    d.className = 'color-dot';
-    d.style.background = c;
-    d.style.border = c === '#ffffff' ? '1px solid #666' : '';
-    d.onclick = () => {
-      document.getElementById('textColor').value = c;
-      document.getElementById('textColorHex').value = c;
-      const el = getActiveEl(); if (!el) return;
-      el.color = c;
-      renderElements(activeCellIdx);
-    };
-    txC.appendChild(d);
-  });
-}
-
-function buildThemePresets() {
-  const tp = document.getElementById('themePresets');
-  THEMES.forEach(t => {
-    const d = document.createElement('div');
-    d.className = 'color-dot';
-    d.style.background = `linear-gradient(135deg, ${t.bg}, ${t.ac})`;
-    d.title = t.name;
-    d.onclick = () => applyTemplate({ name: t.name, colors: [t.bg, '#0a0a0a'], accent: t.ac });
-    tp.appendChild(d);
-  });
-}
-
-const OVERLAY_PRESETS = [
-  { label: 'Hitam', color: '#000000' },
-  { label: 'Putih', color: '#ffffff' },
-  { label: 'Gold', color: '#f0c040' },
-  { label: 'Hijau', color: '#40c850' },
-  { label: 'Merah', color: '#f04070' },
-  { label: 'Biru', color: '#40c8f0' },
-];
-
-function buildOverlayPresets() {
-  const op = document.getElementById('overlayPresets');
-  OVERLAY_PRESETS.forEach(p => {
-    const b = document.createElement('button');
-    b.className = 'overlay-btn';
-    b.textContent = p.label;
-    b.onclick = () => {
-      document.getElementById('overlayColor').value = p.color;
-      if (parseInt(document.getElementById('overlayOpacity').value) === 0) {
-        document.getElementById('overlayOpacity').value = 40;
-        document.getElementById('overlayOpVal').textContent = '40%';
-      }
-      applyOverlay();
-    };
-    op.appendChild(b);
-  });
-}
-
-// ============================
-// ELEMENT LIST
-// ============================
-function updateElementList() {
-  const list = document.getElementById('elementList');
-  const cell = cells[activeCellIdx];
-  if (!cell.elements.length) {
-    list.innerHTML = '<div style="color:var(--text-muted);font-size:12px;">Belum ada elemen.</div>';
-    return;
-  }
-
-  list.innerHTML = '';
-  [...cell.elements].reverse().forEach(el => {
-    const item = document.createElement('div');
-    item.className = 'element-item' + (activeElement === el.id ? ' active' : '');
-
-    const icon = el.type === 'text' ? '✍' : el.type === 'trading' ? '📊' : '🔷';
-    const label = el.type === 'text' ? el.text.slice(0, 20) : `${el.subtype}`;
-
-    item.innerHTML = `
-      <span class="element-icon">${icon}</span>
-      <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${label}</span>
-      <span onclick="removeElementById(${el.id})" style="cursor:pointer;color:var(--text-muted);font-size:16px;padding:0 4px;">×</span>
-    `;
-    item.onclick = (e) => {
-      if (e.target.onclick) return;
-      setActiveElement(el.id);
-    };
-    list.appendChild(item);
-  });
-}
-
-function removeElementById(id) {
-  cells[activeCellIdx].elements = cells[activeCellIdx].elements.filter(e => e.id !== id);
-  if (activeElement === id) activeElement = null;
-  renderElements(activeCellIdx);
-  updateElementList();
-}
-
-// ============================
-// SYNC PANEL
-// ============================
 function syncPanelToCell() {
   const cell = cells[activeCellIdx];
-  if (!cell) return;
-
   document.getElementById('bgColor').value = cell.bg.value || '#0a0a1a';
-  document.getElementById('bgColorHex').value = cell.bg.value || '#0a0a1a';
-  document.getElementById('bgBrightness').value = cell.bg.brightness || 100;
-  document.getElementById('bgContrast').value = cell.bg.contrast || 100;
-  document.getElementById('brightnessVal').textContent = cell.bg.brightness || 100;
-  document.getElementById('contrastVal').textContent = cell.bg.contrast || 100;
-
   document.getElementById('overlayOpacity').value = cell.overlay.opacity || 0;
-  document.getElementById('overlayOpVal').textContent = (cell.overlay.opacity || 0) + '%';
-  document.getElementById('overlayColor').value = cell.overlay.color || '#000000';
-
-  document.getElementById('vignetteRange').value = cell.vignette || 0;
-  document.getElementById('vignetteVal').textContent = (cell.vignette || 0) + '%';
-
   renderCell(activeCellIdx);
 }
 
-// ============================
-// ZOOM
-// ============================
-function updateZoom() {
-  const v = parseInt(document.getElementById('canvasZoom').value);
-  document.getElementById('zoomVal').textContent = v + '%';
-  zoom = v / 100;
-  document.getElementById('canvasWrapper').style.transform = `scale(${zoom})`;
-  document.getElementById('canvasWrapper').style.transformOrigin = 'center center';
-}
+// UTILS & EXPORT
+function hexToRgba(hex, alpha) { const r = parseInt(hex.slice(1, 3), 16), g = parseInt(hex.slice(3, 5), 16), b = parseInt(hex.slice(5, 7), 16); return `rgba(${r},${g},${b},${alpha})`; }
+function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500); }
+function toggleSection(id) { const body = document.getElementById(`${id}-body`); const isOpen = body.style.display !== 'none'; body.style.display = isOpen ? 'none' : 'block'; }
+function clearCanvas() { if(!confirm('Reset post ini?')) return; cells[activeCellIdx] = createCell(); activeElement = null; syncPanelToCell(); saveState(); }
+function showExport() { document.getElementById('exportPanel').style.display = 'flex'; }
+function hideExport() { document.getElementById('exportPanel').style.display = 'none'; }
+function exportAs(format) { showToast('Gunakan fitur Screenshot HP untuk export saat ini!'); hideExport(); }
 
-// ============================
-// EXPORT
-// ============================
-function showExport() {
-  document.getElementById('exportPanel').style.display = 'flex';
-}
-
-function hideExport() {
-  document.getElementById('exportPanel').style.display = 'none';
-}
-
-function exportAs(format) {
-  showToast('Export menggunakan html2canvas — lihat petunjuk!');
-  hideExport();
-
-  // Use print/screenshot fallback
-  const cellEl = document.getElementById(`cell-${activeCellIdx}`);
-  if (!cellEl) return;
-
-  // Open a new window with just the cell for screenshot
-  const html = `<html><head><style>body{margin:0;padding:0;background:#000;}${document.head.innerHTML}</style></head><body style="width:300px;height:300px;overflow:hidden;">${cellEl.outerHTML}</body></html>`;
-  const w = window.open('', '_blank', 'width=310,height=320');
-  w.document.write(html);
-  w.document.close();
-  setTimeout(() => {
-    w.print();
-    showToast('Gunakan "Save as PDF/Image" di print dialog!');
-  }, 500);
-}
-
-function copyToClipboard() {
-  hideExport();
-  showToast('Copy ke clipboard memerlukan ekstensi browser.');
-}
-
-// ============================
-// UTILS
-// ============================
-function hexToRgba(hex, alpha) {
-  const r = parseInt(hex.slice(1, 3), 16);
-  const g = parseInt(hex.slice(3, 5), 16);
-  const b = parseInt(hex.slice(5, 7), 16);
-  return `rgba(${r},${g},${b},${alpha})`;
-}
-
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2500);
-}
-
-function clearCanvas() {
-  if (!confirm('Reset semua elemen di post ini?')) return;
-  cells[activeCellIdx] = createCell();
-  activeElement = null;
-  syncPanelToCell();
-  updateElementList();
-  showToast('Canvas direset!');
-}
-
-function toggleSection(id) {
-  const body = document.getElementById(`${id}-body`);
-  const arrow = document.getElementById(`${id}-arrow`);
-  if (!body) return;
-  const isOpen = body.style.display !== 'none';
-  body.style.display = isOpen ? 'none' : 'block';
-  if (arrow) arrow.textContent = isOpen ? '▸' : '▾';
-}
-
-function updateCanvasSize() {
-  // Future feature
-  showToast('Ukuran canvas standar 1:1 Instagram');
-}
-
-// ============================
-// KEYBOARD SHORTCUTS
-// ============================
-document.addEventListener('keydown', (e) => {
-  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
-
-  if (e.key === 'Delete' || e.key === 'Backspace') {
-    deleteActiveElement();
-  }
-  if (e.key === 't' || e.key === 'T') {
-    addTextLayer();
-  }
-  if (e.key === 'Escape') {
-    activeElement = null;
-    renderElements(activeCellIdx);
-  }
-  // Arrow keys for nudging
-  if (activeElement && ['ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.key)) {
-    e.preventDefault();
-    const el = getActiveEl(); if (!el) return;
-    const step = e.shiftKey ? 10 * DISPLAY_SCALE : DISPLAY_SCALE;
-    if (e.key === 'ArrowLeft') el.x -= step;
-    if (e.key === 'ArrowRight') el.x += step;
-    if (e.key === 'ArrowUp') el.y -= step;
-    if (e.key === 'ArrowDown') el.y += step;
-    document.getElementById('posX').value = Math.round(el.x / DISPLAY_SCALE);
-    document.getElementById('posY').value = Math.round(el.y / DISPLAY_SCALE);
-    renderElements(activeCellIdx);
-  }
-});
-
-// INIT
+// INIT APP
 init();
 </script>
 </body>
